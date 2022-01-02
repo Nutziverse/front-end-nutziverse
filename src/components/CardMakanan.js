@@ -1,3 +1,4 @@
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "../style/card-makanan.css";
 
 export default function CardMakanan({makanan, image, penyetaraanPorsi, kalori, karbon}) {

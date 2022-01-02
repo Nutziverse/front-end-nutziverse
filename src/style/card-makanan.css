@@ -1,0 +1,11 @@
+/* border radius for card makanan */
+.rounded-08 {
+  border-radius: .8rem !important;
+}
+
+.card .card-makanan-img {
+  border-top-left-radius: calc(.8rem - 1px) !important;
+  border-top-right-radius: calc(.8rem - 1px) !important;
+  max-height: 10rem;
+  object-fit: cover;
+}

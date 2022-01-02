@@ -22,7 +22,7 @@ export default function Profile() {
           <i class="fa-thin fa-envelope">vania@gmail.com</i>
         </div>
         <div className="col">
-          <i class="fa-light fa-weight-scale">
+          <i class="fas fa-weight">
             <p>Berat Badan</p>
             <p>65 kg</p>
           </i>

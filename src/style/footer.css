@@ -1,25 +1,28 @@
 .container {
-  margin: 50px;
-  padding: 50px;
-  font-family: poppins;
+	/* padding: 50px; */
+	font-family: poppins;
 }
 .box {
-  background-color: #067cc6;
-  color: white;
+	background-color: #067cc6;
+	color: white;
 }
 
-p {
-  text-align: left;
+.header-box {
+	background-color: white;
+}
+
+/* p {
+	text-align: left;
 }
 
 img {
 }
 
 .two {
-  margin-left: 200px;
+	margin-left: 200px;
 }
 
 .copyright {
-  font-family: poppins;
-  color: white;
-}
+	font-family: poppins;
+	color: white;
+} */

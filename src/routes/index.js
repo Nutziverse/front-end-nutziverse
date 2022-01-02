@@ -1,0 +1,12 @@
+import { Routes, Route } from "react-router";
+import Profile from "../pages/Profile";
+import Layout from "../layouting/Layout";
+
+export default function Routers() {
+  return (
+    <Routes>
+      <Route path="/profile" element={<Profile />}></Route>
+      <Route path="/layout" element={<Layout />}></Route>
+    </Routes>
+  );
+}

@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  height: 30px;
+  background: white;
+  margin: 10px;
+  font-family: poppins;
+  justify-content: center;
+}
+
+hr {
+  height: 10px;
+  margin: auto;
+  padding: auto;
+  width: 100%;
+  background-color: white;
+  border: none;
+  border-radius: 50px;
+  transition: 0.9 ease-in-out;
+}
+
+.one a-nav-link:hover ~ hr {
+  margin-left: 0%;
+}
+.two a:hover ~ hr {
+  margin-left: 25%;
+}
+.three a:hover ~ hr {
+  margin-left: 50%;
+}
+
+a.nav-link {
+  color: #000000;
+}
+
+.Logo {
+  display: flex;
+}
+.box {
+  box-shadow: 2px rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border: 1px solid light-grey;
+}

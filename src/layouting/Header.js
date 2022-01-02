@@ -10,7 +10,7 @@ export default function Header() {
           <img className="me-auto mb-3" src={logo_nutziverse} className="mt-auto mb-auto" height="50px" alt="Logo"></img>
         </div>
         <div>
-        <ul className="nav d-flex justify-content-between" style={{ width: "600px" }}>
+          <ul className="nav d-flex justify-content-between" style={{ width: "600px" }}>
             <li className="nav-item">
               <a className="nav-link" aria-current="page" href="#">
                 Beranda
@@ -27,7 +27,7 @@ export default function Header() {
               </a>
             </li>
             <li className="nav-item">
-            <a className="nav-link" href="#">
+              <a className="nav-link" href="#">
                 Diet
               </a>
             </li>
@@ -36,11 +36,9 @@ export default function Header() {
         <div>
           <img className="me-auto mb-3" src={logo_nutziverse} className="mt-auto mb-auto" height="50px" alt="Logo"></img>
         </div>
-        
+
         {/* <img src="https://logos-world.net/wp-content/uploads/2020/03/Danone-logo.png" class="w3-round" alt="Logo"></img>
         <img src="https://blud.co.id/wp/wp-content/uploads/2018/02/logo-kemenkes.png" class="w3-round" alt="Logo"></img> */}
-        
-          
       </div>
     </div>
   );

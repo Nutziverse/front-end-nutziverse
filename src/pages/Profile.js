@@ -35,13 +35,19 @@ export default function Profile() {
         </div>
       </div>
       <div className="box-user">
-        <i class="fa-solid fa-user"></i>
+        <i className="fa-solid fa-user"></i>
       </div>
       <div className="box-user">
-        <i class="fa-light fa-pen-to-square"></i>
+        <i className="fa-light fa-pen-to-square"></i>
       </div>
       <div className="box-user">
-        <i class="fa-light fa-arrow-right-from-bracket"></i>
+        <i className="fa-light fa-arrow-right-from-bracket"></i>
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col">1 of 2</div>
+          <div className="col">2 of 2</div>
+        </div>
       </div>
     </div>
   );

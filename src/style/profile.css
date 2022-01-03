@@ -1,21 +1,21 @@
 .container {
-	/* padding: 20px; */
-	/* height: 200px; */
-	/* background-color: #067cc6; */
-	font-family: poppins;
-	/* box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+  /* padding: 20px; */
+  /* height: 200px; */
+  /* background-color: #067cc6; */
+  font-family: poppins;
+  /* box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
 	padding: 10px;
 	border: 1px solid grey; */
 }
 
 .col {
-	height: 150px;
+  height: 150px;
 }
 
 img {
 }
 
 .about i {
-	color: #616161;
-	align: left;
+  color: #616161;
+  align: left;
 }

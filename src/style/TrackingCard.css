@@ -1,0 +1,8 @@
+.tracking-image {
+	border-radius: 25px;
+	object-fit: cover;
+}
+
+.tracking-text {
+	color: #616161;
+}

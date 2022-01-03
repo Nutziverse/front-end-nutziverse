@@ -69,3 +69,8 @@ a.nav-link {
 .nav-mobile a {
   color: rgb(117, 117, 117);
 }
+
+.btn.btn-primary{
+  background-color: #0084CD !important;
+  border-color: #0084CD !important;
+}

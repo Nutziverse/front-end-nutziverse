@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import Button from "../components/Button";
 import "../style/card-makanan.css"
 
 export default function HomeGuest() {
@@ -15,12 +15,12 @@ export default function HomeGuest() {
       desc: "Informasi dampak karbon dan cara mengurangi efeknya bagi bumi"
     },
     {
-      icon: "https://cdn-icons.flaticon.com/png/512/561/premium/561611.png?token=exp=1641134841~hmac=87b3846e52b2575657e0c89cb8e673a1",
+      icon: "https://cdn-icons-png.flaticon.com/512/2934/2934108.png",
       title: "Pilih Makanan",
       desc: "Pilih makanan dan hitung kalori makanan yang anda konsumsi"
     },
     {
-      icon: "https://cdn-icons.flaticon.com/png/512/4614/premium/4614332.png?token=exp=1641135121~hmac=141eb176dfd235529ec337fb372da60e",
+      icon: "https://cdn-icons-png.flaticon.com/512/2738/2738658.png",
       title: "Diet",
       desc: "Temukan rekomendasi diet sehat dan aktivitas pendukung diet anda"
     }
@@ -39,7 +39,8 @@ export default function HomeGuest() {
 
               <div className="mt-11">
                 <h5>Daftar sekarang untuk menikmati fitur-fitur ekslusif kami </h5>
-                <Link to="/sign-up"><button className="btn btn-danger text-white mt-3 rounded-08 py-2 px-3">Daftar Sekarang</button></Link>
+                <Link to="/sign-up"><Button btnclass="btn btn-danger text-white mt-3 rounded-08 py-2 px-3">Daftar Sekarang</Button></Link>
+                <Link to="/sign-up"><Button btnclass="btn btn-light text-danger mt-3 rounded-08 py-2 px-3 ms-3 d-lg-none">Masuk</Button></Link>
               </div>
 
             </div>
@@ -60,12 +61,12 @@ export default function HomeGuest() {
                 <div className="col-md-8 col-lg-5 col-12">
                   <div className="card rounded-08 shadow border-0 p-2">
                     <div className="card-body">
-                      <div className="row align-items-center">
-                        <div className="col-3 text-center">
+                      <div className="row align-items-center justify-content-center">
+                        <div className="col-md-3 col-4 text-center mb-4 mb-md-0">
                           <img src={feature.icon} alt="ingredients" className="img-fluid w-75" />
                         </div>
-                        <div className="col-9">
-                          <h5 className="fw-bold mb-3">{feature.title}</h5>
+                        <div className="col-md-9 col-12 text-center text-md-start">
+                          <h5 className="fw-bold mb-2">{feature.title}</h5>
                           <p className="mb-0">{feature.desc}</p>
                         </div>
                       </div>

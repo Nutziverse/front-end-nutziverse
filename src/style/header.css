@@ -52,3 +52,20 @@ a.nav-link {
 	padding: 10px;
 	border: 1px solid light-grey;
 }
+
+/* shadow */
+.nav-mobile {
+	background: #FFFFFF;
+	box-shadow: 0px -1px 3px rgba(0, 0, 0, 0.25);
+	border-top-right-radius: 24px;
+	border-top-left-radius: 24px;
+	padding: .8rem;
+	color: rgb(117, 117, 117);
+}
+
+.nav-mobile .mobile-active {
+	color: #0084cd !important;
+}
+.nav-mobile a {
+	color: rgb(117, 117, 117);
+}

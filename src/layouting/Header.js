@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Button from "../components/Button";
 import logo_nutziverse from "../images/logo_nutziverse.png";
 import "../style/header.css";
 
 export default function Header() {
+  const isLogin = null;
   return (
     <>
-      <div className="header-box mt-3 d-none d-sm-block">
-        <div className="d-flex justify-content-between me-2 ms-2">
+      <div className="py-3 px-2 d-none d-lg-block shadow">
+        <div className="d-flex justify-content-between align-items-center me-2 ms-2">
           <div>
-            <img className="me-auto mb-3" src={logo_nutziverse} className="mt-auto mb-auto" height="50px" alt="Logo"></img>
+            <img className="me-auto mb-3 mt-auto mb-auto" src={logo_nutziverse} height="40px" alt="Logo"></img>
           </div>
           <div>
             <ul className="nav d-flex justify-content-between" style={{ width: "600px" }}>
@@ -36,7 +38,15 @@ export default function Header() {
             </ul>
           </div>
           <div>
-            <img className="me-auto mb-3" src={logo_nutziverse} className="mt-auto mb-auto" height="50px" alt="Logo"></img>
+            {isLogin ? (
+              <h1 className="mb-0">
+                <i class="far fa-user-circle"></i>
+              </h1>
+            ) : (
+              <Link to="sign-in">
+                <Button btnclass="btn btn-primary">Masuk</Button>
+              </Link>
+            )}
           </div>
 
           {/* <img src="https://logos-world.net/wp-content/uploads/2020/03/Danone-logo.png" class="w3-round" alt="Logo"></img>
@@ -44,7 +54,7 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className="fixed-bottom nav-mobile d-block d-sm-none">
+      <nav className="fixed-bottom nav-mobile d-block d-lg-none">
         <div className="container">
           <div className="row justify-content-between align-items-center text-center">
             <div className="col-3">

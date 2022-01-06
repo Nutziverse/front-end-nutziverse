@@ -2,7 +2,7 @@ p{
     font-size:15px;
 }
 
-button {
+/* button {
     background-color:#067cc6;
     border-radius: 8px;
     border-color:#067cc6 ;
@@ -12,8 +12,9 @@ button {
     text-decoration: none;
     padding: 10px 18px;
 
-}
+} */
 button:hover {
     background-color:white;
     color:#067cc6;
 }
+

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo_awal from "../images/Opening.png";
 import Button from "../components/Button";
 import "../style/SignIn.css";
+import google from "../images/google.png";
 
 
 export default function SignIn() {
@@ -128,9 +129,11 @@ export default function SignIn() {
                   
                         <div className="d-grid col-12 mt-md-4 mt-3">
                         
-                            <Button type="submit" className="btn btn-sm btn-main ">
+                            <button type="submit" className="btn btn-sm btn-main" style={{backgroundColor: "#067cc6",fontSize:"16px"
+                             ,boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)",borderRadius:"8px",
+                             padding: "15px 18px;",color:"white"}}>
                              Masuk
-                            </Button>
+                            </button>
                           
                         </div>
                   
@@ -140,9 +143,11 @@ export default function SignIn() {
                         </div>
 
                         <div className="d-grid col-12 mt-md-3 mt-2">
-                            <Button type="submit" className="btn btn-sm btn-main">
-                            <i class="fab fa-google px-2"></i> Masuk dengan Google 
-                            </Button>
+                            <button type="submit" className="btn btn-sm btn-main" style={{backgroundColor: "white",fontSize:"16px"
+                             ,boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)",borderRadius:"8px",
+                             padding: "15px 18px;"}}>
+                            <img src={google} style={{height:"16px", marginRight:"10px"}}></img>Masuk dengan Google+
+                            </button>
                         </div>
 
                       </form>

@@ -5,6 +5,7 @@ import logo_awal from "../images/Opening.png";
 import Button from "../components/Button";
 import "../style/SignIn.css";
 import google from "../images/google.png";
+import CardResep from "../components/CardResep";
 
 
 export default function SignIn() {
@@ -78,7 +79,7 @@ export default function SignIn() {
                               {...register("telepon", {
                                 required: "Nomor Telepon tidak boleh kosong",
                                 pattern: {
-                                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                  value: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/i,
                                   message: "Nomor Telepon tidak valid",
                                 },
                               })}
@@ -157,6 +158,7 @@ export default function SignIn() {
                           <Link to="/sign-up" className="text-primary text-decoration-none">
                             Daftar
                           </Link>
+                        
                         </p>
                       </div>
                     </div>

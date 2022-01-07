@@ -44,3 +44,26 @@
 .mt-11 {
   margin-top: 6rem !important;
 }
+
+/* image height */
+.max-h-10rem {
+  border-radius: 10px;
+  width: 100%;
+  max-height: 10rem;
+  object-fit: cover;
+}
+
+.text-karbo {
+  color: rgb(235, 86, 0);
+}
+
+.text-primary {
+  color: #0084CD;
+}
+
+@media screen and (min-width: 426px) {
+  .max-h-10rem {
+    max-height: 15rem;
+  }
+  
+}

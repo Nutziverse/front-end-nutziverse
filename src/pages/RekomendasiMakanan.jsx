@@ -1,8 +1,21 @@
 import React from "react";
 import TrackingCard from "../components/TrackingCard";
+import Button from "../components/Button";
 
 export default function RekomendasiMakanan() {
 	const data = [
+		{
+			image:
+				"https://cdn.idntimes.com/content-images/community/2021/01/fromandroid-4df0ed11b58c2dae0a623432f32a3919.jpg",
+			alt_image: "bubur ayam",
+			makanan: "Bubur Ayam",
+			infoporsi: "1 porsi = 100 gram",
+			kuantitas: "1",
+			kal: "12",
+			fat: "12",
+			karb: "12",
+			prot: "12",
+		},
 		{
 			image:
 				"https://cdn.idntimes.com/content-images/community/2021/01/fromandroid-4df0ed11b58c2dae0a623432f32a3919.jpg",
@@ -44,6 +57,11 @@ export default function RekomendasiMakanan() {
 									</div>
 								);
 							})}
+							<div className="d-flex">
+								<Button btnclass="btn ms-auto me-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
+									Pilih
+								</Button>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -23,7 +23,7 @@ const plugins = [
 			let fontSize = (height / 160).toFixed(2);
 			ctx.font = fontSize + "em sans-serif";
 			ctx.textBaseline = "top";
-			let text = "90%",
+			let text = "80%",
 				textX = Math.round((width - ctx.measureText(text).width) / 2),
 				textY = height / 2;
 			ctx.fillText(text, textX, textY);
@@ -65,7 +65,7 @@ export const data = {
 	datasets: [
 		{
 			label: "# of Votes",
-			data: [70, 0],
+			data: [80, 20],
 			// backgroundColor: colors
 			backgroundColor: function (context) {
 				const chart = context.chart;
@@ -157,7 +157,7 @@ export default function HomeLogin() {
 					<div className="row g-5">
 						<div className="col-12 col-lg-6">
 							<div
-								className="row shadow-sm p-4 h-100"
+								className="row shadow p-4 h-100"
 								style={{ borderRadius: "20px" }}
 							>
 								<div className="col-6 ">
@@ -183,7 +183,7 @@ export default function HomeLogin() {
 						</div>
 						<div className="d-none d-lg-block col-lg-6">
 							<div className="custom-row h-100">
-								<div className="item-1 rounded shadow-sm d-flex flex-column">
+								<div className="item-1 rounded shadow d-flex flex-column">
 									<div
 										className="p-3 ms-auto me-auto mb-2"
 										style={{ borderRadius: "50%", backgroundColor: "red" }}
@@ -198,7 +198,7 @@ export default function HomeLogin() {
 									<h5 className="text-center">Karbohidrat</h5>
 									<h6 className="fw-bold text-center mt-4 mb-4">200</h6>
 								</div>
-								<div className="item-2 rounded shadow-sm d-flex flex-column">
+								<div className="item-2 rounded shadow d-flex flex-column">
 									<div
 										className="p-3 ms-auto me-auto mb-2"
 										style={{ borderRadius: "50%", backgroundColor: "yellow" }}
@@ -212,7 +212,7 @@ export default function HomeLogin() {
 									<h5 className="text-center">Karbohidrat</h5>
 									<h6 className="fw-bold text-center mt-4 mb-4">200</h6>
 								</div>
-								<div className="item-3 rounded shadow-sm d-flex flex-column">
+								<div className="item-3 rounded shadow d-flex flex-column">
 									<div
 										className="p-3 ms-auto me-auto mb-2"
 										style={{ borderRadius: "50%", backgroundColor: "green" }}
@@ -227,7 +227,7 @@ export default function HomeLogin() {
 									<h5 className="text-center">Karbohidrat</h5>
 									<h6 className="fw-bold text-center mt-4 mb-4">200</h6>
 								</div>
-								<div className="item-4 rounded shadow-sm d-flex flex-column">
+								<div className="item-4 rounded shadow d-flex flex-column">
 									<div
 										className="p-3 ms-auto me-auto mb-2"
 										style={{ borderRadius: "50%", backgroundColor: "blue" }}
@@ -249,37 +249,37 @@ export default function HomeLogin() {
 				<div className="container mt-4 mb-5">
 					<h4>Rekomendasi Makanan</h4>
 					<div className="custom-row-2">
-						<div className="newitem-1 shadow p-4">
+						<div className="newitem-1 shadow p-4 d-flex flex-column">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/3067/3067788.png"
 								height={"70px"}
 								className="ms-auto me-auto"
 							/>
-							<h3>Sarapan</h3>
+							<h6 className="text-center mt-3">Sarapan</h6>
 						</div>
-						<div className="newitem-2 shadow p-4">
+						<div className="newitem-2 shadow p-4 d-flex flex-column">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/3067/3067788.png"
 								height={"70px"}
 								className="ms-auto me-auto"
 							/>
-							<h3>Makan Siang</h3>
+							<h6 className="text-center mt-3">Makan Siang</h6>
 						</div>
-						<div className="newitem-3 shadow p-4">
+						<div className="newitem-3 shadow p-4 d-flex flex-column">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/3067/3067788.png"
 								height={"70px"}
 								className="ms-auto me-auto"
 							/>
-							<h3>Makan Malam</h3>
+							<h6 className="text-center mt-3">Makan Malam</h6>
 						</div>
-						<div className="newitem-4 shadow p-4">
+						<div className="newitem-4 shadow p-4 d-flex flex-column">
 							<img
 								src="https://cdn-icons-png.flaticon.com/512/3067/3067788.png"
 								height={"70px"}
-								className="ms-auto me-auto"
+								className="ms-auto me-auto "
 							/>
-							<h3>Camilan</h3>
+							<h6 className="text-center mt-3">Camilan</h6>
 						</div>
 					</div>
 				</div>

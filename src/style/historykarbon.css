@@ -1,0 +1,17 @@
+.custom-row {
+	display: grid !important;
+	grid-template-columns: repeat(1, 1fr);
+	width: 25%;
+	height: 100px;
+}
+
+#stacked {
+	grid-column: 1/-1;
+	grid-row: 1;
+}
+
+#stacked1 {
+	grid-column: 1 / -1;
+	grid-row: 1;
+	z-index: 1;
+}

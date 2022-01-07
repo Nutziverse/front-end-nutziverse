@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import logo_awal from "../images/Opening.png";
-import Button from "../components/Button";
 import "../style/SignIn.css";
 import google from "../images/google.png";
 import CardResep from "../components/CardResep";
@@ -79,7 +78,7 @@ export default function SignIn() {
                               {...register("telepon", {
                                 required: "Nomor Telepon tidak boleh kosong",
                                 pattern: {
-                                  value: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/i,
+                                  value: /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/i,
                                   message: "Nomor Telepon tidak valid",
                                 },
                               })}
@@ -147,7 +146,7 @@ export default function SignIn() {
                             <button type="submit" className="btn btn-sm btn-main" style={{backgroundColor: "white",fontSize:"16px"
                              ,boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)",borderRadius:"8px",
                              padding: "15px 18px;"}}>
-                            <img src={google} style={{height:"16px", marginRight:"10px"}}></img>Masuk dengan Google+
+                            <img src={google} style={{height:"16px",marginRight:"10px"}}></img>Masuk dengan Google+
                             </button>
                         </div>
 
@@ -158,7 +157,6 @@ export default function SignIn() {
                           <Link to="/sign-up" className="text-primary text-decoration-none">
                             Daftar
                           </Link>
-                        
                         </p>
                       </div>
                     </div>

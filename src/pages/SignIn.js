@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo_awal from "../images/Opening.png";
 import "../style/SignIn.css";
 import google from "../images/google.png";
+import Layout from "../layouting/Layout";
 
 
 
@@ -36,6 +37,7 @@ export default function SignIn() {
   };
   
   return (
+    <Layout>
     <div className="container">
       <div className="row">
         <div className="col-12">
@@ -168,5 +170,6 @@ export default function SignIn() {
         </div>
       </div>
     </div>
+  </Layout>
   );
 }

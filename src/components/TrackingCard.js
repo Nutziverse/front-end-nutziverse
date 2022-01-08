@@ -7,39 +7,74 @@ export default function TrackingCard({
 	makanan,
 	infoporsi,
 	kuantitas,
-	kal,
-	fat,
-	karb,
-	prot,
+	porsiuser = 1,
+	modals = false,
 }) {
 	return (
 		<div>
-			<div className="card mt-3 shadow-sm p-3" style={{ borderRadius: "20px" }}>
-				<div className="row gx-4">
-					<div className="col-4 col-lg-3">
-						<img
-							src={image}
-							className="img-fluid rounded mt-4"
-							alt={alt_image}
-						/>
-					</div>
-					<div className="col-8 col-lg-9">
-						<div className="card-body">
-							<div className="d-flex">
-								<h5 className="card-title fw-bold">{makanan}</h5>
-								<h5 className="card-title ms-5 fw-bold">x {kuantitas}</h5>
+			{modals ? (
+				<div
+					className="card mt-3 shadow-sm p-3"
+					style={{ borderRadius: "20px" }}
+				>
+					<div className="row gx-4">
+						<div className="col-3 col-md-2 ">
+							<img
+								src={image}
+								className="img-fluid rounded-lg"
+								alt={alt_image}
+							/>
+						</div>
+						<div className="col-9 col-md-10 d-flex justify-content-between">
+							<div className="d-flex flex-column">
+								<div className="">
+									<h2 className="fw-bold">{makanan}</h2>
+									<h5 className="">{infoporsi}</h5>
+								</div>
 							</div>
-							<p className="card-text mt-3">{infoporsi}</p>
-							<div className="d-flex justify-content-between mt-5">
-								<p className="card-text tracking-text">Kal : {kal}</p>
-								<p className="card-text tracking-text">Fat : {fat}</p>
-								<p className="card-text tracking-text">Karb : {karb}</p>
-								<p className="card-text tracking-text">Prot : {prot}</p>
+							<div>
+								<h2 className="fw-bold">{kuantitas + " x"}</h2>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			) : (
+				<div
+					className="card mt-3 shadow-sm p-3"
+					style={{ borderRadius: "20px" }}
+				>
+					<div className="row gx-4">
+						<div className="col-3 col-md-2 ">
+							<img
+								src={image}
+								className="img-fluid rounded-lg"
+								alt={alt_image}
+							/>
+						</div>
+						<div className="col-9 col-md-10 d-flex justify-content-between">
+							<div className="d-flex flex-column">
+								<div className="">
+									<h2 className="fw-bold">{makanan}</h2>
+									<h5 className="">{infoporsi}</h5>
+								</div>
+							</div>
+							<div>
+								<div className="d-flex">
+									<button className="btn me-2">
+										<h5 class="fas fa-plus fw-light"></h5>
+									</button>
+
+									<h2>{porsiuser}</h2>
+									<button className="btn me-2">
+										<h5 class="fas fa-minus fw-light"></h5>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
+			{console.log(modals)}
 		</div>
 	);
 }

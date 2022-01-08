@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo_awal from "../images/Opening.png";
 import "../style/SignIn.css";
 import google from "../images/google.png";
-import CardResep from "../components/CardResep";
+
 
 
 export default function SignIn() {

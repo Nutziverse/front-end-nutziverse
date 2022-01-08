@@ -121,9 +121,9 @@ export default function SignUp(){
                 <div className="row">
                     <div className="col-12 mt-5 text-center">
                     <p className="mb-5" style={{fontSize:"18px"}}>
-                          Belum punya akun?{" "}
+                          Sudah punya akun?{" "}
                           <Link to="/sign-up" className="text-primary text-decoration-none">
-                            Daftar
+                            Masuk
                           </Link>
                         </p> 
                     </div>

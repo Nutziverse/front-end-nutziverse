@@ -1,0 +1,69 @@
+/* border radius for card makanan */
+.rounded-08 {
+  border-radius: .8rem !important;
+}
+
+.card .card-makanan-img {
+  border-top-left-radius: calc(.8rem - 1px) !important;
+  border-top-right-radius: calc(.8rem - 1px) !important;
+  max-height: 10rem;
+  object-fit: cover;
+}
+
+/* homepage style */
+.main-section {
+  position: relative;
+  background-color: rgba(6, 124, 198, 1);
+}
+
+.main-section::before {
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-image: url('https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.main-section-content {
+  position: relative;
+}
+
+.mt-6 {
+  margin-top: 3.5rem !important;
+}
+.mt-7 {
+  margin-top: 4rem !important;
+}
+.mt-11 {
+  margin-top: 6rem !important;
+}
+
+/* image height */
+.max-h-10rem {
+  border-radius: 10px;
+  width: 100%;
+  max-height: 10rem;
+  object-fit: cover;
+}
+
+.text-karbo {
+  color: rgb(235, 86, 0);
+}
+
+.text-primary {
+  color: #0084CD;
+}
+
+@media screen and (min-width: 426px) {
+  .max-h-10rem {
+    max-height: 15rem;
+  }
+  
+}

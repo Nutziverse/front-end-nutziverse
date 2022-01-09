@@ -4,6 +4,7 @@ import Layout from "../layouting/Layout";
 import App from "../App";
 import SignIn from "../pages/SignIn";
 import Akun from "../pages/Akun";
+import SignUp from "../pages/SignUp";
 import AkunGoogle from "../pages/AkunGoogle";
 
 
@@ -14,6 +15,7 @@ export default function Routers() {
       <Route path="/profile" element={<Profile />}></Route>
       <Route path="/layout" element={<Layout />}></Route>
       <Route path="/sign-in" element={<SignIn />}></Route>
+      <Route path="/sign-up" element={<SignUp />}></Route>
       <Route path="/akun" element={<Akun />}></Route>
       <Route path="/akungoogle" element={<AkunGoogle />}></Route>
       

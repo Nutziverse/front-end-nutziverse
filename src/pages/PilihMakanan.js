@@ -10,7 +10,7 @@ import "../style/card-makanan.css";
 
 export default function PilihMakanan() {
   const dispatch = useDispatch();
-  const allMakananState = useSelector((state) => state.makananReducers);
+  const allMakananState = useSelector((state) => state.allmakananReducer);
   const { allMakanan, loading, error } = allMakananState;
 
   useEffect(() => {

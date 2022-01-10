@@ -45,6 +45,11 @@
   margin-top: 6rem !important;
 }
 
+/* cursor */
+.pointer {
+  cursor: pointer;
+}
+
 /* image height */
 .max-h-10rem {
   border-radius: 10px;
@@ -59,6 +64,38 @@
 
 .text-primary {
   color: #0084CD;
+}
+
+.bg-primary {
+  background-color: #0084CD !important;
+}
+
+/* .calories-icon {
+  color:rgb(235, 86, 0)
+} */
+
+.fa {
+  font-size: 32px;
+  color: #FF9800;
+  background: -webkit-linear-gradient(#FF9800 31.4%, #FF6D00 66.2%, #F44336 97.2%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fw-semi-bold {
+  font-weight: 600;
+}
+
+.text-white-8 {
+  color: rgba(255, 255, 255, 0.8)
+}
+
+.sup {
+  top: -0.3em;
+}
+
+.fw-medium {
+  font-weight: 500;
 }
 
 @media screen and (min-width: 426px) {

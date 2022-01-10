@@ -6,6 +6,7 @@ import SignIn from "../pages/SignIn";
 import Akun from "../pages/Akun";
 import SignUp from "../pages/SignUp";
 import AkunGoogle from "../pages/AkunGoogle";
+import TrackingNutrisi from "../pages/TrackingNutrisi";
 
 
 export default function Routers() {
@@ -18,7 +19,7 @@ export default function Routers() {
       <Route path="/sign-up" element={<SignUp />}></Route>
       <Route path="/akun" element={<Akun />}></Route>
       <Route path="/akungoogle" element={<AkunGoogle />}></Route>
-      
+      <Route path="/tracking-nutrisi" element={<TrackingNutrisi />}></Route>
       
   
     </Routes>

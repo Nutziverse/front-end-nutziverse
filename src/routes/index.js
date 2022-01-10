@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
-import Profile from "../pages/Profile";
 import Layout from "../layouting/Layout";
+import EditProfile from "../pages/EditProfile";
 import App from "../App";
 import SignIn from "../pages/SignIn";
 import Akun from "../pages/Akun";
@@ -12,7 +12,7 @@ export default function Routers() {
   return (
     <Routes>
       <Route path="/" element={<App />}></Route>
-      <Route path="/profile" element={<Profile />}></Route>
+      <Route path="/editprofile" element={<EditProfile />}></Route>
       <Route path="/layout" element={<Layout />}></Route>
       <Route path="/sign-in" element={<SignIn />}></Route>
       <Route path="/sign-up" element={<SignUp />}></Route>

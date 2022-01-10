@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
 import DatePicker from "react-datepicker";
 import "../style/historykarbon.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,7 +23,7 @@ ChartJS.register(
 	Legend
 );
 
-export default function HistoryKarbon() {
+export default function HistoryKarbon2() {
 	const [hidden, sethidden] = useState(true);
 	const [startDate, setStartDate] = useState(null);
 	const [name, setName] = useState("Hari ini");
@@ -39,7 +38,7 @@ export default function HistoryKarbon() {
 		labels: ["karbon 1"],
 		datasets: [
 			{
-				label: "My First Dataset",
+				label: "Nutrisi Terpenuhi",
 				data: [first],
 				backgroundColor: ["#F9AC3A"],
 				borderColor: ["#F9AC3A"],
@@ -49,7 +48,7 @@ export default function HistoryKarbon() {
 				barThickness: 15,
 			},
 			{
-				label: "My second Dataset",
+				label: "Nutrisi Belum Terpenuhi",
 				data: [second],
 				backgroundColor: ["transparent"],
 				borderColor: ["transparent"],
@@ -60,8 +59,7 @@ export default function HistoryKarbon() {
 			},
 		],
 	});
-	console.log(data(12, 10));
-	const data1 = {
+	const maxdata = (total) => ({
 		labels: ["karbon 1"],
 		datasets: [
 			{
@@ -75,7 +73,7 @@ export default function HistoryKarbon() {
 				barThickness: 15,
 			},
 		],
-	};
+	});
 	const config = {
 		indexAxis: "y",
 		plugins: {
@@ -175,17 +173,17 @@ export default function HistoryKarbon() {
 						className="ms-auto me-auto d-flex justify-content-between"
 						style={{ width: "80%" }}
 					>
-						<div className="custom-row ">
-							<Bar data={data(10, 2)} options={config} id="stacked1" />
-							<Bar data={data1} options={config1} id="stacked" />
-						</div>
-						<div className="custom-row ">
+						<div className="custom-rows ">
 							<Bar data={data(9, 3)} options={config} id="stacked1" />
-							<Bar data={data1} options={config1} id="stacked" />
+							<Bar data={maxdata(12)} options={config1} id="stacked" />
 						</div>
-						<div className="custom-row ">
+						<div className="custom-rows ">
+							<Bar data={data(9, 3)} options={config} id="stacked1" />
+							<Bar data={maxdata(12)} options={config1} id="stacked" />
+						</div>
+						<div className="custom-rows ">
 							<Bar data={data(8, 4)} options={config} id="stacked1" />
-							<Bar data={data1} options={config1} id="stacked" />
+							<Bar data={maxdata(12)} options={config1} id="stacked" />
 						</div>
 					</div>
 				</div>

@@ -1,34 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TrackingCard from "../components/TrackingCard";
 import Button from "../components/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getMakanan } from "../redux/actions/action.makanan.all";
 
 export default function RekomendasiMakanan() {
-	const data = [
-		{
-			image:
-				"https://cdn.idntimes.com/content-images/community/2021/01/fromandroid-4df0ed11b58c2dae0a623432f32a3919.jpg",
-			alt_image: "bubur ayam",
-			makanan: "Bubur Ayam",
-			infoporsi: "1 porsi = 100 gram",
-			kuantitas: "1",
-			kal: "12",
-			fat: "12",
-			karb: "12",
-			prot: "12",
-		},
-		{
-			image:
-				"https://cdn.idntimes.com/content-images/community/2021/01/fromandroid-4df0ed11b58c2dae0a623432f32a3919.jpg",
-			alt_image: "bubur ayam",
-			makanan: "Bubur Ayam",
-			infoporsi: "1 porsi = 100 gram",
-			kuantitas: "1",
-			kal: "12",
-			fat: "12",
-			karb: "12",
-			prot: "12",
-		},
-	];
+	const makananState = useSelector((state) => state.makananallReducers);
+	const { makanan } = makananState;
+	useEffect(() => {
+		dispatch(getMakanan());
+	}, []);
+
+	const dispatch = useDispatch();
+
+	const Statsrekom = ({ colors, angka, satuan, nama }) => (
+		<div style={{ position: "relative" }}>
+			<div className="border border-primary rounded shadow-sm p-2">
+				<h5 className="fw-bold text-center">{angka}</h5>
+				<h6 className="fw-light text-center">{satuan}</h6>
+			</div>
+			<h5 className="text-center">{nama}</h5>
+			<div
+				style={{
+					width: "20px",
+					height: "20px",
+					backgroundColor: colors,
+					position: "absolute",
+					borderRadius: "50%",
+					top: "-8px",
+					left: "-8px",
+				}}
+			></div>
+		</div>
+	);
 	return (
 		<div>
 			<div className="container mt-4 mb-4">
@@ -39,24 +43,60 @@ export default function RekomendasiMakanan() {
 						Rekomendasi beberapa menu sarapan untuk anda
 					</h5>
 					<div className="rounded border border-danger p-4">
-						<div className="row">
-							{data.map((data) => {
+						<div className="row ">
+							{makanan.map((makan) => {
 								return (
 									<div className="col-12 col-lg-6">
 										<TrackingCard
-											image={data.image}
-											alt_image={data.alt_image}
-											infoporsi={data.infoporsi}
-											fat={data.fat}
-											kal={data.kal}
-											karb={data.karb}
-											kuantitas={data.kuantitas}
-											makanan={data.makanan}
-											prot={data.prot}
+											image={makan.image}
+											infoporsi={makan.porsi + "=" + makan.penyetaraanPorsi}
+											modals={true}
+											namamakanan={makan.makanan}
+											id={makan._id}
 										></TrackingCard>
 									</div>
 								);
 							})}
+							<a className="text-end text-decoration-none mt-3">Lihat Resep</a>
+							<div>
+								<h4 className="text-center">Total</h4>
+								<div
+									className="d-flex justify-content-evenly ms-auto me-auto mt-3"
+									style={{ width: "100%" }}
+								>
+									<Statsrekom
+										colors={"red"}
+										nama={"Protein"}
+										angka={390}
+										satuan={"gr"}
+									></Statsrekom>
+									<Statsrekom
+										colors={"red"}
+										nama={"Protein"}
+										angka={390}
+										satuan={"gr"}
+									></Statsrekom>
+									<Statsrekom
+										colors={"red"}
+										nama={"Protein"}
+										angka={390}
+										satuan={"gr"}
+									></Statsrekom>
+									<Statsrekom
+										colors={"red"}
+										nama={"Protein"}
+										angka={390}
+										satuan={"gr"}
+									></Statsrekom>
+									<Statsrekom
+										colors={"red"}
+										nama={"Protein"}
+										angka={390}
+										satuan={"gr"}
+									></Statsrekom>
+								</div>
+							</div>
+
 							<div className="d-flex">
 								<Button btnclass="btn ms-auto me-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
 									Pilih

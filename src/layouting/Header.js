@@ -40,7 +40,7 @@ export default function Header() {
           <div>
             {isLogin ? (
               <h1 className="mb-0">
-                <i class="far fa-user-circle"></i>
+                <i className="far fa-user-circle"></i>
               </h1>
             ) : (
               <Link to="sign-in">
@@ -60,28 +60,28 @@ export default function Header() {
             <div className="col-3">
               <Link to="/" className="mobile-active">
                 <h3 className="m-0">
-                  <i class="far fa-home"></i>
+                  <i className="far fa-home"></i>
                 </h3>
               </Link>
             </div>
             <div className="col-3">
               <Link to="/pilih-makanan">
                 <h3 className="m-0">
-                  <i class="far fa-utensils"></i>
+                  <i className="far fa-utensils"></i>
                 </h3>
               </Link>
             </div>
             <div className="col-3">
               <Link to="/karbon">
                 <h3 className="m-0">
-                  <i class="far fa-cloud-meatball"></i>
+                  <i className="far fa-cloud-meatball"></i>
                 </h3>
               </Link>
             </div>
             <div className="col-3">
               <Link to="/diet">
                 <h3 className="m-0">
-                  <i class="far fa-weight"></i>
+                  <i className="far fa-weight"></i>
                 </h3>
               </Link>
             </div>

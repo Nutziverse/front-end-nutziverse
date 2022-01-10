@@ -61,6 +61,16 @@
   color: #0084CD;
 }
 
+/* button */
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus, .form-control:active {
+  box-shadow: none !important;
+}
+
 @media screen and (min-width: 426px) {
   .max-h-10rem {
     max-height: 15rem;

@@ -31,3 +31,27 @@ function checkCookie() {
     }
   }
 }
+
+
+
+export const addMakanan = (MID) => {
+  const items = localStorage.getItem("pilih_makanan") || []
+  
+  const data = {
+    makananID: MID,
+    porsi: 1
+  }
+  
+  if(items.length > 0) {
+    let newData = JSON.parse(items)
+    const index = newData.findIndex(el => el.makananID === MID)
+    if(index > -1) {
+      newData[index].porsi += 1
+    } else {
+      newData.push(data)
+    }
+    localStorage.setItem("pilih_makanan", JSON.stringify(newData))
+  } else {
+    localStorage.setItem("pilih_makanan", JSON.stringify([data]))
+  }
+}

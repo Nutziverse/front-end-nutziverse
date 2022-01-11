@@ -28,27 +28,7 @@ export default function HistoryKarbon() {
 	}, [hidden]);
 	return (
 		<div className="container mt-4">
-			<div className="d-flex flex-column">
-				<div class="dropdown ms-auto me-auto">
-					<button
-						class="btn btn-primary dropdown-toggle"
-						type="button"
-						id="dropdownMenuButton1"
-						data-bs-toggle="dropdown"
-						aria-expanded="false"
-					>
-						{name}
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li onClick={() => setName("Hari ini")}>
-							<p className="dropdown-item">Hari ini</p>
-						</li>
-						<li onClick={() => handleClick()}>
-							<p className="dropdown-item">Pilih Tanggal</p>
-						</li>
-					</ul>
-				</div>
-			</div>
+			<div className="d-flex flex-column"></div>
 			<div className="d-flex flex-column">
 				<DatePicker
 					className={hidden ? "d-none" : "d-block"}

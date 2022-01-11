@@ -5,11 +5,12 @@ import HomeGuest from "./pages/HomeGuest";
 import RekomendasiMakanan from "./pages/RekomendasiMakanan";
 import HomeLogin from "./pages/HomeLogin";
 import HistoryKarbon from "./pages/HistoryKarbon";
-import HistoryKarbon2 from "./pages/HistoryKarbon2";
+import HistoryKarbon3 from "./pages/HistoryKarbon3";
+import CallToAction from "./pages/CallToAction";
 function App() {
 	return (
 		<Layout>
-			<RekomendasiMakanan></RekomendasiMakanan>
+			<CallToAction />
 		</Layout>
 	);
 }

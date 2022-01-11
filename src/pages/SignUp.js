@@ -4,30 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import google from "../images/google.png";
 import Layout from "../layouting/Layout";
 import "../style/SignUp.css";
-import GoogleLogin from "react-google-login";
-import axios from "axios";
 
 export default function SignUp() {
-  const onSubmit = async (data) => {
-    let inputTelepon = data.telepon;
-    let inputPassword = data.password;
-
-    const body = {
-      no_hp: data.telepon,
-      password: data.password,
-    };
-  const { REACT_APP_API_URL } = process.env;
-  try {
-    const result = await axios.post(`${REACT_APP_API_URL}/users/login`, body);
-    console.log(result);
-    const { token } = result.data;
-    setCookie("token", token);
-    const cookie = getCookie("token");
-    if (token) {
-      Navigate("/akun");
-    }
-    console.log(cookie);
-  } catch (error) {}
   return (
     <Layout>
       <div className="container">
@@ -158,31 +136,15 @@ export default function SignUp() {
           </div>
         </div>
         <div className="row">
-          {/* <div className="col-12 mt-3 text-center">
-                    <button type="submit" className="btn btn-sm btn-main fw-bold" style={{backgroundColor: "white",fontSize:"18px"
-                             ,boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)",borderRadius:"10px",
-                             padding: "15px 18px;",height: "50px",width:"500px"}}>
-                            <img src={google} style={{height:"25px",marginRight:"10px"}}></img>Daftar dengan Google
-                            </button>
-                    </div> */}
-          <GoogleLogin
-            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-            render={(props) => (
-              <div className="d-grid col-12 mt-md-3 mt-2">
-                <button
-                  onClick={props.onClick}
-                  className="btn btn-sm btn-main"
-                  style={{ backgroundColor: "white", fontSize: "16px", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)", borderRadius: "8px", padding: "15px 18px;" }}
-                >
-                  <img src={google} style={{ height: "16px", marginRight: "10px" }}></img>Daftar dengan Google+
-                </button>
-              </div>
-            )}
-            buttonText="Daftar dengan google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy="single_host_origin"
-          />
+          <div className="col-12 mt-3 text-center">
+            <button
+              type="submit"
+              className="btn btn-sm btn-main fw-bold"
+              style={{ backgroundColor: "white", fontSize: "18px", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)", borderRadius: "10px", padding: "15px 18px;", height: "50px", width: "500px" }}
+            >
+              <img src={google} style={{ height: "25px", marginRight: "10px" }}></img>Daftar dengan Google
+            </button>
+          </div>
         </div>
         <div className="row">
           <div className="col-12 mt-5 text-center">
@@ -197,4 +159,4 @@ export default function SignUp() {
       </div>
     </Layout>
   );
-            }
+}

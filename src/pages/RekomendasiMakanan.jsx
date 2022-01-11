@@ -2,14 +2,21 @@ import React, { useEffect } from "react";
 import TrackingCard from "../components/TrackingCard";
 import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getMakanan } from "../redux/actions/action.makanan.all";
+import { getMakanan } from "../redux/actions/action.makanan";
+import { getRekomendasi } from "../redux/actions/action.rekomendasi";
+import Layout from "../layouting/Layout";
 
 export default function RekomendasiMakanan() {
-	const makananState = useSelector((state) => state.makananallReducers);
-	const { makanan } = makananState;
 	useEffect(() => {
 		dispatch(getMakanan());
+		dispatch(getRekomendasi());
 	}, []);
+	const RekomendasiState = useSelector((state) => state.rekomendasiReducer);
+	const { allRekomendasi } = RekomendasiState;
+	console.log(allRekomendasi);
+	const makananState = useSelector((state) => state.allmakananReducer);
+
+	const { allMakanan } = makananState;
 
 	const dispatch = useDispatch();
 
@@ -34,7 +41,7 @@ export default function RekomendasiMakanan() {
 		</div>
 	);
 	return (
-		<div>
+		<Layout>
 			<div className="container mt-4 mb-4">
 				<h3 className="fw-bold">Rekomendasi Makanan</h3>
 				<div className="sarapan">
@@ -44,15 +51,13 @@ export default function RekomendasiMakanan() {
 					</h5>
 					<div className="rounded border border-danger p-4">
 						<div className="row ">
-							{makanan.map((makan) => {
+							{allMakanan.map((makan) => {
 								return (
 									<div className="col-12 col-lg-6">
 										<TrackingCard
-											image={makan.image}
-											infoporsi={makan.porsi + "=" + makan.penyetaraanPorsi}
-											modals={true}
-											namamakanan={makan.makanan}
 											id={makan._id}
+											namamakanan={makan.makanan}
+											image={makan.image}
 										></TrackingCard>
 									</div>
 								);
@@ -106,6 +111,6 @@ export default function RekomendasiMakanan() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</Layout>
 	);
 }

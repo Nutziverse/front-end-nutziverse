@@ -16,10 +16,6 @@ export default function TrackingCard({
 	id,
 }) {
 	const dispatch = useDispatch();
-	const amount = useSelector((state) => state.PorsiReducer);
-	let { number } = amount;
-	const makananState = useSelector((state) => state.makananReducers);
-	const { makanan } = makananState;
 	return (
 		<div>
 			{modals ? (
@@ -84,7 +80,7 @@ export default function TrackingCard({
 										<h5 class="fas fa-plus fw-light"></h5>
 									</button>
 
-									<h2>{number}</h2>
+									<h2>{12}</h2>
 									<button
 										className="btn me-2"
 										onClick={() => dispatch(KurangiPorsi())}

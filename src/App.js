@@ -8,11 +8,7 @@ import HistoryKarbon from "./pages/HistoryKarbon";
 import HistoryKarbon3 from "./pages/HistoryKarbon3";
 import CallToAction from "./pages/CallToAction";
 function App() {
-	return (
-		<Layout>
-			<CallToAction />
-		</Layout>
-	);
+	return <RekomendasiMakanan />;
 }
 
 export default App;

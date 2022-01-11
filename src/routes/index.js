@@ -1,21 +1,27 @@
 import { Routes, Route } from "react-router";
-import Profile from "../pages/Profile";
 import Layout from "../layouting/Layout";
 import HomeLogin from "../pages/HomeLogin";
+import EditProfile from "../pages/EditProfile";
 import App from "../App";
 import SignIn from "../pages/SignIn";
 import Akun from "../pages/Akun";
+import SignUp from "../pages/SignUp";
 import AkunGoogle from "../pages/AkunGoogle";
+import PilihMakanan from "../pages/PilihMakanan";
 
 export default function Routers() {
-	return (
-		<Routes>
-			<Route path="/" element={<App />}></Route>
-			<Route path="/profile" element={<Profile />}></Route>
-			<Route path="/layout" element={<Layout />}></Route>
-			<Route path="/sign-in" element={<SignIn />}></Route>
-			<Route path="/akun" element={<Akun />}></Route>
-			<Route path="/akungoogle" element={<AkunGoogle />}></Route>
-		</Routes>
-	);
+  return (
+    <Routes>
+      <Route path="/" element={<App />}></Route>
+      <Route path="/editprofile" element={<EditProfile />}></Route>
+      <Route path="/layout" element={<Layout />}></Route>
+      <Route path="/sign-in" element={<SignIn />}></Route>
+      <Route path="/sign-up" element={<SignUp />}></Route>
+      <Route path="/akun" element={<Akun />}></Route>
+      <Route path="/akungoogle" element={<AkunGoogle />}></Route>
+      <Route path="/pilih-makanan" element={<PilihMakanan />}></Route>
+      
+  
+    </Routes>
+  );
 }

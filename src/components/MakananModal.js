@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { addMakanan } from "../helpers";
 import { getMakananByID } from "../redux/actions/action.makanan";
 import { closeModal } from "../redux/actions/action.modal";
 import "../style/card-makanan.css";
@@ -8,7 +10,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 	const dispatch = useDispatch();
 	const makananState = useSelector((state) => state.makananReducers);
 	const modalState = useSelector((state) => state.modalReducer);
-	const { makanan } = makananState;
+	const { makanan, loading } = makananState;
 
 	let showModal = "d-block";
 

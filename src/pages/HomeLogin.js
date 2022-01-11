@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-
+import Layout from "../layouting/Layout";
 import { Doughnut } from "react-chartjs-2";
 import "../style/PieChart.css";
 import Button from "../components/Button";
@@ -148,7 +148,7 @@ export default function HomeLogin() {
 		</div>
 	);
 	return (
-		<div>
+		<Layout>
 			<div className="container">
 				<div
 					className="mt-4 rounded d-flex justify-content-between main-bg"
@@ -422,6 +422,6 @@ export default function HomeLogin() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</Layout>
 	);
 }

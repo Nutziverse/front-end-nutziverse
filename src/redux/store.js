@@ -3,14 +3,14 @@ import thunk from "redux-thunk";
 import { combineReducers } from "redux";
 import makananReducers from "./reducers/reducer.makanan";
 import modalReducer from "./reducers/reducer.modal";
-import PorsiReducer from "./reducers/reducerPorsiMakanan";
-import makananallReducers from "./reducers/reducers.makanan.all";
+import allmakananReducer from "./reducers/reducer.allmakanan";
+import rekomendasiReducer from "./reducers/reducer.rekomendasi";
 
 const reducers = combineReducers({
 	makananReducers: makananReducers,
 	modalReducer: modalReducer,
-	PorsiReducer: PorsiReducer,
-	makananallReducers: makananallReducers,
+	allmakananReducer: allmakananReducer,
+	rekomendasiReducer: rekomendasiReducer,
 });
 
 export const store = createStore(reducers, {}, applyMiddleware(thunk));

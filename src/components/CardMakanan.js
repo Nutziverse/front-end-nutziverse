@@ -8,7 +8,7 @@ export default function CardMakanan({makanan, image, penyetaraanPorsi, kalori, k
         src={image}
         alt="Food"
       />
-      <div className="card-body">
+      <div className="card-body text-center">
         <h5 className="card-title">{makanan}</h5>
         <p className="card-text mb-2"><small>{penyetaraanPorsi}</small></p>
         <ul className="list-inline d-flex flex-wrap justify-content-around mb-1">

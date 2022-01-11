@@ -63,7 +63,19 @@ export default function SignIn() {
     try {
       if (authResult) {
         const result = await axios.post(`${process.env.REACT_APP_API_URL}/users/auth/google`, authResult);
-        console.log(process.env.REACT_APP_API_URL);
+        console.log(process.env.REACT_APP_API_URL); 
+        console.log(result)
+        const { message } = result.data
+
+        if(message === 'welcome') {
+          const {token} = result.data
+          setCookie("token", token);
+          Navigate("/");
+        } else {
+          setCookie("email", result.data.result.email)
+          Navigate("/sign-up")
+        }
+
         return result;
       } else {
         throw new Error(authResult);

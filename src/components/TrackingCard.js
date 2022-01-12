@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../style/TrackingCard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../redux/actions/action.modal";
@@ -8,7 +8,6 @@ import { removeMakanan, addMakanan } from "../helpers";
 
 export default function TrackingCard({
 	image,
-	alt_image,
 	namamakanan,
 	infoporsi,
 	kuantitas,
@@ -16,6 +15,7 @@ export default function TrackingCard({
 	id,
 }) {
 	const dispatch = useDispatch();
+	useEffect(() => {}, [dispatch]);
 	return (
 		<div>
 			{modals ? (
@@ -78,14 +78,17 @@ export default function TrackingCard({
 							</div>
 							<div>
 								<div className="d-flex">
-									<button className="btn me-2" onClick={() => addMakanan(id)}>
+									<button
+										className="btn me-2"
+										onClick={() => dispatch(TambahPorsi(id))}
+									>
 										<h5 class="fas fa-plus fw-light"></h5>
 									</button>
 
 									<h2>{kuantitas}</h2>
 									<button
 										className="btn me-2"
-										onClick={() => removeMakanan(id)}
+										onClick={() => dispatch(KurangiPorsi(id))}
 									>
 										<h5 class="fas fa-minus fw-light"></h5>
 									</button>

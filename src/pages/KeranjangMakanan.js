@@ -18,7 +18,6 @@ import "../style/PieChart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getKeranjang } from "../redux/actions/action.keranjang";
 import Layout from "../layouting/Layout";
-import { set } from "react-hook-form";
 
 ChartJS.register(
 	CategoryScale,
@@ -105,26 +104,28 @@ export default function KeranjangMakanan() {
 	let local = localStorage.getItem("pilih_makanan");
 	local = JSON.parse(local);
 	let id = [];
-	let jumlah = [];
 	local.map((data) => id.push(data.makananID));
-	local.map((data) => jumlah.push(data.porsi));
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(getKeranjang(id));
-	}, [dispatch]);
 	const KeranjangState = useSelector((state) => state.keranjangReducer);
-	const { keranjang } = KeranjangState;
+	const PorsiState = useSelector((state) => state.PorsiReducer);
+	console.log(PorsiState);
+	function Findporsi(ID) {
+		let porsi = PorsiState.filter((data) => data.makananID == ID);
+		porsi = porsi[0].porsi;
+		return porsi;
+	}
+	let jumlah = PorsiState.map((data) => data.porsi);
+	let { keranjang } = KeranjangState;
 	let DataKeranjang = keranjang.data;
 	let Loading = KeranjangState.loading;
 	const [proteins, setProteins] = useState(0);
-	console.log(DataKeranjang);
 	let Totalprotein,
 		Totallemak,
 		Totalkarbohidrat,
 		Totalkalori = [];
-	function add_array(data) {}
+
 	let ar = [1, 2];
 	if (!Loading) {
 		Totalprotein = DataKeranjang.map((data) => data.protein);
@@ -143,10 +144,7 @@ export default function KeranjangMakanan() {
 		Totalkalori = Totalkalori.reduce(function (r, a, i) {
 			return r + a * jumlah[i];
 		}, 0);
-		console.log(Totalkarbohidrat, Totalkalori, Totallemak, Totalprotein);
 	}
-
-	console.log(typeof DataKeranjang);
 
 	let [warna, setwarna] = useState(true);
 	function warna1() {
@@ -242,6 +240,10 @@ export default function KeranjangMakanan() {
 		}
 	}
 
+	useEffect(() => {
+		dispatch(getKeranjang(id));
+	}, [dispatch, Findporsi]);
+
 	return (
 		<Layout>
 			<div className="container mt-4">
@@ -250,16 +252,19 @@ export default function KeranjangMakanan() {
 						<div className="col-12 col-lg-6">
 							<button onClick={() => protein()}>test</button>
 							{DataKeranjang.map((data) => (
-								<TrackingCard
-									image={data.image}
-									namamakanan={data.makanan}
-									modals={false}
-									id={data._id}
-									protein={data.protein}
-									karbohidrat={data.karbohidrat}
-									lemak={data.lemak}
-									kalori={data.kalori}
-								></TrackingCard>
+								<>
+									<TrackingCard
+										image={data.image}
+										namamakanan={data.makanan}
+										modals={false}
+										id={data._id}
+										protein={data.protein}
+										karbohidrat={data.karbohidrat}
+										lemak={data.lemak}
+										kalori={data.kalori}
+										kuantitas={Findporsi(data._id)}
+									></TrackingCard>
+								</>
 							))}
 						</div>
 						<div className="col-12 col-lg-6 d-flex flex-column py-5">

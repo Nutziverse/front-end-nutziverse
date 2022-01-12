@@ -43,7 +43,7 @@ export default function Header() {
                 <i className="far fa-user-circle"></i>
               </h1>
             ) : (
-              <Link to="sign-in">
+              <Link to="/sign-in">
                 <Button btnclass="btn btn-primary">Masuk</Button>
               </Link>
             )}

@@ -349,7 +349,7 @@ export default function SignUp() {
           <div className="col-12 mt-5 text-center">
             <p className="mb-5" style={{ fontSize: "18px" }}>
               Sudah punya akun?{" "}
-              <Link to="/sign-up" className="text-primary text-decoration-none">
+              <Link to="/sign-in" className="text-primary text-decoration-none">
                 Masuk
               </Link>
             </p>

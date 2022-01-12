@@ -1,9 +1,13 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 import Button from "../components/Button";
+import { getCookie } from "../helpers";
 import "../style/profile.css";
 
 export default function Akun() {
-
+  if(!getCookie("token")) {
+    return <Navigate to="/sign-in"/>
+  }
 
   return (
     <div className="container-fluid">

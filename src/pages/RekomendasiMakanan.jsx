@@ -7,6 +7,7 @@ import { getRekomendasi } from "../redux/actions/action.rekomendasi";
 import Layout from "../layouting/Layout";
 
 export default function RekomendasiMakanan() {
+	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getMakanan());
 		dispatch(getRekomendasi());
@@ -17,8 +18,6 @@ export default function RekomendasiMakanan() {
 	const makananState = useSelector((state) => state.allmakananReducer);
 
 	const { allMakanan } = makananState;
-
-	const dispatch = useDispatch();
 
 	const Statsrekom = ({ colors, angka, satuan, nama }) => (
 		<div style={{ position: "relative" }}>

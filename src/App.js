@@ -7,8 +7,9 @@ import HomeLogin from "./pages/HomeLogin";
 import HistoryKarbon from "./pages/HistoryKarbon";
 import HistoryKarbon3 from "./pages/HistoryKarbon3";
 import CallToAction from "./pages/CallToAction";
+import KeranjangMakanan from "./pages/KeranjangMakanan";
 function App() {
-	return <RekomendasiMakanan />;
+	return <KeranjangMakanan></KeranjangMakanan>;
 }
 
 export default App;

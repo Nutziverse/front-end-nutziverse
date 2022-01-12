@@ -1,17 +1,21 @@
 .custom-rows {
 	display: grid !important;
-	grid-template-columns: repeat(1, 1fr);
-	width: 25%;
-	height: 100px;
+	grid-template-columns: repeat(1, 1fr) !important;
+	padding: 0 !important;
 }
-
 #stacked {
 	grid-column: 1/-1;
 	grid-row: 1;
+	height: 200px !important;
+	width: auto !important;
+	padding: 0;
 }
 
 #stacked1 {
 	grid-column: 1 / -1;
 	grid-row: 1;
 	z-index: 1;
+	height: 200px !important;
+	width: auto !important;
+	padding: 0;
 }

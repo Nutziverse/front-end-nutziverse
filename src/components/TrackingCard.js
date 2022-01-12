@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../redux/actions/action.modal";
 import MakananModal from "../components/MakananModal";
 import { TambahPorsi, KurangiPorsi } from "../redux/actions/actionPorsiMakanan";
+import { removeMakanan, addMakanan } from "../helpers";
 
 export default function TrackingCard({
 	image,
@@ -11,7 +12,6 @@ export default function TrackingCard({
 	namamakanan,
 	infoporsi,
 	kuantitas,
-	porsiuser = 1,
 	modals = true,
 	id,
 }) {
@@ -35,7 +35,7 @@ export default function TrackingCard({
 									objectFit: "cover",
 									borderRadius: "5px",
 								}}
-								alt={alt_image}
+								alt={namamakanan}
 							/>
 						</div>
 						<div className="col-9 col-md-9">
@@ -53,37 +53,39 @@ export default function TrackingCard({
 				</button>
 			) : (
 				<div
-					className="card mt-3 shadow-sm p-3"
+					className="card mt-3 shadow-sm p-3 w-100"
 					style={{ borderRadius: "20px" }}
 				>
-					<div className="row gx-4">
-						<div className="col-3 col-md-2 ">
+					<div className="row w-100">
+						<div className="col-3 col-md-3 ">
 							<img
 								src={image}
-								className="img-fluid rounded-lg"
-								alt={alt_image}
+								style={{
+									width: "100%",
+									height: "100px",
+									objectFit: "cover",
+									borderRadius: "5px",
+								}}
+								alt={namamakanan}
 							/>
 						</div>
-						<div className="col-9 col-md-10 d-flex justify-content-between">
+						<div className="col-9 col-md-9 d-flex justify-content-between">
 							<div className="d-flex flex-column">
 								<div className="">
-									<h2 className="fw-bold">{namamakanan}</h2>
-									<h5 className="">{infoporsi}</h5>
+									<h5 className="fw-bold">{namamakanan}</h5>
+									<h6 className="">{infoporsi}</h6>
 								</div>
 							</div>
 							<div>
 								<div className="d-flex">
-									<button
-										className="btn me-2"
-										onClick={() => dispatch(TambahPorsi())}
-									>
+									<button className="btn me-2" onClick={() => addMakanan(id)}>
 										<h5 class="fas fa-plus fw-light"></h5>
 									</button>
 
-									<h2>{12}</h2>
+									<h2>{kuantitas}</h2>
 									<button
 										className="btn me-2"
-										onClick={() => dispatch(KurangiPorsi())}
+										onClick={() => removeMakanan(id)}
 									>
 										<h5 class="fas fa-minus fw-light"></h5>
 									</button>

@@ -19,6 +19,7 @@ export default function TrackingNutrisi() {
   const [hidden, sethidden] = useState(true);
   const [dropdown, setdropdown] = useState(false)
   const myRefname = useRef(null);
+  let today = new Date()
 
   const { tracking, loading, error } = trackingState;
 
@@ -94,6 +95,7 @@ export default function TrackingNutrisi() {
                     selected={selectedDate} 
                     onChange={(date) => selectTanggal(date) } 
                     ref={myRefname}
+                    maxDate={today}
                   />
                 </div>
               </div>

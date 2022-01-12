@@ -1,24 +1,56 @@
 import Layout from "../layouting/Layout";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTracking } from "../redux/actions/action.tracking";
+import { getByDate, getTracking } from "../redux/actions/action.tracking";
 import TrackingCard from "../components/TrackingCard";
 import { showModal } from "../redux/actions/action.modal";
 import MakananModal from "../components/MakananModal";
 import "../style/card-makanan.css";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
 
 export default function TrackingNutrisi() {
   const dispatch = useDispatch();
   const trackingState = useSelector((state) => state.trackingReducer);
+  const initialState = "Hari ini"
+  const [state, setstate] = useState(initialState)
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [hidden, sethidden] = useState(true);
+  const [dropdown, setdropdown] = useState(false)
+  const myRefname = useRef(null);
 
   const { tracking, loading, error } = trackingState;
 
+  function convert(str) {
+		let date = str;
+		let mnth = ("0" + (date.getMonth() + 1)).slice(-2);
+		let day = ("0" + date.getDate()).slice(-2);
+		return [date.getFullYear(), mnth, day].join("-");
+	}
+  
+  const selectTanggal = (date) => {
+    sethidden(false);
+    myRefname.current.setFocus(true);
+    if(date) {
+      let newDate = convert(date)
+      setSelectedDate(date)
+      setstate(newDate)
+      setdropdown(false)
+    }
+  }
+  
   useEffect(() => {
-    dispatch(getTracking());
-  }, [dispatch]);
-
-  console.log(tracking);
+    if(selectedDate) {
+      dispatch(getByDate(state))
+    } else {
+      dispatch(getTracking());
+    }
+    if (hidden === false) {
+      myRefname.current.setFocus(true);
+			sethidden(true);
+		}
+  }, [dispatch, hidden, selectedDate, state]);
 
   return (
     <Layout>
@@ -36,11 +68,35 @@ export default function TrackingNutrisi() {
 
         <div className="container pt-4 pb-3">
           <div className="row justify-content-center">
-            <div className="col-9">
-              <select class="form-select rounded-08" aria-label="Default select example">
-                <option selected >Hari ini</option>
-                <option value="pilih-tanggal">Pilih Tanggal</option>
-              </select>
+            <div className="col-12 text-center">
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary px-3 rounded-08" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onClick={() => setdropdown(true)}>
+                  <span className="me-4 text-red"><i class="far fa-calendar-alt"></i></span>
+                  <span className="me-4">{state}</span>
+                  <span className="text-muted"><i class="fas fa-chevron-down"></i></span>
+                </button>
+                <ul className={`dropdown-menu dropdown-menu-center ${dropdown?'d-block' : ''}`} aria-labelledby="dropdownMenuButton1">
+                  <li 
+                    onClick={() => {
+                      setstate(initialState);
+                      setSelectedDate(null);
+                      setdropdown(false)
+                    }}
+                  >
+                    <p className="dropdown-item pointer mb-0">Hari ini</p>
+                  </li>
+                  <li onClick={() => selectTanggal()}><p className="dropdown-item pointer mb-0">Pilih Tanggal</p></li>
+                </ul>
+                <div className="d-flex">
+                  <DatePicker
+                    className={hidden ? "d-none" : "d-block"}
+                    closeOnScroll={true} 
+                    selected={selectedDate} 
+                    onChange={(date) => selectTanggal(date) } 
+                    ref={myRefname}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -50,24 +106,24 @@ export default function TrackingNutrisi() {
             <div class="card-body">
               <div className="row gy-4 pt-3">
                 <div className="col-12">
-                  <p className="fs-2 mb-0 fw-bold"><span className="fa"><i class="fas fa-fire"></i></span> {!loading && tracking.tracking  ? tracking.tracking.totKalori : 0}</p>
+                  <p className="fs-2 mb-0 fw-bold"><span className="fa"><i class="fas fa-fire"></i></span> {!loading && !error && tracking.tracking  ? tracking.tracking.totKalori : 0}</p>
                   <p className="fs-6 fw-medium">kkal</p>
                 </div>
 
                 <div className="col-12">
                   <div className="row gy-4">
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading ? tracking.totKarbohidrat : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking.tracking ? tracking.totKarbohidrat : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
                       {/* this will be chart */}
                       <p className="fs-6 fw-medium">Karbohidrat</p>
                     </div>
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading ? tracking.totLemak : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking.tracking ? tracking.totLemak : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
                       {/* this will be chart */}
                       <p className="fs-6 fw-medium">Protein</p>
                     </div>
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading ? tracking.totProtein : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking.tracking ? tracking.totProtein : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
                       {/* this will be chart */}
                       <p className="fs-6 fw-medium">Lemak</p>
                     </div>

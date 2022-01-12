@@ -74,7 +74,7 @@ export default function TrackingCard({
 					</div>
 				</div>
 			)}
-			{console.log(modals)}
+			
 		</div>
 	);
 }

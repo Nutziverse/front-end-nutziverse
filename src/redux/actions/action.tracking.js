@@ -36,9 +36,6 @@ export const getByDate = (date) => {
     })
   
     try {
-      const body = {
-        date: date
-      }
   
       const { data } = await axios.get(`${API_URL}/tracking/${date}`, {
         headers: {

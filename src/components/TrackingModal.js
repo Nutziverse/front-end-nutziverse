@@ -4,7 +4,7 @@ import { getMakananByID } from "../redux/actions/action.makanan"
 import { closeModal } from "../redux/actions/action.modal"
 import "../style/card-makanan.css"
 
-export default function MakananModal({pilih=false, karbon=false}) {
+export default function TrackingModal({karbon=false, porsi}) {
   
   const dispatch = useDispatch()
   const makananState = useSelector(state => state.makananReducers)
@@ -12,11 +12,15 @@ export default function MakananModal({pilih=false, karbon=false}) {
   const { makanan } = makananState
 
   let showModal = 'd-block'
+  let kaliPorsi, kaliPenyetaraan
   
   useEffect(() => {
     dispatch(getMakananByID(modalState.MID))
   }, [dispatch, modalState.MID])
   
+  if(makanan) {
+    kaliPorsi = makanan.porsi.split()
+  }
 
   if(!modalState.show)
     return null
@@ -75,9 +79,6 @@ export default function MakananModal({pilih=false, karbon=false}) {
                 </div>
               </div>
             </div>
-          </div>
-          <div className={`modal-footer ${pilih? '' : 'd-none'}`}>
-            <button type="button" className="btn btn-primary">Pilih</button>
           </div>
         </div>
       </div>

@@ -128,6 +128,24 @@
   background-color: #0084CD;
 }
 
+/* chart */
+.custom-rows {
+	display: grid !important;
+	grid-template-columns: repeat(3, 1fr);
+	row-gap: 20px;
+	column-gap: 20px;
+}
+#stacked {
+	grid-column: 1/-1;
+	grid-row: 1;
+}
+
+#stacked1 {
+	grid-column: 1 / -1;
+	grid-row: 1;
+	z-index: 1;
+}
+
 @media screen and (min-width: 426px) {
   .max-h-10rem {
     max-height: 15rem;

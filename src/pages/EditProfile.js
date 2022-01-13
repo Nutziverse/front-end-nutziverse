@@ -92,6 +92,22 @@ export default function EditProfile() {
               required: "Umur tidak boleh kosong",
             })}
           />
+          <div className="mb-3 mt-3">
+            <label for="jeniskelamin">Jenis Kelamin</label>
+            <select
+              className="form-control form-control-lg "
+              id="jeniskelamin"
+              placeholder="Jenis Kelamin"
+              {...register("jeniskelamin", {
+                required: "Jenis Kelamin tidak boleh kosong",
+              })}
+            >
+              <i className="fas fa-caret-down"></i>
+              <option defaultValue>Pilih Jenis Kelamin</option>
+              <option value={"laki-laki"}>Laki-Laki</option>
+              <option value={"perempuan"}>Perempuan</option>
+            </select>
+          </div>
 
           <div className="mb-3 mt-3">
             <label for="formGroupExampleInput" className="form-label">
@@ -128,7 +144,7 @@ export default function EditProfile() {
               Aktivitas Fisik
             </label>
             <select
-              className="form-control"
+              className="form-control form-control-lg"
               id="aktivitasFisik"
               {...register("aktivitasFisik", {
                 required: "Aktivitas Fisik tidak boleh kosong",

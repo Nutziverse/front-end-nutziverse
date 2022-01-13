@@ -3,8 +3,13 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Layout from "../layouting/Layout";
 import { Doughnut } from "react-chartjs-2";
 import "../style/PieChart.css";
-import Button from "../components/Button";
+import { Link } from "react-router-dom";
 
+import { getMakanan } from "../redux/actions/action.makanan";
+import { useDispatch, useSelector } from "react-redux";
+import { getUSER } from "../redux/actions/action.User";
+import CardResep from "../components/CardResep";
+import "../style/card-makanan.css";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const plugins = [
@@ -131,6 +136,18 @@ export const options = {
 };
 
 export default function HomeLogin() {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getUSER());
+		dispatch(getMakanan());
+	}, [dispatch]);
+	const allMakananState = useSelector((state) => state.allmakananReducer);
+	const { allMakanan, loading, error } = allMakananState;
+	console.log(allMakanan);
+	const UserState = useSelector((state) => state.UserReducer);
+	const { User } = UserState;
+
+	const PorsiState = useSelector((state) => state.PorsiReducer);
 	const StatsProfile = ({ grid, colors, image, nutrisi, angka }) => (
 		<div
 			className={grid + " shadow d-flex flex-column"}
@@ -157,7 +174,7 @@ export default function HomeLogin() {
 					}}
 				>
 					<div>
-						<h1 className="text-white fw-bold mt-4 ms-3">Halo, Vania!</h1>
+						<h1 className="text-white fw-bold mt-4 ms-3">Halo, {User.nama}</h1>
 						<h4 className="text-white mt-3 ms-3">Apa kabar?</h4>
 					</div>
 					<img
@@ -239,142 +256,20 @@ export default function HomeLogin() {
 				</div>
 				<div className=" mt-4">
 					<h4>Resep</h4>
-					<div className="custom-row-2">
-						<div className="newitem-1 p-3 rounded shadow">
-							<div className="row">
-								<div className="col-4 ">
-									<img
-										style={{
-											width: "100%",
-											height: "100px",
-											objectFit: "cover",
-											borderRadius: "5px",
-										}}
-										src="https://media.istockphoto.com/photos/hot-vegetable-soup-in-a-dish-made-of-natural-materials-traditional-picture-id1226586928?b=1&k=20&m=1226586928&s=170667a&w=0&h=OaaJR-PWvbGaTfJlp8Rrykt0IJ_7JYiVAOyquPfcZWs="
-									/>
-								</div>
-								<div className="col-8">
-									<div className="">
-										<h5 className="fw-bold">Resep Nasi Kuning</h5>
-										<div className="d-flex mt-3">
-											<div className="d-flex me-4">
-												<div>
-													<img
-														src="https://cdn-icons-png.flaticon.com/128/850/850960.png"
-														width={"25px"}
-														height={"auto"}
-													/>
-												</div>
-
-												<h6 className="ms-1 my-auto">30 menit</h6>
-											</div>
-											<div className="d-flex"></div>
-											<div>
-												<img
-													src="https://cdn-icons-png.flaticon.com/128/2424/2424848.png"
-													width={"25px"}
-													height={"auto"}
-												/>
-											</div>
-											<h6 className="ms-1 my-auto">1 porsi</h6>
-										</div>
-										<div className="d-flex justify-content-end mt-3">
-											<Button btnclass={"btn btn-danger me-2"}>Pilih</Button>
-										</div>
-									</div>
+					<div className="row">
+						{allMakanan.slice(0, 4).map((data) => (
+							<div className="col-12 col-md-6 col-lg-3">
+								<div className="pointer">
+									<CardResep
+										imageUrl={data.image}
+										kalori={data.kaloriMakanan}
+										karbon={data.karbon}
+										title={data.makanan}
+										key={data._id}
+									></CardResep>
 								</div>
 							</div>
-						</div>
-						<div className="newitem-2 d-none d-lg-block p-3 rounded shadow">
-							<div className="row">
-								<div className="col-4 ">
-									<img
-										style={{
-											width: "100%",
-											height: "100px",
-											objectFit: "cover",
-											borderRadius: "5px",
-										}}
-										src="https://media.istockphoto.com/photos/hot-vegetable-soup-in-a-dish-made-of-natural-materials-traditional-picture-id1226586928?b=1&k=20&m=1226586928&s=170667a&w=0&h=OaaJR-PWvbGaTfJlp8Rrykt0IJ_7JYiVAOyquPfcZWs="
-									/>
-								</div>
-								<div className="col-8">
-									<div className="">
-										<h5 className="fw-bold">Resep Nasi Kuning</h5>
-										<div className="d-flex mt-3">
-											<div className="d-flex me-4">
-												<div>
-													<img
-														src="https://cdn-icons-png.flaticon.com/128/850/850960.png"
-														width={"25px"}
-														height={"auto"}
-													/>
-												</div>
-
-												<h6 className="ms-1 my-auto">30 menit</h6>
-											</div>
-											<div className="d-flex"></div>
-											<div>
-												<img
-													src="https://cdn-icons-png.flaticon.com/128/2424/2424848.png"
-													width={"25px"}
-													height={"auto"}
-												/>
-											</div>
-											<h6 className="ms-1 my-auto">2 porsi</h6>
-										</div>
-										<div className="d-flex justify-content-end mt-3">
-											<Button btnclass={"btn btn-danger me-2"}>Pilih</Button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className="newitem-3 d-none d-lg-block p-3 rounded shadow">
-							<div className="row">
-								<div className="col-4 ">
-									<img
-										style={{
-											width: "100%",
-											height: "100px",
-											objectFit: "cover",
-											borderRadius: "5px",
-										}}
-										src="https://images.unsplash.com/photo-1612927601601-6638404737ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bm9vZGxlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-									/>
-								</div>
-								<div className="col-8">
-									<div className="">
-										<h5 className="fw-bold">Resep Nasi Kuning</h5>
-										<div className="d-flex mt-3">
-											<div className="d-flex me-4">
-												<div>
-													<img
-														src="https://cdn-icons-png.flaticon.com/128/850/850960.png"
-														width={"25px"}
-														height={"auto"}
-													/>
-												</div>
-
-												<h6 className="ms-1 my-auto">30 menit</h6>
-											</div>
-
-											<div>
-												<img
-													src="https://cdn-icons-png.flaticon.com/128/2424/2424848.png"
-													width={"25px"}
-													height={"auto"}
-												/>
-											</div>
-											<h6 className="ms-1 my-auto">3 porsi</h6>
-										</div>
-										<div className="d-flex justify-content-end mt-3">
-											<Button btnclass={"btn btn-danger me-2"}>Pilih</Button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						))}
 					</div>
 					<div className="d-flex justify-content-end mt-3">
 						<a href="/#" className="text-decoration-none">
@@ -386,8 +281,8 @@ export default function HomeLogin() {
 				<div className="mt-4 mb-5">
 					<h4>Rekomendasi Makanan</h4>
 					<div className="custom-row-2">
-						<a
-							href="/#"
+						<Link
+							to="/rekomendasi#sarapan"
 							className="newitem-1 text-black text-decoration-none shadow p-4 d-flex flex-column"
 						>
 							<img
@@ -396,9 +291,9 @@ export default function HomeLogin() {
 								className="ms-auto me-auto"
 							/>
 							<h6 className="text-center mt-3">Sarapan</h6>
-						</a>
-						<a
-							href="/#"
+						</Link>
+						<Link
+							to="/rekomendasi#makansiang"
 							className="newitem-2 text-black text-decoration-none shadow p-4 d-flex flex-column"
 						>
 							<img
@@ -407,9 +302,9 @@ export default function HomeLogin() {
 								className="ms-auto me-auto"
 							/>
 							<h6 className="text-center mt-3">Makan Siang</h6>
-						</a>
-						<a
-							href="/#"
+						</Link>
+						<Link
+							to="/rekomendasi#makanmalam"
 							className="newitem-3 text-black text-decoration-none shadow p-4 d-flex flex-column"
 						>
 							<img
@@ -418,7 +313,7 @@ export default function HomeLogin() {
 								className="ms-auto me-auto"
 							/>
 							<h6 className="text-center mt-3">Makan Malam</h6>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

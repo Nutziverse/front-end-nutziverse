@@ -12,6 +12,7 @@ export default function TrackingCard({
 	infoporsi,
 	kuantitas,
 	modals = true,
+	porsirekomendasi,
 	id,
 }) {
 	const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export default function TrackingCard({
 									<h6 className="text-start fw-light">{infoporsi}</h6>
 								</div>
 								<div className="">
-									<h4 className="fw-bold">{"1" + " x"}</h4>
+									<h4 className="fw-bold">{porsirekomendasi + " x"}</h4>
 								</div>
 							</div>
 						</div>
@@ -53,7 +54,9 @@ export default function TrackingCard({
 				</button>
 			) : (
 				<div
-					className="card mt-3 shadow-sm p-3 w-100"
+					className={`${
+						kuantitas ? "d-block" : "d-none"
+					} + "card mt-3 shadow-sm p-3 w-100"`}
 					style={{ borderRadius: "20px" }}
 				>
 					<div className="row w-100">
@@ -77,20 +80,20 @@ export default function TrackingCard({
 								</div>
 							</div>
 							<div>
-								<div className="d-flex">
+								<div className="d-flex ">
 									<button
-										className="btn me-2"
+										className="btn me-2 my-auto"
 										onClick={() => dispatch(TambahPorsi(id))}
 									>
-										<h5 class="fas fa-plus fw-light"></h5>
+										<h5 class="fas fa-plus fw-light my-auto"></h5>
 									</button>
 
-									<h2>{kuantitas}</h2>
+									<h3 className="my-auto">{kuantitas}</h3>
 									<button
-										className="btn me-2"
+										className="btn ms-2 my-auto"
 										onClick={() => dispatch(KurangiPorsi(id))}
 									>
-										<h5 class="fas fa-minus fw-light"></h5>
+										<h5 class="fas fa-minus fw-light my -auto"></h5>
 									</button>
 								</div>
 							</div>

@@ -15,3 +15,18 @@ export const KurangiPorsi = (ID) => {
 		});
 	};
 };
+export const GetPorsi = () => {
+	return (dispatch) => {
+		dispatch({
+			type: "GET_PORSI",
+		});
+	};
+};
+
+export const DeletePorsi = () => {
+	return (dispatch) => {
+		dispatch({
+			type: "DELETE_PORSI",
+		});
+	};
+};

@@ -15,7 +15,7 @@ const PorsiReducer = (state = initialState, action) => {
 				state.push(data);
 			}
 			localStorage.setItem("pilih_makanan", JSON.stringify(state));
-			return state;
+			return [...state];
 		case "KURANGI_PORSI":
 			let index1 = state.findIndex((el) => el.makananID === action.payload);
 			if (index1 > -1) {
@@ -27,7 +27,12 @@ const PorsiReducer = (state = initialState, action) => {
 					localStorage.setItem("pilih_makanan", JSON.stringify(state));
 				}
 			}
-			return state;
+			return [...state];
+		case "GET_PORSI":
+			return [...state];
+		case "DELETE_PORSI":
+			localStorage.removeItem("pilih-makanan");
+			return [...state];
 		default:
 			return state;
 	}

@@ -9,7 +9,7 @@ import HistoryKarbon3 from "./pages/HistoryKarbon3";
 import CallToAction from "./pages/CallToAction";
 import KeranjangMakanan from "./pages/KeranjangMakanan";
 function App() {
-	return <KeranjangMakanan></KeranjangMakanan>;
+	return <HistoryKarbon3></HistoryKarbon3>;
 }
 
 export default App;

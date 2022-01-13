@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { addMakanan } from "../helpers";
 import { getMakananByID } from "../redux/actions/action.makanan";
 import { closeModal } from "../redux/actions/action.modal";
+import { TambahPorsi } from "../redux/actions/actionPorsiMakanan";
 import "../style/card-makanan.css";
 
 export default function MakananModal({ pilih = false, karbon = false }) {
@@ -151,7 +152,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 							to="/pilih-makanan/detail"
 							className="btn btn-primary"
 							disabled={loading}
-							onClick={() => addMakanan(makanan._id)}
+							onClick={() => dispatch(TambahPorsi(makanan._id))}
 						>
 							Pilih
 						</Link>

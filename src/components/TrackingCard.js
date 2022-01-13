@@ -3,7 +3,7 @@ import "../style/TrackingCard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../redux/actions/action.modal";
 import MakananModal from "../components/MakananModal";
-import { TambahPorsi, KurangiPorsi } from "../redux/actions/actionPorsiMakanan";
+// import { TambahPorsi, KurangiPorsi } from "../redux/actions/actionPorsiMakanan";
 
 export default function TrackingCard({
 	image,
@@ -16,8 +16,8 @@ export default function TrackingCard({
 	id,
 }) {
 	const dispatch = useDispatch();
-	const amount = useSelector((state) => state.PorsiReducer);
-	let { number } = amount;
+	// const amount = useSelector((state) => state.PorsiReducer);
+	// let { number } = amount;
 	const makananState = useSelector((state) => state.makananReducers);
 	const { makanan } = makananState;
 	return (
@@ -79,15 +79,15 @@ export default function TrackingCard({
 								<div className="d-flex">
 									<button
 										className="btn me-2"
-										onClick={() => dispatch(TambahPorsi())}
+										// onClick={() => dispatch(TambahPorsi())}
 									>
 										<h5 class="fas fa-plus fw-light"></h5>
 									</button>
 
-									<h2>{number}</h2>
+									{/* <h2>{number}</h2> */}
 									<button
 										className="btn me-2"
-										onClick={() => dispatch(KurangiPorsi())}
+										// onClick={() => dispatch(KurangiPorsi())}
 									>
 										<h5 class="fas fa-minus fw-light"></h5>
 									</button>

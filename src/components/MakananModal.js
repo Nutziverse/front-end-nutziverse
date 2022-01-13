@@ -65,18 +65,16 @@ export default function MakananModal({pilih=false, karbon=false}) {
                       </div>
 
                       <p className="mt-4 mb-1"><small>dan menghasilkan emisi karbon sebesar</small></p>
-                      <h5 className="fw-bold">{makanan.kaloriMakanan} <small className="text-muted fs-6 fw-normal">kg CO<sup>2</sup></small></h5>
+                      <h5 className="fw-bold">{makanan.karbon} <small className="text-muted fs-6 fw-normal">kg CO<sup>2</sup></small></h5>
 
                     </div>
 
-                    <div className={`row ${karbon? '' : 'd-none'}`}>
-                      <div className="col-12 text-center">
-                        <h6>Tahukah kamu?</h6>
-                        <p><small>{makanan.porsi } {makanan.makanan} atau setara dengan {makanan.penyetaraanPorsi}, menghasilkan emisi karbon sebesar</small></p>
-                        <h5 className="fw-bold">{makanan.kaloriMakanan} <small className="text-muted fs-6 fw-normal">kg CO<sup>2</sup></small></h5>
-                        <p><small>yang setara dengan kamu berkendara sepeda motor selama <span className="fw-bold">9 menit</span></small></p>
-                      </div>
-                    </div>
+                <div className={`row ${karbon? '' : 'd-none'}`}>
+                  <div className="col-12 text-center">
+                    <h6>Tahukah kamu?</h6>
+                    <p><small>{makanan.porsi } {makanan.makanan} atau setara dengan {makanan.penyetaraanPorsi}, menghasilkan emisi karbon sebesar</small></p>
+                    <h5 className="fw-bold">{makanan.karbon} <small className="text-muted fs-6 fw-normal">kg CO<sup>2</sup></small></h5>
+                    <p><small>yang setara dengan kamu berkendara sepeda motor selama <span className="fw-bold">9 menit</span></small></p>
                   </div>
                 </div>
               </div>

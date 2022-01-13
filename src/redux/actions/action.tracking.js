@@ -1,6 +1,7 @@
 import axios from "axios";
+import { getCookie } from "../../helpers";
 const API_URL = process.env.REACT_APP_API_URL
-const accessToken = process.env.REACT_APP_TOKEN
+const accessToken = getCookie("token")
 
 export const getTracking = () => {
   return async dispatch => {

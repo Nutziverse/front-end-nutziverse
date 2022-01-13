@@ -8,7 +8,6 @@ import SignUp from "../pages/SignUp";
 import AkunGoogle from "../pages/AkunGoogle";
 import PilihMakanan from "../pages/PilihMakanan";
 
-
 export default function Routers() {
   return (
     <Routes>
@@ -20,8 +19,6 @@ export default function Routers() {
       <Route path="/akun" element={<Akun />}></Route>
       <Route path="/akungoogle" element={<AkunGoogle />}></Route>
       <Route path="/pilih-makanan" element={<PilihMakanan />}></Route>
-      
-  
     </Routes>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import logo_awal from "../images/Opening.png";
@@ -11,7 +11,7 @@ import { setCookie } from "../helpers";
 
 export default function SignIn() {
   let Navigate = useNavigate();
-
+  
   const {
     register,
     handleSubmit,
@@ -19,10 +19,22 @@ export default function SignIn() {
     trigger,
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const [errorsMessage, setErrorMessage] = useState(false);
+  
   const togglePasswordVisiblity = () => {
     setShowPassword(showPassword ? false : true);
   };
+  const [alert, setAlert] = useState(false);
+  const [alertmsg, setAlertmsg] = useState("")
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      // After 3 seconds set the show value to false
+      setAlert(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [alert]);
 
   const onSubmit = async (data) => {
     const body = {
@@ -33,25 +45,28 @@ export default function SignIn() {
     const { REACT_APP_API_URL } = process.env;
     try {
       const result = await axios.post(`${REACT_APP_API_URL}/users/login`, body);
-      console.log(result);
-      if (result.data === "user is not exist") {
-      }
+
       const { token } = result.data;
       setCookie("token", token);
       if (token) {
-        Navigate("/akun");
+        Navigate("/");
+      } else if(result.data === "user is not exist") {
+        setAlert(true)
+        setAlertmsg("Nomor telepon belum terdaftar")
+      } else if(result.data === "invalid") {
+        setAlert(true)
+        setAlertmsg("Password salah")
       }
     } catch (error) {}
   };
 
   const responseGoogle = async (authResult) => {
-    console.log(authResult);
+  
     try {
       if (authResult) {
         const result = await axios.post(`${process.env.REACT_APP_API_URL}/users/auth/google`, authResult);
-        console.log(process.env.REACT_APP_API_URL);
-        console.log(result);
-        const { message } = result.data;
+        
+        const { message } = result.data
 
         if (message === "welcome") {
           const { token } = result.data;
@@ -67,7 +82,7 @@ export default function SignIn() {
         throw new Error(authResult);
       }
     } catch (e) {
-      console.log(e);
+    
     }
   };
 
@@ -95,9 +110,8 @@ export default function SignIn() {
                           <p className="text-secondary mt-1">Selamat datang di Nutziverse</p>
                         </div>
                         {/* Alert */}
-
-                        <div className={`alert alert-danger align-items-center ${errorsMessage ? "d-flex" : "d-none"}`} role="alert">
-                          <div>No.telepon dan Password tidak sesuai !</div>
+                        <div className={`alert alert-danger align-items-center mt-4 ${alert ? "show" : "d-none"}`} role="alert">
+                          <div>{alertmsg}</div>
                         </div>
 
                         <form noValidate onSubmit={handleSubmit(onSubmit)} id="loginForm">

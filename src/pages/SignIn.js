@@ -7,7 +7,7 @@ import google from "../images/google.png";
 import Layout from "../layouting/Layout";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
-import { setCookie, getCookie } from "../helpers";
+import { setCookie } from "../helpers";
 
 export default function SignIn() {
   let Navigate = useNavigate();
@@ -29,9 +29,10 @@ export default function SignIn() {
   const onSubmit = async (data) => {
 
     const body = {
-      no_hp: data.telepon,
+      no_hp: data.telepon.replace("+62", "0"),
       password: data.password,
     };
+    
     const { REACT_APP_API_URL } = process.env;
     try {
       const result = await axios.post(`${REACT_APP_API_URL}/users/login`, body);

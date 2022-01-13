@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import google from "../images/google.png";
 import Layout from "../layouting/Layout";
@@ -17,13 +17,31 @@ export default function SignUp() {
     register,
     handleSubmit,
     formState: { errors },
-    trigger,
+    setError
   } = useForm();
 
   let Navigate = useNavigate()
+  const [alert, setAlert] = useState(false);
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      // After 3 seconds set the show value to false
+      setAlert(false);
+    }, 5000);
 
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [alert]);
   const onSubmit = async (data) => {
-    const {nama_lengkap, no_hp, password, berat, tinggi, umur, aktivitasFisik, jeniskelamin} = data
+    let {nama_lengkap, no_hp, password, konfirmasi_password, berat, tinggi, umur, aktivitasFisik, jeniskelamin} = data
+    if(konfirmasi_password !== password) {
+      setError("konfirmasi_password", {
+        message: "Password tidak sesuai"
+      })
+    }
+    
+    no_hp = no_hp.replace("+62", "0")
+
     if(google_cookie) {
       const body = {
         email: google_cookie,
@@ -38,7 +56,7 @@ export default function SignUp() {
       if(data.message === 'success') {
         document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         setCookie("token", data.token)
-
+        
         Navigate("/")
       }
     } else {
@@ -54,25 +72,29 @@ export default function SignUp() {
       }
       
       const {data} = await axios.post(`${REACT_APP_API_URL}/users/register`, body)
-
+      
       if(data.message === 'success') {
         setCookie("token", data.token)
-
+        
         Navigate("/")
+      } else {
+        setAlert(true)
       }
     }
   }
 
+
+
   const responseGoogle = async (authResult) => {
-    console.log(authResult);
+    
     try {
       if (authResult) {
         const result = await axios.post(
           `${process.env.REACT_APP_API_URL}/users/auth/google`,
           authResult
         );
-        console.log(process.env.REACT_APP_API_URL);
-        console.log(result);
+        
+        
         const { message } = result.data;
 
         if (message === "welcome") {
@@ -89,8 +111,13 @@ export default function SignUp() {
         throw new Error(authResult);
       }
     } catch (e) {
-      console.log(e);
+      
     }
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisiblity = () => {
+    setShowPassword(showPassword ? false : true);
   };
 
   return (
@@ -102,6 +129,11 @@ export default function SignUp() {
               Buat Akun
             </h3>
           </div>
+        </div>
+
+        {/* Alert */}
+        <div className={`alert alert-danger align-items-center mt-4 ${alert ? "show" : "d-none"}`} role="alert">
+          <div>No Telepon sudah terdaftar</div>
         </div>
 
         {/* Isi Content */}
@@ -122,6 +154,7 @@ export default function SignUp() {
                       required: "Nama Lengkap tidak boleh kosong"
                     })}
                   ></input>
+                  {errors.nama_lengkap && <small className="text-danger">{errors.nama_lengkap.message}</small>}
                 </div>
 
                 <div className="form-group mb-4">
@@ -141,6 +174,7 @@ export default function SignUp() {
                       },
                     })}
                   ></input>
+                  {errors.no_hp && <small className="text-danger">{errors.no_hp.message}</small>}
                 </div>
 
                 <div className="form-group mb-4">
@@ -148,7 +182,7 @@ export default function SignUp() {
                     Kata Sandi
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className="form-control form-control-lg mt-2"
                     id="katasandi"
                     placeholder="Kata Sandi"
@@ -160,6 +194,7 @@ export default function SignUp() {
                       },
                     })}
                   ></input>
+                  {errors.password && <small className="text-danger">{errors.password.message}</small>}
                 </div>
 
                 <div className="form-group">
@@ -167,9 +202,9 @@ export default function SignUp() {
                     Konfirmasi Kata Sandi
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className={`form-control form-control-lg mt-2 ${errors.password && "invalid"}`}
-                    id="katasandi"
+                    id="konfirmasikatasandi"
                     placeholder="Konfirmasi Kata Sandi"
                     {...register("konfirmasi_password", {
                       required: "Konfirmasi Password tidak boleh kosong",
@@ -179,6 +214,7 @@ export default function SignUp() {
                       },
                     })}
                   ></input>
+                  {errors.konfirmasi_password && <small className="text-danger">{errors.konfirmasi_password.message}</small>}
                 </div>
               </div>
             )}
@@ -189,32 +225,41 @@ export default function SignUp() {
                   Jenis Kelamin
                 </label>
                 <select
-                  class="form-control form-control-lg mt-2"
+                  className="form-control form-control-lg mt-2"
                   id="jeniskelamin"
                   placeholder="Jenis Kelamin"
                   {...register("jeniskelamin", {
                     required: "Jenis Kelamin tidak boleh kosong"
                   })}
                 >
-                  <i class="fas fa-caret-down"></i>
+                  <i className="fas fa-caret-down"></i>
+                  <option value="">Pilih Jenis Kelamin</option>
                   <option value={"laki-laki"}>Laki-Laki</option>
                   <option value={"perempuan"}>Perempuan</option>
                 </select>
+                {errors.jeniskelamin && <small className="text-danger">{errors.jeniskelamin.message}</small>}
               </div>
 
               <div className="form-group">
                 <label for="umur" style={{ fontSize: "20px" }}>
                   Umur
                 </label>
-                <input
-                  type="number"
-                  className="form-control form-control-lg mt-2"
-                  id="umur"
-                  placeholder="Umur"
-                  {...register("umur", {
-                    required: "Umur tidak boleh kosong"
-                  })}
-                ></input>
+                <div className="input-group mt-2">
+                  <input
+                    type="number"
+                    className="form-control form-control-lg"
+                    id="umur"
+                    maxLength={3}
+                    min={0}
+                    max={200}
+                    placeholder="Umur"
+                    {...register("umur", {
+                      required: "Umur tidak boleh kosong"
+                    })}
+                    ></input>
+                    <span className="input-group-text">tahun</span>
+                </div>
+                  {errors.umur && <small className="text-danger">{errors.umur.message}</small>}
               </div>
 
               <div className="row">
@@ -223,15 +268,20 @@ export default function SignUp() {
                     <label for="beratbadan" style={{ fontSize: "20px" }}>
                       Berat Badan
                     </label>
-                    <input
-                      type="number"
-                      className="form-control form-control-lg mt-2"
-                      id="Berat Badan"
-                      placeholder="Berat Badan                       kg"
-                      {...register("berat", {
-                        required: "Berat tidak boleh kosong"
-                      })}
-                    ></input>
+                    <div className="input-group mt-2">
+                      <input
+                        type="number"
+                        className="form-control form-control-lg"
+                        id="Berat Badan"
+                        min={1}
+                        placeholder="Berat Badan"
+                        {...register("berat", {
+                          required: "Berat tidak boleh kosong"
+                        })}
+                        ></input>
+                        <span className="input-group-text">kg</span>
+                    </div>
+                      {errors.berat && <small className="text-danger">{errors.berat.message}</small>}
                   </div>
                 </div>
                 <div className="col-6 mt-4">
@@ -239,15 +289,22 @@ export default function SignUp() {
                     <label for="tinggibadan" style={{ fontSize: "20px" }}>
                       Tinggi Badan
                     </label>
-                    <input
-                      type="number"
-                      className="form-control form-control-lg mt-2"
-                      id="Tinggi Badan"
-                      placeholder="Tinggi                          cm"
-                      {...register("tinggi", {
-                        required: "Tinggi badan tidak boleh kosong"
-                      })}
-                    ></input>
+                    <div className="input-group mt-2">
+                      <input
+                        type="number"
+                        className="form-control form-control-lg"
+                        id="Tinggi Badan"
+                        min={1}
+                        max={500}
+                        maxLength={3}
+                        placeholder="Tinggi"
+                        {...register("tinggi", {
+                          required: "Tinggi badan tidak boleh kosong"
+                        })}
+                        ></input>
+                        <span className="input-group-text">cm</span>
+                    </div>
+                      {errors.tinggi && <small className="text-danger">{errors.tinggi.message}</small>}
                   </div>
                 </div>
               </div>
@@ -280,6 +337,7 @@ export default function SignUp() {
                     type="checkbox"
                     id="inlineCheckbox1"
                     value="option1"
+                    onClick={() => togglePasswordVisiblity()}
                   ></input>
                   <label
                     className="form-check-label"
@@ -321,7 +379,7 @@ export default function SignUp() {
                 <GoogleLogin
                   clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                   render={(props) => (
-                    <div className="d-grid col-12 mt-md-3 mt-2">
+                    <div className="d-grid col-12 mt-md-3 mt-2" onClick={props.onClick}>
                       <Button
                         type="submit"
                         btnclass={"btn btn-sm btn-main btn-google"}

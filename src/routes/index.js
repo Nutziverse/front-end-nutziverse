@@ -5,8 +5,8 @@ import App from "../App";
 import SignIn from "../pages/SignIn";
 import Akun from "../pages/Akun";
 import SignUp from "../pages/SignUp";
-import AkunGoogle from "../pages/AkunGoogle";
 import PilihMakanan from "../pages/PilihMakanan";
+import NotFound from "../pages/NotFound";
 
 
 export default function Routers() {
@@ -18,9 +18,8 @@ export default function Routers() {
       <Route path="/sign-in" element={<SignIn />}></Route>
       <Route path="/sign-up" element={<SignUp />}></Route>
       <Route path="/akun" element={<Akun />}></Route>
-      <Route path="/akungoogle" element={<AkunGoogle />}></Route>
       <Route path="/pilih-makanan" element={<PilihMakanan />}></Route>
-      
+      <Route path="*" element={<NotFound />}></Route>
   
     </Routes>
   );

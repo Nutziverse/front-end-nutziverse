@@ -71,6 +71,10 @@
   box-shadow: none !important;
 }
 
+.profile-icon {
+  font-size: 2.3rem;
+}
+
 @media screen and (min-width: 426px) {
   .max-h-10rem {
     max-height: 15rem;

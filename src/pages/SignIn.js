@@ -7,10 +7,10 @@ import google from "../images/google.png";
 import Layout from "../layouting/Layout";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
-import { useCookies } from "react-cookie";
-import { setCookie, getCookie } from "../helpers";
+import { setCookie } from "../helpers";
 
 export default function SignIn() {
+  let Navigate = useNavigate();
   // const [name, setName] = useState('')
   // const [password, setShowPassword] = useState('')
   // const [cookies, setCookie] = useCookies([user])
@@ -25,37 +25,27 @@ export default function SignIn() {
   const togglePasswordVisiblity = () => {
     setShowPassword(showPassword ? false : true);
   };
-  let Navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    let inputTelepon = data.telepon;
-    let inputPassword = data.password;
 
     const body = {
-      no_hp: data.telepon,
+      no_hp: data.telepon.replace("+62", "0"),
       password: data.password,
     };
+    
     const { REACT_APP_API_URL } = process.env;
     try {
       const result = await axios.post(`${REACT_APP_API_URL}/users/login`, body);
       console.log(result);
+      if(result.data === "user is not exist") {
+        
+      }
       const { token } = result.data;
       setCookie("token", token);
-      const cookie = getCookie("token");
       if (token) {
         Navigate("/akun");
       }
-      console.log(cookie);
     } catch (error) {}
-
-    // let userTelepon = localStorage.getItem("SubmissionTelepon");
-    // let userPassword = localStorage.getItem("SubmissionPassword");
-    // if (inputTelepon !== userTelepon || inputPassword !== userPassword) {
-    //   setErrorMessage(true);
-    // } else {
-    //   localStorage.setItem("isLogin", "true");
-    //   Navigate("/");
-    // }
   };
 
   const responseGoogle = async (authResult) => {
@@ -189,16 +179,6 @@ export default function SignIn() {
 
                           <div className="text-center d-grid col-12 mt-md-2 mt-2">atau</div>
 
-                          {/* <div className="d-grid col-12 mt-md-3 mt-2">
-                            <button
-                              type="submit"
-                              className="btn btn-sm btn-main"
-                              style={{ backgroundColor: "white", fontSize: "16px", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)", borderRadius: "8px", padding: "15px 18px;" }}
-                            >
-                              <img src={google} style={{ height: "16px", marginRight: "10px" }}></img>Masuk dengan Google+
-                            </button>
-                          </div> */}
-
                           {/* google login */}
                           <GoogleLogin
                             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -209,7 +189,7 @@ export default function SignIn() {
                                   className="btn btn-sm btn-main"
                                   style={{ backgroundColor: "white", fontSize: "16px", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)", borderRadius: "8px", padding: "15px 18px;" }}
                                 >
-                                  <img src={google} style={{ height: "16px", marginRight: "10px" }}></img>Masuk dengan Google+
+                                  <img src={google} alt="google" style={{ height: "16px", marginRight: "10px" }}></img>Masuk dengan Google
                                 </button>
                               </div>
                             )}

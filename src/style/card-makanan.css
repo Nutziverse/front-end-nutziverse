@@ -144,7 +144,7 @@
 	grid-column: 1 / -1;
 	grid-row: 1;
 	z-index: 1;
-
+}
 /* button */
 .btn:focus,.btn:active {
   outline: none !important;

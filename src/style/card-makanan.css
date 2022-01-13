@@ -144,6 +144,16 @@
 	grid-column: 1 / -1;
 	grid-row: 1;
 	z-index: 1;
+
+/* button */
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-control:focus, .form-control:active {
+  box-shadow: none !important;
+
 }
 
 @media screen and (min-width: 426px) {

@@ -1,3 +1,30 @@
 .label{
     font-size: 14px;
 }
+
+.btn-google {
+    background-color: white;
+    font-size: 16px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+.btn-daftar {
+    background-color: #067cc6;
+    font-size: 16px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: white;
+}
+
+.btn-daftar:hover, .btn-daftar:focus {
+    background-color: #067cc6;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color: white;
+}
+
+.btn-google:focus, .btn-google:active {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19) !important;
+}

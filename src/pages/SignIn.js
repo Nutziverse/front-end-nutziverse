@@ -11,9 +11,7 @@ import { setCookie } from "../helpers";
 
 export default function SignIn() {
   let Navigate = useNavigate();
-  // const [name, setName] = useState('')
-  // const [password, setShowPassword] = useState('')
-  // const [cookies, setCookie] = useCookies([user])
+
   const {
     register,
     handleSubmit,
@@ -27,18 +25,16 @@ export default function SignIn() {
   };
 
   const onSubmit = async (data) => {
-
     const body = {
       no_hp: data.telepon.replace("+62", "0"),
       password: data.password,
     };
-    
+
     const { REACT_APP_API_URL } = process.env;
     try {
       const result = await axios.post(`${REACT_APP_API_URL}/users/login`, body);
       console.log(result);
-      if(result.data === "user is not exist") {
-        
+      if (result.data === "user is not exist") {
       }
       const { token } = result.data;
       setCookie("token", token);
@@ -53,17 +49,17 @@ export default function SignIn() {
     try {
       if (authResult) {
         const result = await axios.post(`${process.env.REACT_APP_API_URL}/users/auth/google`, authResult);
-        console.log(process.env.REACT_APP_API_URL); 
-        console.log(result)
-        const { message } = result.data
+        console.log(process.env.REACT_APP_API_URL);
+        console.log(result);
+        const { message } = result.data;
 
-        if(message === 'welcome') {
-          const {token} = result.data
+        if (message === "welcome") {
+          const { token } = result.data;
           setCookie("token", token);
           Navigate("/");
         } else {
-          setCookie("email", result.data.result.email)
-          Navigate("/sign-up")
+          setCookie("email", result.data.result.email);
+          Navigate("/sign-up");
         }
 
         return result;

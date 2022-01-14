@@ -20,8 +20,8 @@ export default function CardResep({ title, imageUrl, kalori, karbon }) {
 						</small>
 					</div>
 				</div>
-				<div className="card-title text-end">
-					<h3>{title}</h3>
+				<div className="card-title ms-3 py-2 text-start">
+					<h6>{title}</h6>
 				</div>
 			</div>
 		</div>

@@ -41,6 +41,37 @@ export default function RekomendasiMakanan() {
 		(prev, curr) => prev + curr.nutrisi.karbon,
 		0
 	);
+	let porsisarapan = rekomendasisarapan.map((data) =>
+		data.menu.map((jumlah) => jumlah.jumlah)
+	);
+	let idsarapan = rekomendasisarapan.map((data) =>
+		data.menu.map((id) => id.idmakanan._id)
+	);
+	function setlocal(id, porsi) {
+		id = id[0];
+		porsi = porsi[0];
+		for (let i = 0; i < id.length; i++) {
+			let items = localStorage.getItem("pilih_makanan") || [];
+
+			let data = {
+				makananID: id[i],
+				porsi: porsi[i],
+			};
+			if (items.length > 0) {
+				let newData = JSON.parse(items);
+				let index = newData.findIndex((el) => el.makananID === id[i]);
+				if (index > -1) {
+					newData[index].porsi += porsi[i];
+				} else {
+					newData.push(data);
+				}
+				localStorage.setItem("pilih_makanan", JSON.stringify(newData));
+			} else {
+				localStorage.setItem("pilih_makanan", JSON.stringify([data]));
+			}
+			data = {};
+		}
+	}
 
 	const Statsrekom = ({ colors, angka, satuan, nama }) => (
 		<div className="position-relative">
@@ -135,9 +166,12 @@ export default function RekomendasiMakanan() {
 								</div>
 
 								<div className="d-flex">
-									<Button btnclass="btn ms-auto me-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
+									<button
+										onClick={() => setlocal(idsarapan, porsisarapan)}
+										className="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4"
+									>
 										Pilih
-									</Button>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -200,7 +234,7 @@ export default function RekomendasiMakanan() {
 								</div>
 
 								<div className="d-flex">
-									<Button btnclass="btn ms-auto me-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
+									<Button btnclass="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
 										Pilih
 									</Button>
 								</div>
@@ -265,7 +299,7 @@ export default function RekomendasiMakanan() {
 								</div>
 
 								<div className="d-flex">
-									<Button btnclass="btn ms-auto me-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
+									<Button btnclass="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
 										Pilih
 									</Button>
 								</div>

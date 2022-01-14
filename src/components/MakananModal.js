@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addMakanan } from "../helpers";
 import { getMakananByID } from "../redux/actions/action.makanan";
 import { closeModal } from "../redux/actions/action.modal";
 import { TambahPorsi } from "../redux/actions/actionPorsiMakanan";
@@ -95,38 +94,49 @@ export default function MakananModal({ pilih = false, karbon = false }) {
                     </h5>
                   </div>
 
-                  <div className={`row ${karbon ? "" : "d-none"}`}>
-                    <div className="col-12 text-center">
-                      <h6>Tahukah kamu?</h6>
-                      <p>
-                        <small>
-                          {makanan.porsi} {makanan.makanan} atau setara dengan {makanan.penyetaraanPorsi}, menghasilkan emisi karbon sebesar
-                        </small>
-                      </p>
-                      <h5 className="fw-bold">
-                        {makanan.kaloriMakanan}{" "}
-                        <small className="text-muted fs-6 fw-normal">
-                          kg CO<sup>2</sup>
-                        </small>
-                      </h5>
-                      <p>
-                        <small>
-                          yang setara dengan kamu berkendara sepeda motor selama <span className="fw-bold">9 menit</span>
-                        </small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-          <div className={`modal-footer ${pilih ? "" : "d-none"}`}>
-            <Link to="/pilih-makanan/detail" className="btn btn-primary" disabled={loading} onClick={() => dispatch(TambahPorsi(makanan._id))}>
-              Pilih
-            </Link>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+									<div className={`row ${karbon ? "" : "d-none"}`}>
+										<div className="col-12 text-center">
+											<h6>Tahukah kamu?</h6>
+											<p>
+												<small>
+													{makanan.porsi} {makanan.makanan} atau setara dengan{" "}
+													{makanan.penyetaraanPorsi}, menghasilkan emisi karbon
+													sebesar
+												</small>
+											</p>
+											<h5 className="fw-bold">
+												{makanan.kaloriMakanan}{" "}
+												<small className="text-muted fs-6 fw-normal">
+													kg CO<sup>2</sup>
+												</small>
+											</h5>
+											<p>
+												<small>
+													yang setara dengan kamu berkendara sepeda motor selama{" "}
+													<span className="fw-bold">9 menit</span>
+												</small>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					)}
+					<div className={`modal-footer ${pilih ? "" : "d-none"}`}>
+						<Link
+							to="/pilih-makanan/detail"
+							className="btn btn-primary"
+							disabled={loading}
+							onClick={() => {
+								dispatch(closeModal())
+								dispatch(TambahPorsi(makanan._id))
+							}}
+						>
+							Pilih
+						</Link>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }

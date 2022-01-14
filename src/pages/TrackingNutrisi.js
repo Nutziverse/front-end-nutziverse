@@ -19,6 +19,7 @@ import {
 	Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { getUSER } from "../redux/actions/action.User";
 import { getCookie } from "../helpers";
 
 ChartJS.register(
@@ -33,24 +34,56 @@ ChartJS.register(
 
 export default function TrackingNutrisi() {
   const token = getCookie("token")
-
   
   const dispatch = useDispatch();
   const trackingState = useSelector((state) => state.trackingReducer);
+  const userState = useSelector((state) => state.UserReducer)
   const initialState = "Hari ini"
   const [state, setstate] = useState(initialState)
   const [selectedDate, setSelectedDate] = useState(null)
   const [hidden, sethidden] = useState(true);
   const myRefname = useRef(null);
+
+  let {User} = userState
+  if(User.legth === 0)
+    User = null
+
   let today = new Date()
   const { tracking, loading, error } = trackingState;
   let karbohidrat = 0, protein = 0, lemak = 0
-  if(!loading && tracking && tracking.tracking) {
+  let butuhkarbohidrat = 0, butuhprotein = 0, butuhlemak = 0
+
+  
+  if(!loading && tracking && tracking.tracking && User) {
+    butuhkarbohidrat = Number(User.gizi.karbohidrat.toFixed(2))
+    butuhprotein = Number(User.gizi.protein.toFixed(2))
+    butuhlemak = Number(User.gizi.lemak.toFixed(2))
+
     karbohidrat = tracking.totKarbohidrat
-    karbohidrat = karbohidrat/1200 * 100
+    karbohidrat = karbohidrat/User.gizi.karbohidrat * 100
+    karbohidrat = Number(karbohidrat.toFixed(2))
+    
     protein = tracking.totProtein
-    lemak = tracking.lemak
+    protein = protein/User.gizi.protein * 100
+    protein = Number(protein.toFixed(2))
+    
+    lemak = tracking.totLemak
+    lemak = lemak/User.gizi.lemak * 100
+    lemak = Number(lemak.toFixed(2))
   }
+
+  if(karbohidrat > 100) {
+    karbohidrat = 100
+  }
+  if(protein > 100) {
+    protein = 100
+  }
+  if(lemak > 100) {
+    lemak = 100
+  }
+console.log(tracking)
+
+  console.log(userState)
 
   // for chart
   const borderRadiusAllCorners = {
@@ -61,10 +94,10 @@ export default function TrackingNutrisi() {
 	};
   
   const data = (first, second) => ({
-    labels: ["karbon 1"],
+    labels: ["Nutrisi"],
 		datasets: [
       {
-        label: "Nutrisi Terpenuhi",
+        label: "Terpenuhi",
 				data: [first],
 				backgroundColor: ["#F9AC3A"],
 				borderColor: ["#F9AC3A"],
@@ -74,7 +107,7 @@ export default function TrackingNutrisi() {
 				barThickness: 15,
 			},
 			{
-        label: "Nutrisi Belum Terpenuhi",
+        label: "Belum Terpenuhi",
 				data: [second],
 				backgroundColor: ["transparent"],
 				borderColor: ["transparent"],
@@ -86,7 +119,7 @@ export default function TrackingNutrisi() {
 		],
 	});
 	const maxdata = (total) => ({
-    labels: ["karbon 1"],
+    labels: ["Nutrisi"],
 		datasets: [
       {
         label: "My First Dataset",
@@ -162,6 +195,7 @@ export default function TrackingNutrisi() {
   }
   
   useEffect(() => {
+    dispatch(getUSER())
     if(selectedDate) {
       dispatch(getByDate(state))
     } else {
@@ -238,7 +272,7 @@ export default function TrackingNutrisi() {
                 <div className="col-12">
                   <div className="row gy-4">
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totKarbohidrat : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totKarbohidrat : 0} <sup className="fs-6 text-white-8 sup">/{butuhkarbohidrat}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(karbohidrat,100-karbohidrat)} options={config} id="stacked1" />
@@ -247,7 +281,7 @@ export default function TrackingNutrisi() {
                       <p className="fs-6 fw-medium">Karbohidrat</p>
                     </div>
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totLemak : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totProtein : 0} <sup className="fs-6 text-white-8 sup">/{butuhprotein}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(protein,100-protein)} options={config} id="stacked1" />
@@ -256,7 +290,7 @@ export default function TrackingNutrisi() {
                       <p className="fs-6 fw-medium">Protein</p>
                     </div>
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totProtein : 0} <sup className="fs-6 text-white-8 sup">/350</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totLemak : 0} <sup className="fs-6 text-white-8 sup">/{butuhlemak}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(lemak,100-lemak)} options={config} id="stacked1" />

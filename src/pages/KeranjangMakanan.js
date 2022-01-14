@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getKeranjang } from "../redux/actions/action.keranjang";
 import Layout from "../layouting/Layout";
 import { Post_data_to_history } from "../redux/actions/actions.tohistory";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(
 	CategoryScale,
@@ -28,6 +29,7 @@ ChartJS.register(
 );
 
 export default function KeranjangMakanan() {
+	const Navigate = useNavigate()
 	const config = {
 		layout: {
 			padding: {
@@ -384,6 +386,11 @@ export default function KeranjangMakanan() {
 		dispatch(getKeranjang(id));
 	}, [dispatch]);
 
+	const handleSelesai = (postmakanan, postkalori, postkarbon) => {
+		dispatch(Post_data_to_history(postmakanan, postkalori, postkarbon))
+		Navigate("/tracking-nutrisi")
+	}
+
 	return (
 		<Layout>
 			<div className="container mt-4">
@@ -437,10 +444,11 @@ export default function KeranjangMakanan() {
 								<button
 									className="btn btn-danger"
 									onClick={() =>
-										dispatch(
-											Post_data_to_history(postmakanan, postkalori, postkarbon)
-										)
-									}
+										// dispatch(
+										// 	Post_data_to_history(postmakanan, postkalori, postkarbon)
+										// 	)
+										handleSelesai(postmakanan, postkalori, postkarbon)
+										}
 								>
 									Selesai
 								</button>

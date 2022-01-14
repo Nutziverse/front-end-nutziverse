@@ -29,7 +29,7 @@ ChartJS.register(
 );
 
 export default function KeranjangMakanan() {
-	const Navigate = useNavigate()
+	const Navigate = useNavigate();
 	const config = {
 		layout: {
 			padding: {
@@ -387,13 +387,14 @@ export default function KeranjangMakanan() {
 	}, [dispatch]);
 
 	const handleSelesai = (postmakanan, postkalori, postkarbon) => {
-		dispatch(Post_data_to_history(postmakanan, postkalori, postkarbon))
-		Navigate("/tracking-nutrisi")
-	}
+		dispatch(Post_data_to_history(postmakanan, postkalori, postkarbon));
+		Navigate("/tracking-nutrisi");
+	};
 
 	return (
 		<Layout>
 			<div className="container mt-4">
+				<h4 className="text-center fw-medium">Pilihan Makanan</h4>
 				{!Loading ? (
 					<div className="row">
 						<div className="col-12 col-lg-6">
@@ -409,6 +410,7 @@ export default function KeranjangMakanan() {
 										lemak={data.lemak}
 										kalori={data.kalori}
 										kuantitas={Findporsi(data._id)}
+										infoporsi={data.porsi}
 									></TrackingCard>
 								</>
 							))}
@@ -448,7 +450,7 @@ export default function KeranjangMakanan() {
 										// 	Post_data_to_history(postmakanan, postkalori, postkarbon)
 										// 	)
 										handleSelesai(postmakanan, postkalori, postkarbon)
-										}
+									}
 								>
 									Selesai
 								</button>

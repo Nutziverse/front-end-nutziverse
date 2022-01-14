@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Layout from "../layouting/Layout";
 import { Doughnut } from "react-chartjs-2";
 import "../style/PieChart.css";
 import { Link } from "react-router-dom";
-import { getTracking, getByDate } from "../redux/actions/action.tracking";
+import { getTracking } from "../redux/actions/action.tracking";
 
 import { getMakanan } from "../redux/actions/action.makanan";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,11 +20,10 @@ export default function HomeLogin() {
 	const allMakananState = useSelector((state) => state.allmakananReducer);
 	const HistoryState = useSelector((state) => state.trackingReducer);
 
-	const { allMakanan, loading, error } = allMakananState;
+	const { allMakanan, loading } = allMakananState;
 	const UserState = useSelector((state) => state.UserReducer);
 	const { User } = UserState;
 
-	const PorsiState = useSelector((state) => state.PorsiReducer);
 	const [persenkalori, setpersen] = useState(0);
 	console.log(persenkalori);
 	const StatsProfile = ({ grid, colors, image, nutrisi, angka }) => (
@@ -35,7 +35,12 @@ export default function HomeLogin() {
 				className="p-3 mx-auto my-3"
 				style={{ borderRadius: "50%", backgroundColor: colors }}
 			>
-				<img src={image} height={"40px"} className="ms-auto me-auto" />
+				<img
+					src={image}
+					height={"40px"}
+					className="ms-auto me-auto"
+					alt={"icon"}
+				/>
 			</div>
 
 			<h6 className="text-center">{nutrisi}</h6>
@@ -63,37 +68,7 @@ export default function HomeLogin() {
 			},
 		},
 	];
-	let width, height, gradient, gradient2;
-	const colors = [];
-	function getGradient(ctx, chartArea, lengthdata) {
-		const chartWidth = chartArea.right - chartArea.left;
-		const chartHeight = chartArea.bottom - chartArea.top;
 
-		if (!gradient || width !== chartWidth || height !== chartHeight) {
-			width = chartWidth;
-			height = chartHeight;
-			gradient = ctx.createLinearGradient(
-				0,
-				chartArea.bottom,
-				0,
-				chartArea.top
-			);
-			gradient2 = ctx.createLinearGradient(0, 0, 100, 400);
-
-			for (let i = 0; i < lengthdata; i++) {
-				if (i == 0) {
-				} else {
-					gradient2.addColorStop(0, "transparent");
-					gradient2.addColorStop(1, "transparent");
-					colors.push(gradient);
-				}
-			}
-			gradient.addColorStop(0, "#4FBAF0");
-			gradient.addColorStop(0.5, "#4FBAF0");
-			gradient.addColorStop(1, "#0084CD");
-		}
-		return [gradient, gradient2];
-	}
 	const data = (kalori, maxkalori) => ({
 		labels: ["kalori anda"],
 		datasets: [
@@ -258,7 +233,7 @@ export default function HomeLogin() {
 											loading
 												? 0
 												: HistoryState.tracking
-												? HistoryState.tracking.totKarbohidrat
+												? HistoryState.tracking.totKarbohidrat.toFixed(1)
 												: 0 + " gr"
 										}
 										colors={"#FFECB3"}
@@ -273,7 +248,7 @@ export default function HomeLogin() {
 											loading
 												? 0
 												: HistoryState.tracking
-												? HistoryState.tracking.totProtein
+												? HistoryState.tracking.totProtein.toFixed(1)
 												: 0 + " gr"
 										}
 										colors={"#8CD2F5"}
@@ -288,7 +263,7 @@ export default function HomeLogin() {
 											loading
 												? 0
 												: HistoryState.tracking
-												? HistoryState.tracking.totLemak
+												? HistoryState.tracking.totLemak.toFixed(1)
 												: 0 + " gr"
 										}
 										colors={"#F89D89"}
@@ -303,7 +278,7 @@ export default function HomeLogin() {
 											loading
 												? 0
 												: HistoryState.tracking
-												? HistoryState.tracking.tracking.totKarbon
+												? HistoryState.tracking.tracking.totKarbon.toFixed(1)
 												: 0 + " kg"
 										}
 										colors={"#E1E1E1"}
@@ -352,6 +327,7 @@ export default function HomeLogin() {
 									src="https://cdn-icons-png.flaticon.com/128/3068/3068777.png"
 									height={"70px"}
 									className="ms-auto me-auto"
+									alt="sarapan"
 								/>
 								<h6 className="text-center mt-3">Sarapan</h6>
 							</Link>
@@ -363,6 +339,7 @@ export default function HomeLogin() {
 									src="https://cdn-icons-png.flaticon.com/128/2718/2718265.png"
 									height={"70px"}
 									className="ms-auto me-auto"
+									alt="makansiang"
 								/>
 								<h6 className="text-center mt-3">Makan Siang</h6>
 							</Link>
@@ -374,6 +351,7 @@ export default function HomeLogin() {
 									src="https://cdn-icons-png.flaticon.com/128/4336/4336872.png"
 									height={"70px"}
 									className="ms-auto me-auto"
+									alt="makanmalam"
 								/>
 								<h6 className="text-center mt-3">Makan Malam</h6>
 							</Link>

@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import TrackingCard from "../components/TrackingCard";
-import Button from "../components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getMakanan } from "../redux/actions/action.makanan";
 import { getRekomendasi } from "../redux/actions/action.rekomendasi";
 import Layout from "../layouting/Layout";
+import { Link } from "react-router-dom";
 
 export default function RekomendasiMakanan() {
 	const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function RekomendasiMakanan() {
 	const { allRekomendasi } = RekomendasiState;
 	const makananState = useSelector((state) => state.allmakananReducer);
 
-	const { allMakanan, Loading } = makananState;
+	const { Loading } = makananState;
 	let rekomendasisarapan = allRekomendasi.filter(
 		(data) => data.jenisrekomendasi === "Sarapan"
 	);
@@ -147,9 +148,12 @@ export default function RekomendasiMakanan() {
 										);
 									})
 								)}
-								<a className="text-end text-decoration-none mt-3">
+								<Link
+									to="/resep"
+									className="text-end text-decoration-none mt-3"
+								>
 									Lihat Resep
-								</a>
+								</Link>
 								<div>
 									<h4 className="text-center">Total</h4>
 									<div className="d-flex justify-content-evenly mx-auto mt-3">
@@ -219,9 +223,12 @@ export default function RekomendasiMakanan() {
 										);
 									})
 								)}
-								<a className="text-end text-decoration-none mt-3">
+								<Link
+									to="/resep"
+									className="text-end text-decoration-none mt-3"
+								>
 									Lihat Resep
-								</a>
+								</Link>
 								<div>
 									<h4 className="text-center">Total</h4>
 									<div className="d-flex justify-content-evenly mx-auto mt-3">
@@ -291,9 +298,12 @@ export default function RekomendasiMakanan() {
 										);
 									})
 								)}
-								<a className="text-end text-decoration-none mt-3">
+								<Link
+									to="/resep"
+									className="text-end text-decoration-none mt-3"
+								>
 									Lihat Resep
-								</a>
+								</Link>
 								<div>
 									<h4 className="text-center">Total</h4>
 									<div className="d-flex justify-content-evenly mx-auto mt-3">

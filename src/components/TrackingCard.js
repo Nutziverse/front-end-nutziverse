@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import "../style/TrackingCard.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showModal } from "../redux/actions/action.modal";
 import MakananModal from "../components/MakananModal";
 import { TambahPorsi, KurangiPorsi } from "../redux/actions/actionPorsiMakanan";
-import { removeMakanan, addMakanan } from "../helpers";
 
 export default function TrackingCard({
 	image,
@@ -85,14 +84,18 @@ export default function TrackingCard({
 										className="btn me-2 my-auto"
 										onClick={() => dispatch(TambahPorsi(id))}
 									>
-										<h5 class="fas fa-plus fw-light my-auto"></h5>
+										<h5>
+											<i class="fas fa-plus fw-light my-auto"></i>
+										</h5>
 									</button>
 									<h3 className="my-auto">{kuantitas}</h3>
 									<button
 										className="btn ms-2 my-auto"
 										onClick={() => dispatch(KurangiPorsi(id))}
 									>
-										<h5 class="fas fa-minus fw-light my -auto"></h5>
+										<h5>
+											<i class="fas fa-minus fw-light my-auto"></i>
+										</h5>
 									</button>
 								</div>
 							</div>

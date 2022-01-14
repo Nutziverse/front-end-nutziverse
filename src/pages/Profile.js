@@ -173,7 +173,7 @@ export default function Profile() {
 					</Link>
 					<Link
 						className="col-12 text-decoration-none text-dark"
-						to="/profile/edit"
+						to="/editprofile"
 					>
 						<div className="row align-items-center">
 							<div className="col-10">

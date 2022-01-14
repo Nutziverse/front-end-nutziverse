@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getByDate, getTracking } from "../redux/actions/action.tracking";
 import TrackingCard from "../components/TrackingCard";
-import { showModal } from "../redux/actions/action.modal";
 import MakananModal from "../components/MakananModal";
 import "../style/card-makanan.css";
 import { Link, Navigate } from "react-router-dom";
@@ -305,7 +304,6 @@ export default function TrackingNutrisi() {
 }
 
 const TrackingSection = ({ makanan }) => {
-  const dispatch = useDispatch();
 
   return (
     <div className="container">
@@ -315,17 +313,16 @@ const TrackingSection = ({ makanan }) => {
             <div className="col-12" key={`col-${index}`}>
               <div
                 className="pointer"
-                onClick={() => dispatch(showModal(el.makananID._id))}
                 key={`onclick-${index}`}
               >
                 <TrackingCard
                   image={el.makananID.image}
                   alt_image={el.makananID.makanan}
-                  makanan={el.makananID.makanan}
+                  namamakanan={el.makananID.makanan}
                   infoporsi={el.makananID.porsi}
-                  kuantitas={el.porsi}
-                  modals={true}
+                  porsirekomendasi={el.porsi}
                   key={index}
+                  id={el.makananID._id}
                 ></TrackingCard>
               </div>
             </div>

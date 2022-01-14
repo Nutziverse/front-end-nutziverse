@@ -2,7 +2,6 @@
 	display: grid !important;
 	grid-template-columns: repeat(2, 1fr) !important;
 	padding: 0 !important;
-	background-color: blue;
 	margin-left: auto !important;
 	margin-right: auto !important;
 }

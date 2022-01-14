@@ -97,7 +97,7 @@ export default function EditProfile() {
             <div className="mb-3 mt-3">
               <label for="jeniskelamin">Jenis Kelamin</label>
               <select
-                className="form-control form-control-lg "
+                className="form-control "
                 id="jeniskelamin"
                 placeholder="Jenis Kelamin"
                 {...register("jeniskelamin", {
@@ -146,7 +146,7 @@ export default function EditProfile() {
                 Aktivitas Fisik
               </label>
               <select
-                className="form-control form-control-lg"
+                className="form-control "
                 id="aktivitasFisik"
                 {...register("aktivitasFisik", {
                   required: "Aktivitas Fisik tidak boleh kosong",

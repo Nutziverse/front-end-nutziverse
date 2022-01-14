@@ -40,8 +40,7 @@ export default function SignUp() {
       });
     }
 
-    no_hp = no_hp.replace("+62", "0");
-
+    
     if (google_cookie) {
       const body = {
         email: google_cookie,
@@ -51,15 +50,16 @@ export default function SignUp() {
         berat: berat,
         aktivitasFisik: aktivitasFisik,
       };
-
+      
       const { data } = await axios.patch(`${REACT_APP_API_URL}/users/register/google`, body);
       if (data.message === "success") {
         document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         setCookie("token", data.token);
-
+        
         Navigate("/");
       }
     } else {
+      no_hp = no_hp.replace("+62", "0");
       const body = {
         nama: nama_lengkap,
         no_hp: no_hp,

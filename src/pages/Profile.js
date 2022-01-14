@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { getCookie } from "../helpers";
 import Layout from "../layouting/Layout";
-import { getUSER } from "../redux/actions/action.user";
+import { getUSER } from "../redux/actions/action.User";
 import "../style/card-makanan.css"
 
 export default function Profile() {

@@ -22,8 +22,8 @@ export default function HomeGuest() {
     },
     {
       icon: "https://cdn-icons-png.flaticon.com/512/2738/2738658.png",
-      title: "Diet",
-      desc: "Temukan rekomendasi diet sehat dan aktivitas pendukung diet anda"
+      title: "Tracking Nutrisi",
+      desc: "Rekam nutrisi yang sudah anda konsumsi setiap hari"
     }
   ]
   return(

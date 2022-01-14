@@ -36,11 +36,10 @@ export default function HomeLogin() {
 				(HistoryState.tracking.tracking.totKalori /
 					User.kaloriYgDibutuhkan.toFixed(0)) *
 				100;
-
 			setpersen(persen.toFixed(1));
 		}
 		console.log(persenkalori);
-	}, [persenkalori]);
+	}, [persenkalori, loading]);
 
 	const StatsProfile = ({ grid, colors, image, nutrisi, angka }) => (
 		<div
@@ -169,7 +168,7 @@ export default function HomeLogin() {
 		cutout: "85%",
 		responsive: true,
 		maintainAspectRatio: true,
-		text: kalori,
+		text: kalori + "%",
 	});
 
 	// end of chart js

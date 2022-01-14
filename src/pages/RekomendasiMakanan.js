@@ -20,33 +20,55 @@ export default function RekomendasiMakanan() {
 	let rekomendasisarapan = allRekomendasi.filter(
 		(data) => data.jenisrekomendasi === "Sarapan"
 	);
+	let rekomendasisiang = allRekomendasi.filter(
+		(data) => data.jenisrekomendasi === "Makan Siang"
+	);
 
-	let karbohidratsarapan = rekomendasisarapan.reduce(
-		(prev, curr) => prev + curr.nutrisi.karbohidrat,
-		0
+	let rekomendasimalam = allRekomendasi.filter(
+		(data) => data.jenisrekomendasi === "Makan Malam"
 	);
-	let lemaksarapan = rekomendasisarapan.reduce(
-		(prev, curr) => prev + curr.nutrisi.lemak,
-		0
-	);
-	let proteinsarapan = rekomendasisarapan.reduce(
-		(prev, curr) => prev + curr.nutrisi.protein,
-		0
-	);
-	let kalorisarapan = rekomendasisarapan.reduce(
-		(prev, curr) => prev + curr.nutrisi.kalori,
-		0
-	);
-	let karbonsarapan = rekomendasisarapan.reduce(
-		(prev, curr) => prev + curr.nutrisi.karbon,
-		0
-	);
-	let porsisarapan = rekomendasisarapan.map((data) =>
-		data.menu.map((jumlah) => jumlah.jumlah)
-	);
-	let idsarapan = rekomendasisarapan.map((data) =>
-		data.menu.map((id) => id.idmakanan._id)
-	);
+	function getnutrisi(jenis) {
+		let karbohidratsarapan = jenis.reduce(
+			(prev, curr) => prev + curr.nutrisi.karbohidrat,
+			0
+		);
+		let lemaksarapan = jenis.reduce(
+			(prev, curr) => prev + curr.nutrisi.lemak,
+			0
+		);
+		let proteinsarapan = jenis.reduce(
+			(prev, curr) => prev + curr.nutrisi.protein,
+			0
+		);
+		let kalorisarapan = jenis.reduce(
+			(prev, curr) => prev + curr.nutrisi.kalori,
+			0
+		);
+		let karbonsarapan = jenis.reduce(
+			(prev, curr) => prev + curr.nutrisi.karbon,
+			0
+		);
+		let porsisarapan = jenis.map((data) =>
+			data.menu.map((jumlah) => jumlah.jumlah)
+		);
+		let idsarapan = rekomendasisarapan.map((data) =>
+			data.menu.map((id) => id.idmakanan._id)
+		);
+		return [
+			karbohidratsarapan,
+			lemaksarapan,
+			proteinsarapan,
+			kalorisarapan,
+			karbonsarapan,
+			porsisarapan,
+			idsarapan,
+		];
+	}
+
+	let sarapan = getnutrisi(rekomendasisarapan);
+	let siang = getnutrisi(rekomendasisiang);
+	let malam = getnutrisi(rekomendasimalam);
+
 	function setlocal(id, porsi) {
 		id = id[0];
 		porsi = porsi[0];
@@ -135,31 +157,31 @@ export default function RekomendasiMakanan() {
 										<Statsrekom
 											colors={"red"}
 											nama={"Kalori"}
-											angka={kalorisarapan}
+											angka={sarapan[3]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"yellow"}
 											nama={"Karbohidrat"}
-											angka={karbohidratsarapan}
+											angka={sarapan[0]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Protein"}
-											angka={proteinsarapan}
+											angka={sarapan[2]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Lemak"}
-											angka={lemaksarapan}
+											angka={sarapan[1]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Karbon"}
-											angka={karbonsarapan}
+											angka={sarapan[4]}
 											satuan={"gr"}
 										></Statsrekom>
 									</div>
@@ -167,7 +189,7 @@ export default function RekomendasiMakanan() {
 
 								<div className="d-flex">
 									<button
-										onClick={() => setlocal(idsarapan, porsisarapan)}
+										onClick={() => setlocal(sarapan[6], sarapan[5])}
 										className="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4"
 									>
 										Pilih
@@ -177,131 +199,145 @@ export default function RekomendasiMakanan() {
 						</div>
 					</div>
 					<div id="makansiang">
-						<h4 className="mt-5">Makan Siang</h4>
+						<h4 className="mt-5">Sarapan</h4>
 						<h5 className="fw-light">
 							Rekomendasi beberapa menu sarapan untuk anda
 						</h5>
 						<div className="rounded border border-danger p-4">
 							<div className="row ">
-								{allMakanan.slice(0, 5).map((makan) => {
-									return (
-										<div className="col-12 col-lg-6">
-											<TrackingCard
-												id={makan._id}
-												namamakanan={makan.makanan}
-												image={makan.image}
-											></TrackingCard>
-										</div>
-									);
-								})}
+								{rekomendasisiang.map((data) =>
+									data.menu.map((id) => {
+										return (
+											<div className="col-12 col-lg-6">
+												<TrackingCard
+													id={id.idmakanan._id}
+													namamakanan={id.idmakanan.makanan}
+													image={id.idmakanan.image}
+													porsirekomendasi={id.jumlah}
+												></TrackingCard>
+											</div>
+										);
+									})
+								)}
 								<a className="text-end text-decoration-none mt-3">
 									Lihat Resep
 								</a>
 								<div>
 									<h4 className="text-center">Total</h4>
 									<div className="d-flex justify-content-evenly mx-auto mt-3">
+										{}
 										<Statsrekom
 											colors={"red"}
 											nama={"Kalori"}
-											angka={390}
+											angka={siang[3]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"yellow"}
 											nama={"Karbohidrat"}
-											angka={390}
+											angka={siang[0]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Protein"}
-											angka={390}
+											angka={siang[2]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Lemak"}
-											angka={390}
+											angka={siang[1]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Karbon"}
-											angka={390}
+											angka={siang[4]}
 											satuan={"gr"}
 										></Statsrekom>
 									</div>
 								</div>
 
 								<div className="d-flex">
-									<Button btnclass="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
+									<button
+										onClick={() => setlocal(siang[6], siang[5])}
+										className="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4"
+									>
 										Pilih
-									</Button>
+									</button>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div id="makanmalam">
-						<h4 className="mt-5">Makan Malam</h4>
+						<h4 className="mt-5">Sarapan</h4>
 						<h5 className="fw-light">
 							Rekomendasi beberapa menu sarapan untuk anda
 						</h5>
 						<div className="rounded border border-danger p-4">
 							<div className="row ">
-								{allMakanan.slice(0, 5).map((makan) => {
-									return (
-										<div className="col-12 col-lg-6">
-											<TrackingCard
-												id={makan._id}
-												namamakanan={makan.makanan}
-												image={makan.image}
-											></TrackingCard>
-										</div>
-									);
-								})}
+								{rekomendasimalam.map((data) =>
+									data.menu.map((id) => {
+										return (
+											<div className="col-12 col-lg-6">
+												<TrackingCard
+													id={id.idmakanan._id}
+													namamakanan={id.idmakanan.makanan}
+													image={id.idmakanan.image}
+													porsirekomendasi={id.jumlah}
+												></TrackingCard>
+											</div>
+										);
+									})
+								)}
 								<a className="text-end text-decoration-none mt-3">
 									Lihat Resep
 								</a>
 								<div>
 									<h4 className="text-center">Total</h4>
 									<div className="d-flex justify-content-evenly mx-auto mt-3">
+										{}
 										<Statsrekom
 											colors={"red"}
 											nama={"Kalori"}
-											angka={390}
+											angka={malam[3]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"yellow"}
 											nama={"Karbohidrat"}
-											angka={390}
+											angka={malam[0]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Protein"}
-											angka={390}
+											angka={malam[2]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Lemak"}
-											angka={390}
+											angka={malam[1]}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Karbon"}
-											angka={390}
+											angka={malam[4]}
 											satuan={"gr"}
 										></Statsrekom>
 									</div>
 								</div>
 
 								<div className="d-flex">
-									<Button btnclass="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4">
+									<button
+										onClick={() => setlocal(malam[6], malam[5])}
+										className="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4"
+									>
 										Pilih
-									</Button>
+									</button>
 								</div>
 							</div>
 						</div>

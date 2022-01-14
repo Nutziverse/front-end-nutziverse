@@ -15,11 +15,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function HomeLogin() {
 	const dispatch = useDispatch();
-	useEffect(() => {
-		dispatch(getUSER());
-		dispatch(getMakanan());
-		dispatch(getTracking());
-	}, [dispatch]);
+
 	const allMakananState = useSelector((state) => state.allmakananReducer);
 	const HistoryState = useSelector((state) => state.trackingReducer);
 
@@ -28,19 +24,8 @@ export default function HomeLogin() {
 	const { User } = UserState;
 
 	const PorsiState = useSelector((state) => state.PorsiReducer);
-	const [persenkalori, setpersen] = useState(100);
+	const [persenkalori, setpersen] = useState(0);
 	console.log(persenkalori);
-	useEffect(() => {
-		if (!loading) {
-			let persen =
-				(HistoryState.tracking.tracking.totKalori /
-					User.kaloriYgDibutuhkan.toFixed(0)) *
-				100;
-			setpersen(persen.toFixed(1));
-		}
-		console.log(persenkalori);
-	}, [persenkalori, loading]);
-
 	const StatsProfile = ({ grid, colors, image, nutrisi, angka }) => (
 		<div
 			className={grid + " shadow d-flex flex-column"}
@@ -170,7 +155,25 @@ export default function HomeLogin() {
 		maintainAspectRatio: true,
 		text: kalori + "%",
 	});
-
+	if (HistoryState.tracking) {
+		console.log("hallo");
+	} else {
+		console.log("APa");
+	}
+	console.log(HistoryState.tracking);
+	useEffect(() => {
+		dispatch(getUSER());
+		dispatch(getMakanan());
+		dispatch(getTracking());
+		if (!loading && HistoryState.tracking) {
+			let persen =
+				(HistoryState.tracking.tracking.totKalori /
+					User.kaloriYgDibutuhkan.toFixed(0)) *
+				100;
+			setpersen(persen.toFixed(1));
+		}
+		console.log(persenkalori);
+	}, [dispatch, persenkalori, loading]);
 	return (
 		<Layout>
 			{loading ? null : (
@@ -193,7 +196,13 @@ export default function HomeLogin() {
 							className="img-fluid d-none d-md-block"
 						/>
 					</div>
-					<h4 className="mt-4">Penghitung Nutrisi</h4>
+					<div className="d-flex justify-content-between">
+						<h4 className="mt-4">Penghitung Nutrisi</h4>
+						<Link className="mt-4 text-decoration-none" to="/tracking-nutrisi">
+							Ringkasan
+						</Link>
+					</div>
+
 					<div className="container ">
 						<div className="d-flex justify-content-betweeen row">
 							<div className="col-12 col-lg-6">
@@ -206,11 +215,13 @@ export default function HomeLogin() {
 											<Doughnut
 												data={
 													loading
-														? null
-														: data(
+														? data(0, 100)
+														: HistoryState.tracking
+														? data(
 																HistoryState.tracking.tracking.totKalori,
 																User.kaloriYgDibutuhkan.toFixed(0)
 														  )
+														: data(0, 100)
 												}
 												options={options(persenkalori)}
 												plugins={plugins}
@@ -224,10 +235,15 @@ export default function HomeLogin() {
 											<h5 className="text-danger">Dibutuhkan</h5>
 											<h5>
 												{loading ? 0 : User.kaloriYgDibutuhkan.toFixed(0)} Kkal
+												{console.log(User)}
 											</h5>
 											<h5 className="text-primary mt-5">Terpenuhi</h5>
 											<h5>
-												{loading ? 0 : HistoryState.tracking.tracking.totKalori}{" "}
+												{loading
+													? 0
+													: HistoryState.tracking
+													? HistoryState.tracking.tracking.totKalori
+													: 0}{" "}
 												Kkal
 											</h5>
 										</div>
@@ -235,11 +251,15 @@ export default function HomeLogin() {
 								</div>
 							</div>
 							<div className="d-none d-lg-block col-lg-6">
-								<div className="custom-row h-100">
+								<div className="custom-row h-100 w-100">
 									<StatsProfile
 										grid={"item-1"}
 										angka={
-											loading ? 0 : HistoryState.tracking.totKarbohidrat + " gr"
+											loading
+												? 0
+												: HistoryState.tracking
+												? HistoryState.tracking.totKarbohidrat
+												: 0 + " gr"
 										}
 										colors={"#FFECB3"}
 										image={
@@ -250,7 +270,11 @@ export default function HomeLogin() {
 									<StatsProfile
 										grid={"item-2"}
 										angka={
-											loading ? 0 : HistoryState.tracking.totProtein + " gr"
+											loading
+												? 0
+												: HistoryState.tracking
+												? HistoryState.tracking.totProtein
+												: 0 + " gr"
 										}
 										colors={"#8CD2F5"}
 										image={
@@ -260,7 +284,13 @@ export default function HomeLogin() {
 									></StatsProfile>
 									<StatsProfile
 										grid={"item-3"}
-										angka={loading ? 0 : HistoryState.tracking.totLemak + " gr"}
+										angka={
+											loading
+												? 0
+												: HistoryState.tracking
+												? HistoryState.tracking.totLemak
+												: 0 + " gr"
+										}
 										colors={"#F89D89"}
 										image={
 											"https://cdn-icons-png.flaticon.com/128/2553/2553591.png"
@@ -272,7 +302,9 @@ export default function HomeLogin() {
 										angka={
 											loading
 												? 0
-												: HistoryState.tracking.tracking.totKarbon + " kg"
+												: HistoryState.tracking
+												? HistoryState.tracking.tracking.totKarbon
+												: 0 + " kg"
 										}
 										colors={"#E1E1E1"}
 										image={
@@ -285,7 +317,13 @@ export default function HomeLogin() {
 						</div>
 					</div>
 					<div className=" mt-4">
-						<h4>Resep</h4>
+						<div className=" my-2 d-flex justify-content-between">
+							<h4>Resep</h4>
+							<Link className="text-decoration-none" to="/resep">
+								Lihat Semua
+							</Link>
+						</div>
+
 						<div className="row">
 							{allMakanan.slice(0, 4).map((data) => (
 								<div className="col-12 col-md-6 col-lg-3">
@@ -300,11 +338,6 @@ export default function HomeLogin() {
 									</div>
 								</div>
 							))}
-						</div>
-						<div className="d-flex justify-content-end mt-3">
-							<a href="/#" className="text-decoration-none">
-								Lihat Semua
-							</a>
 						</div>
 					</div>
 

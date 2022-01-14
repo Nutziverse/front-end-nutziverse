@@ -75,7 +75,7 @@ export default function TrackingCard({
 						<div className="col-9 col-md-9 d-flex justify-content-between">
 							<div className="d-flex flex-column">
 								<div className="">
-									<h5 className="fw-bold">{namamakanan}</h5>
+									<h5 className="fw-semi-bold">{namamakanan}</h5>
 									<h6 className="">{infoporsi}</h6>
 								</div>
 							</div>
@@ -91,7 +91,6 @@ export default function TrackingCard({
 									<button
 										className="btn ms-2 my-auto"
 										onClick={() => dispatch(KurangiPorsi(id))}
-
 									>
 										<h5 class="fas fa-minus fw-light my -auto"></h5>
 									</button>

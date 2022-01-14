@@ -1,0 +1,124 @@
+.custom-row-2 {
+	display: grid !important;
+	grid-template-columns: repeat(3, 1fr);
+	row-gap: 20px;
+	column-gap: 20px;
+}
+#stacked {
+	grid-column: 1/-1;
+	grid-row: 1;
+}
+
+#stacked1 {
+	grid-column: 1 / -1;
+	grid-row: 1;
+	z-index: 1;
+}
+
+.div1 {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+}
+.custom-row {
+	display: grid !important;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	row-gap: 15px;
+	column-gap: 15px;
+}
+.item-1 {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 1;
+	grid-column-end: 2;
+}
+.item-2 {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 2;
+	grid-column-end: 3;
+}
+.item-3 {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 2;
+}
+.item-4 {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	grid-column-start: 2;
+	grid-column-end: 3;
+}
+
+.main-bg {
+	opacity: 1;
+	background-image: linear-gradient(
+			rgba(26, 167, 236, 0.6),
+			rgba(26, 167, 236, 0.6)
+		),
+		url("https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGF0dGVybnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: cover;
+	position: relative;
+}
+
+.custom-row-2 {
+	display: grid !important;
+	grid-template-columns: repeat(3, 1fr);
+	row-gap: 20px;
+	column-gap: 20px;
+}
+.newitem-1 {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 1;
+	grid-column-end: 2;
+}
+.newitem-2 {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 2;
+	grid-column-end: 3;
+}
+.newitem-3 {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	grid-column-start: 3;
+	grid-column-end: 4;
+}
+
+@media (max-width: 992px) {
+	.custom-row-2 {
+		display: grid !important;
+		grid-template-rows: repeat(3, 1fr);
+		grid-template-columns: repeat(1, 1fr);
+		row-gap: 20px;
+		column-gap: 20px;
+	}
+	.newitem-1 {
+		grid-row-start: 1;
+		grid-row-end: 2;
+		grid-column-start: 1;
+		grid-column-end: 2;
+	}
+	.newitem-2 {
+		grid-row-start: 2;
+		grid-row-end: 3;
+		grid-column-start: 1;
+		grid-column-end: 2;
+	}
+	.newitem-3 {
+		grid-row-start: 3;
+		grid-row-end: 4;
+		grid-column-start: 1;
+		grid-column-end: 2;
+	}
+	.newitem-4 {
+		grid-row-start: 2;
+		grid-row-end: 3;
+		grid-column-start: 2;
+		grid-column-end: 3;
+	}
+}

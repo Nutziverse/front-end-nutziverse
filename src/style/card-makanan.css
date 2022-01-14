@@ -81,3 +81,8 @@
   }
   
 }
+
+.bg-profile-icon {
+  background-color: #63AED8;
+  border-radius: 8px !important;
+}

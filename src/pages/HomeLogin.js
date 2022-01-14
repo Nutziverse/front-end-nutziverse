@@ -171,8 +171,6 @@ export default function HomeLogin() {
 		text: kalori + "%",
 	});
 
-	// end of chart js
-
 	return (
 		<Layout>
 			{loading ? null : (

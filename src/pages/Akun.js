@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import Button from "../components/Button";
 import { getCookie } from "../helpers";
 import Layout from "../layouting/Layout";
 import { getAkun } from "../redux/actions/action.akun";
-import { Navigate } from "react-router-dom";
-import { getCookie } from "../helpers";
 import "../style/profile.css";
 import NotFound from "./NotFound";
 import AkunGoogle from "./AkunGoogle";

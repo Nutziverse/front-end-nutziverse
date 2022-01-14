@@ -1,15 +1,13 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Layout from "./layouting/Layout";
 import HomeGuest from "./pages/HomeGuest";
-import RekomendasiMakanan from "./pages/RekomendasiMakanan";
-import HomeLogin from "./pages/HomeLogin";
-import HistoryKarbon from "./pages/HistoryKarbon";
-import HistoryKarbon3 from "./pages/HistoryKarbon3";
-import CallToAction from "./pages/CallToAction";
-import KeranjangMakanan from "./pages/KeranjangMakanan";
+
 function App() {
-	return <HistoryKarbon3></HistoryKarbon3>;
+	return (
+		<Layout>
+			<HomeGuest></HomeGuest>
+		</Layout>
+	);
 }
 
 export default App;

@@ -12,129 +12,6 @@ import CardResep from "../components/CardResep";
 import "../style/card-makanan.css";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const plugins = [
-	{
-		beforeDraw: function (chart) {
-			let width = chart.width,
-				height = chart.height,
-				ctx = chart.ctx;
-			ctx.restore();
-			let fontSize = (height / 160).toFixed(2);
-			ctx.font = fontSize + "em sans-serif";
-			ctx.textBaseline = "top";
-			let text = "80%",
-				textX = Math.round((width - ctx.measureText(text).width) / 2),
-				textY = height / 2;
-			ctx.fillText(text, textX, textY);
-			ctx.save();
-		},
-	},
-];
-let width, height, gradient, gradient2;
-const colors = [];
-function getGradient(ctx, chartArea, lengthdata) {
-	const chartWidth = chartArea.right - chartArea.left;
-	const chartHeight = chartArea.bottom - chartArea.top;
-
-	if (!gradient || width !== chartWidth || height !== chartHeight) {
-		width = chartWidth;
-		height = chartHeight;
-		gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
-		gradient2 = ctx.createLinearGradient(0, 0, 100, 400);
-
-		for (let i = 0; i < lengthdata; i++) {
-			if (i == 0) {
-			} else {
-				gradient2.addColorStop(0, "transparent");
-				gradient2.addColorStop(1, "transparent");
-				colors.push(gradient);
-			}
-		}
-		console.log(colors);
-		gradient.addColorStop(0, "#4FBAF0");
-		gradient.addColorStop(0.5, "#4FBAF0");
-		gradient.addColorStop(1, "#0084CD");
-	}
-	return [gradient, gradient2];
-}
-console.log(colors);
-export const data = {
-	labels: ["kalori anda"],
-	datasets: [
-		{
-			label: "# of Votes",
-			data: [80, 20],
-			backgroundColor: function (context) {
-				const chart = context.chart;
-				let { ctx, chartArea } = chart;
-
-				if (!chartArea) {
-					chartArea = {
-						bottom: 281.4815013660502,
-						height: 281.4815013660502,
-						left: 0,
-						right: 281.4815013660502,
-						top: 0,
-						width: 281.4815013660502,
-					};
-				}
-				let lengthdata = data.datasets[0].data.length;
-				return getGradient(ctx, chartArea, lengthdata);
-			},
-
-			borderColor: ["#1AA7EC", "transparent"],
-			borderWidth: 1,
-			borderRadius: [100, 100],
-		},
-	],
-};
-
-export const data1 = {
-	labels: ["kalori anda"],
-	datasets: [
-		{
-			label: "# of Votes",
-			data: [30],
-			backgroundColor: ["#d9d9d9"],
-			borderColor: ["white"],
-			borderWidth: 1,
-			borderRadius: [100],
-		},
-	],
-};
-
-export const options1 = {
-	rotation: 225,
-	animation: {
-		duration: 0,
-	},
-	circumference: 270,
-	plugins: {
-		legend: {
-			display: false,
-		},
-	},
-	cutout: "85%",
-	responsive: true,
-	maintainAspectRatio: true,
-};
-
-export const options = {
-	rotation: 225,
-	plugins: {
-		legend: {
-			display: false,
-		},
-	},
-	circumference: 270,
-	tooltip: {
-		enabled: false,
-	},
-	cutout: "85%",
-	responsive: true,
-	maintainAspectRatio: true,
-};
-
 export default function HomeLogin() {
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -146,6 +23,7 @@ export default function HomeLogin() {
 	console.log(allMakanan);
 	const UserState = useSelector((state) => state.UserReducer);
 	const { User } = UserState;
+	console.log(User);
 
 	const PorsiState = useSelector((state) => state.PorsiReducer);
 	const StatsProfile = ({ grid, colors, image, nutrisi, angka }) => (
@@ -164,6 +42,135 @@ export default function HomeLogin() {
 			<h6 className="fw-bold text-center mt-2 mb-4">{angka}</h6>
 		</div>
 	);
+
+	// chart js
+	const plugins = [
+		{
+			beforeDraw: function (chart) {
+				let width = chart.width,
+					height = chart.height,
+					ctx = chart.ctx;
+				ctx.restore();
+				let fontSize = (height / 160).toFixed(2);
+				ctx.font = fontSize + "em sans-serif";
+				ctx.textBaseline = "top";
+				let text = "80%",
+					textX = Math.round((width - ctx.measureText(text).width) / 2),
+					textY = height / 2;
+				ctx.fillText(text, textX, textY);
+				ctx.save();
+			},
+		},
+	];
+	let width, height, gradient, gradient2;
+	const colors = [];
+	function getGradient(ctx, chartArea, lengthdata) {
+		const chartWidth = chartArea.right - chartArea.left;
+		const chartHeight = chartArea.bottom - chartArea.top;
+
+		if (!gradient || width !== chartWidth || height !== chartHeight) {
+			width = chartWidth;
+			height = chartHeight;
+			gradient = ctx.createLinearGradient(
+				0,
+				chartArea.bottom,
+				0,
+				chartArea.top
+			);
+			gradient2 = ctx.createLinearGradient(0, 0, 100, 400);
+
+			for (let i = 0; i < lengthdata; i++) {
+				if (i == 0) {
+				} else {
+					gradient2.addColorStop(0, "transparent");
+					gradient2.addColorStop(1, "transparent");
+					colors.push(gradient);
+				}
+			}
+			console.log(colors);
+			gradient.addColorStop(0, "#4FBAF0");
+			gradient.addColorStop(0.5, "#4FBAF0");
+			gradient.addColorStop(1, "#0084CD");
+		}
+		return [gradient, gradient2];
+	}
+	const data = {
+		labels: ["kalori anda"],
+		datasets: [
+			{
+				label: "# of Votes",
+				data: [80, 20],
+				backgroundColor: function (context) {
+					const chart = context.chart;
+					let { ctx, chartArea } = chart;
+
+					if (!chartArea) {
+						chartArea = {
+							bottom: 281.4815013660502,
+							height: 281.4815013660502,
+							left: 0,
+							right: 281.4815013660502,
+							top: 0,
+							width: 281.4815013660502,
+						};
+					}
+					let lengthdata = data.datasets[0].data.length;
+					return getGradient(ctx, chartArea, lengthdata);
+				},
+
+				borderColor: ["#1AA7EC", "transparent"],
+				borderWidth: 1,
+				borderRadius: [100, 100],
+			},
+		],
+	};
+
+	const data1 = {
+		labels: ["kalori anda"],
+		datasets: [
+			{
+				label: "# of Votes",
+				data: [30],
+				backgroundColor: ["#d9d9d9"],
+				borderColor: ["white"],
+				borderWidth: 1,
+				borderRadius: [100],
+			},
+		],
+	};
+
+	const options1 = {
+		rotation: 225,
+		animation: {
+			duration: 0,
+		},
+		circumference: 270,
+		plugins: {
+			legend: {
+				display: false,
+			},
+		},
+		cutout: "85%",
+		responsive: true,
+		maintainAspectRatio: true,
+	};
+
+	const options = {
+		rotation: 225,
+		plugins: {
+			legend: {
+				display: false,
+			},
+		},
+		circumference: 270,
+		tooltip: {
+			enabled: false,
+		},
+		cutout: "85%",
+		responsive: true,
+		maintainAspectRatio: true,
+	};
+	// end of chart js
 	return (
 		<Layout>
 			<div className="container">
@@ -205,7 +212,7 @@ export default function HomeLogin() {
 								<div className="col-6 col-md-7 col-lg-4 d-flex justify-content-evenly justify-content-lg-end mmt-0 mt-md-4 ">
 									<div>
 										<h5 className="text-danger">Dibutuhkan</h5>
-										<h5>2000 Kkal</h5>
+										<h5>{User.kaloriYgDibutuhkan} Kkal</h5>
 										<h5 className="text-primary mt-5">Terpenuhi</h5>
 										<h5>1900 Kkal</h5>
 									</div>

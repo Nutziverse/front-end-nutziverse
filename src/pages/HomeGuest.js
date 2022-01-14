@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
+import Layout from "../layouting/Layout";
 import "../style/card-makanan.css"
 
 export default function HomeGuest() {
@@ -26,7 +27,7 @@ export default function HomeGuest() {
     }
   ]
   return(
-    <>
+    <Layout>
       <main className="main-section">
         {/* <img src="" alt="Food" /> */}
         <div className="main-section-content container-fluid container-md text-white py-5">
@@ -78,6 +79,6 @@ export default function HomeGuest() {
           }
         </div>
       </section>
-    </>
+    </Layout>
   )
 }

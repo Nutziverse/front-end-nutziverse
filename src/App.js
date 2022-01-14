@@ -1,14 +1,17 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Layout from "./layouting/Layout";
+import { getCookie } from "./helpers";
 import HomeGuest from "./pages/HomeGuest";
+import HomeLogin from "./pages/HomeLogin";
 
 function App() {
 
+  const token = getCookie("token");
   return (
-    <Layout>
-      <HomeGuest></HomeGuest>
-    </Layout>
+    <>
+      {
+        token ? <HomeLogin></HomeLogin> : <HomeGuest></HomeGuest>
+      }
+    </>
   );
 
 }

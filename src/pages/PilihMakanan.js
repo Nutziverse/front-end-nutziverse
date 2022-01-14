@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CardMakanan from "../components/CardMakanan";
@@ -12,6 +12,15 @@ export default function PilihMakanan() {
   const dispatch = useDispatch();
   const allMakananState = useSelector((state) => state.allmakananReducer);
   const { allMakanan, loading, error } = allMakananState;
+  const [input, setinput] = useState("");
+  const [filterMakanan, setfilterMakanan] = useState([]);
+  
+  const searchMakanan = () => {
+    let filter = allMakanan.filter((item) =>
+      item.makanan.toLowerCase().includes(input)
+    );
+    setfilterMakanan(filter);
+  };
 
   useEffect(() => {
     dispatch(getMakanan());
@@ -28,6 +37,7 @@ export default function PilihMakanan() {
             <div className="col-10 col-md-5">
               <div class="input-group">
                 <input
+                  onChange={(e) => setinput(e.target.value.toLowerCase())}
                   type="text"
                   class="form-control"
                   placeholder="Cari . . ."
@@ -38,6 +48,7 @@ export default function PilihMakanan() {
                   class="btn btn-outline-primary"
                   type="button"
                   id="button-addon2"
+                  onClick={() => searchMakanan()}
                 >
                   <i class="fas fa-search"></i>
                 </button>
@@ -55,15 +66,47 @@ export default function PilihMakanan() {
         </div>
 
         <div className="container">
-          <div className="row">
+          <div className="row gy-3">
             {!loading
-              ? allMakanan.map((el, index) => {
-                  return <div className="col-6 col-md-4 col-lg-3" key={index}>
-                    <div onClick={() => dispatch(showModal(el._id))} className="pointer">
-                      <CardMakanan makanan={el.makanan} image={el.image} penyetaraanPorsi={el.porsi} kalori={el.kaloriMakanan} karbon={el.karbon} key={el._id}></CardMakanan>
-                    </div>
-                  </div>;
-                })
+              ? filterMakanan.length > 0
+                ? filterMakanan.map((el, index) => {
+                    return (
+                      <div className="col-6 col-md-4 col-lg-3" key={index}>
+                        <div
+                          onClick={() => dispatch(showModal(el._id))}
+                          className="pointer"
+                        >
+                          <CardMakanan
+                            makanan={el.makanan}
+                            image={el.image}
+                            penyetaraanPorsi={el.porsi}
+                            kalori={el.kaloriMakanan}
+                            karbon={el.karbon}
+                            key={el._id}
+                          ></CardMakanan>
+                        </div>
+                      </div>
+                    );
+                  })
+                : allMakanan.map((el, index) => {
+                    return (
+                      <div className="col-6 col-md-4 col-lg-3" key={index}>
+                        <div
+                          onClick={() => dispatch(showModal(el._id))}
+                          className="pointer"
+                        >
+                          <CardMakanan
+                            makanan={el.makanan}
+                            image={el.image}
+                            penyetaraanPorsi={el.porsi}
+                            kalori={el.kaloriMakanan}
+                            karbon={el.karbon}
+                            key={el._id}
+                          ></CardMakanan>
+                        </div>
+                      </div>
+                    );
+                  })
               : null}
           </div>
 

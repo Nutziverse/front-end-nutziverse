@@ -7,6 +7,7 @@ import { getAkun } from "../redux/actions/action.akun";
 import "../style/profile.css";
 import NotFound from "./NotFound";
 import AkunGoogle from "./AkunGoogle";
+import { Link } from "react-router-dom";
 
 export default function Akun() {
   const token = getCookie("token");
@@ -31,9 +32,9 @@ export default function Akun() {
           <div className="container-fluid">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
               <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <Link className="navbar-brand" to="/profile">
                   <i class="fas fa-chevron-left"></i>
-                </a>
+                </Link>
                 <button
                   className="navbar-toggler"
                   type="button"

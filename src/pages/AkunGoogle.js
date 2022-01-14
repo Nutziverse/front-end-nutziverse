@@ -2,15 +2,16 @@ import React from "react";
 import "../style/akun.css";
 import google from "../images/google.png";
 import Button from "../components/Button";
+import { Link } from "react-router-dom";
 
 export default function AkunGoogle({email}) {
   return (
     <div className="container-fluid">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/profile">
             <i class="fas fa-chevron-left"></i>
-          </a>
+          </Link>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <h5> Akun</h5>

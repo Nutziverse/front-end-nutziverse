@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import logo_awal from "../images/Opening.png";
@@ -7,13 +7,11 @@ import google from "../images/google.png";
 import Layout from "../layouting/Layout";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
-import { useCookies } from "react-cookie";
-import { setCookie, getCookie } from "../helpers";
+import { setCookie } from "../helpers";
 
 export default function SignIn() {
-  // const [name, setName] = useState('')
-  // const [password, setShowPassword] = useState('')
-  // const [cookies, setCookie] = useCookies([user])
+  let Navigate = useNavigate();
+  
   const {
     register,
     handleSubmit,
@@ -21,59 +19,62 @@ export default function SignIn() {
     trigger,
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const [errorsMessage, setErrorMessage] = useState(false);
+  
   const togglePasswordVisiblity = () => {
     setShowPassword(showPassword ? false : true);
   };
-  let Navigate = useNavigate();
+  const [alert, setAlert] = useState(false);
+  const [alertmsg, setAlertmsg] = useState("")
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      // After 3 seconds set the show value to false
+      setAlert(false);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [alert]);
 
   const onSubmit = async (data) => {
-    let inputTelepon = data.telepon;
-    let inputPassword = data.password;
-
     const body = {
-      no_hp: data.telepon,
+      no_hp: data.telepon.replace("+62", "0"),
       password: data.password,
     };
+
     const { REACT_APP_API_URL } = process.env;
     try {
       const result = await axios.post(`${REACT_APP_API_URL}/users/login`, body);
-      console.log(result);
+
       const { token } = result.data;
       setCookie("token", token);
-      const cookie = getCookie("token");
       if (token) {
-        Navigate("/akun");
+        Navigate("/");
+      } else if(result.data === "user is not exist") {
+        setAlert(true)
+        setAlertmsg("Nomor telepon belum terdaftar")
+      } else if(result.data === "invalid") {
+        setAlert(true)
+        setAlertmsg("Password salah")
       }
-      console.log(cookie);
     } catch (error) {}
-
-    // let userTelepon = localStorage.getItem("SubmissionTelepon");
-    // let userPassword = localStorage.getItem("SubmissionPassword");
-    // if (inputTelepon !== userTelepon || inputPassword !== userPassword) {
-    //   setErrorMessage(true);
-    // } else {
-    //   localStorage.setItem("isLogin", "true");
-    //   Navigate("/");
-    // }
   };
 
   const responseGoogle = async (authResult) => {
-    console.log(authResult);
+  
     try {
       if (authResult) {
         const result = await axios.post(`${process.env.REACT_APP_API_URL}/users/auth/google`, authResult);
-        console.log(process.env.REACT_APP_API_URL); 
-        console.log(result)
+        
         const { message } = result.data
 
-        if(message === 'welcome') {
-          const {token} = result.data
+        if (message === "welcome") {
+          const { token } = result.data;
           setCookie("token", token);
           Navigate("/");
         } else {
-          setCookie("email", result.data.result.email)
-          Navigate("/sign-up")
+          setCookie("email", result.data.result.email);
+          Navigate("/sign-up");
         }
 
         return result;
@@ -81,7 +82,7 @@ export default function SignIn() {
         throw new Error(authResult);
       }
     } catch (e) {
-      console.log(e);
+    
     }
   };
 
@@ -109,9 +110,8 @@ export default function SignIn() {
                           <p className="text-secondary mt-1">Selamat datang di Nutziverse</p>
                         </div>
                         {/* Alert */}
-
-                        <div className={`alert alert-danger align-items-center ${errorsMessage ? "d-flex" : "d-none"}`} role="alert">
-                          <div>No.telepon dan Password tidak sesuai !</div>
+                        <div className={`alert alert-danger align-items-center mt-4 ${alert ? "show" : "d-none"}`} role="alert">
+                          <div>{alertmsg}</div>
                         </div>
 
                         <form noValidate onSubmit={handleSubmit(onSubmit)} id="loginForm">
@@ -189,16 +189,6 @@ export default function SignIn() {
 
                           <div className="text-center d-grid col-12 mt-md-2 mt-2">atau</div>
 
-                          {/* <div className="d-grid col-12 mt-md-3 mt-2">
-                            <button
-                              type="submit"
-                              className="btn btn-sm btn-main"
-                              style={{ backgroundColor: "white", fontSize: "16px", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)", borderRadius: "8px", padding: "15px 18px;" }}
-                            >
-                              <img src={google} style={{ height: "16px", marginRight: "10px" }}></img>Masuk dengan Google+
-                            </button>
-                          </div> */}
-
                           {/* google login */}
                           <GoogleLogin
                             clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -209,7 +199,7 @@ export default function SignIn() {
                                   className="btn btn-sm btn-main"
                                   style={{ backgroundColor: "white", fontSize: "16px", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)", borderRadius: "8px", padding: "15px 18px;" }}
                                 >
-                                  <img src={google} style={{ height: "16px", marginRight: "10px" }}></img>Masuk dengan Google+
+                                  <img src={google} alt="google" style={{ height: "16px", marginRight: "10px" }}></img>Masuk dengan Google
                                 </button>
                               </div>
                             )}

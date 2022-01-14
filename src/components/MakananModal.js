@@ -161,4 +161,3 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 			</div>
 		</div>
 	);
-}

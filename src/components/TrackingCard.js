@@ -87,11 +87,11 @@ export default function TrackingCard({
 									>
 										<h5 class="fas fa-plus fw-light my-auto"></h5>
 									</button>
-
 									<h3 className="my-auto">{kuantitas}</h3>
 									<button
 										className="btn ms-2 my-auto"
 										onClick={() => dispatch(KurangiPorsi(id))}
+
 									>
 										<h5 class="fas fa-minus fw-light my -auto"></h5>
 									</button>

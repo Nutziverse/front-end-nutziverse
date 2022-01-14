@@ -4,6 +4,7 @@ import Layout from "../layouting/Layout";
 import { Doughnut } from "react-chartjs-2";
 import "../style/PieChart.css";
 import { Link } from "react-router-dom";
+import { getTracking, getByDate } from "../redux/actions/action.tracking";
 
 import { getMakanan } from "../redux/actions/action.makanan";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,15 +18,28 @@ export default function HomeLogin() {
 	useEffect(() => {
 		dispatch(getUSER());
 		dispatch(getMakanan());
+		dispatch(getTracking());
 	}, [dispatch]);
 	const allMakananState = useSelector((state) => state.allmakananReducer);
+	const HistoryState = useSelector((state) => state.trackingReducer);
+
 	const { allMakanan, loading, error } = allMakananState;
-	console.log(allMakanan);
 	const UserState = useSelector((state) => state.UserReducer);
 	const { User } = UserState;
-	console.log(User);
 
 	const PorsiState = useSelector((state) => state.PorsiReducer);
+	const [persenkalori, setpersen] = useState(0);
+	console.log(persenkalori);
+	useEffect(() => {
+		if (!loading) {
+			let persen =
+				(HistoryState.tracking.tracking.totKalori /
+					User.kaloriYgDibutuhkan.toFixed(0)) *
+				100;
+			setpersen(persen);
+		}
+	}, [persenkalori]);
+	console.log(persenkalori);
 	const StatsProfile = ({ grid, colors, image, nutrisi, angka }) => (
 		<div
 			className={grid + " shadow d-flex flex-column"}
@@ -54,7 +68,8 @@ export default function HomeLogin() {
 				let fontSize = (height / 160).toFixed(2);
 				ctx.font = fontSize + "em sans-serif";
 				ctx.textBaseline = "top";
-				let text = "80%",
+				console.log(persenkalori);
+				let text = `${persenkalori}%`,
 					textX = Math.round((width - ctx.measureText(text).width) / 2),
 					textY = height / 2;
 				ctx.fillText(text, textX, textY);
@@ -87,13 +102,13 @@ export default function HomeLogin() {
 					colors.push(gradient);
 				}
 			}
-			console.log(colors);
 			gradient.addColorStop(0, "#4FBAF0");
 			gradient.addColorStop(0.5, "#4FBAF0");
 			gradient.addColorStop(1, "#0084CD");
 		}
 		return [gradient, gradient2];
 	}
+	console.log(HistoryState);
 	const data = {
 		labels: ["kalori anda"],
 		datasets: [
@@ -170,7 +185,9 @@ export default function HomeLogin() {
 		responsive: true,
 		maintainAspectRatio: true,
 	};
+
 	// end of chart js
+
 	return (
 		<Layout>
 			<div className="container">
@@ -212,9 +229,14 @@ export default function HomeLogin() {
 								<div className="col-6 col-md-7 col-lg-4 d-flex justify-content-evenly justify-content-lg-end mmt-0 mt-md-4 ">
 									<div>
 										<h5 className="text-danger">Dibutuhkan</h5>
-										<h5>{User.kaloriYgDibutuhkan} Kkal</h5>
+										<h5>
+											{loading ? 0 : User.kaloriYgDibutuhkan.toFixed(0)} Kkal
+										</h5>
 										<h5 className="text-primary mt-5">Terpenuhi</h5>
-										<h5>1900 Kkal</h5>
+										<h5>
+											{loading ? 0 : HistoryState.tracking.tracking.totKalori}{" "}
+											Kkal
+										</h5>
 									</div>
 								</div>
 							</div>
@@ -223,7 +245,9 @@ export default function HomeLogin() {
 							<div className="custom-row h-100">
 								<StatsProfile
 									grid={"item-1"}
-									angka={200}
+									angka={
+										loading ? 0 : HistoryState.tracking.totKarbohidrat + " gr"
+									}
 									colors={"#FFECB3"}
 									image={
 										"https://cdn-icons-png.flaticon.com/128/575/575435.png"
@@ -232,7 +256,7 @@ export default function HomeLogin() {
 								></StatsProfile>
 								<StatsProfile
 									grid={"item-2"}
-									angka={200}
+									angka={loading ? 0 : HistoryState.tracking.totProtein + " gr"}
 									colors={"#8CD2F5"}
 									image={
 										"https://cdn-icons-png.flaticon.com/128/1046/1046825.png"
@@ -241,7 +265,7 @@ export default function HomeLogin() {
 								></StatsProfile>
 								<StatsProfile
 									grid={"item-3"}
-									angka={200}
+									angka={loading ? 0 : HistoryState.tracking.totLemak + " gr"}
 									colors={"#F89D89"}
 									image={
 										"https://cdn-icons-png.flaticon.com/128/2553/2553591.png"
@@ -250,7 +274,11 @@ export default function HomeLogin() {
 								></StatsProfile>
 								<StatsProfile
 									grid={"item-4"}
-									angka={200}
+									angka={
+										loading
+											? 0
+											: HistoryState.tracking.tracking.totKarbon + " kg"
+									}
 									colors={"#E1E1E1"}
 									image={
 										"https://cdn-icons-png.flaticon.com/128/1890/1890036.png"

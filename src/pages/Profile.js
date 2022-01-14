@@ -11,7 +11,7 @@ import "../style/card-makanan.css"
 export default function Profile() {
   let token = getCookie("token")
   const dispatch = useDispatch()
-  const profile = useSelector(state => state.userReducer)
+  const profile = useSelector(state => state.UserReducer)
   const {User, loading, error} = profile
 
   useEffect(() => {

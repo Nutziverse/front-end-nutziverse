@@ -7,7 +7,6 @@ import { getByDate, getTracking } from "../redux/actions/action.tracking";
 import Layout from "../layouting/Layout";
 import MakananModal from "../components/MakananModal";
 import "../style/card-makanan.css";
-import { showModal } from "../redux/actions/action.modal";
 import TrackingCard from "../components/TrackingCard";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
@@ -69,7 +68,7 @@ export default function TrackingKarbon() {
               <button className="btn bg-transparent text-decoration-none border-0"><i className="fas fa-chevron-left"></i></button>
             </div>
             <div className="col-11">
-              <h5 className="fw-bold">Tracking Nutrisi</h5>
+              <h5 className="fw-bold">Tracking Karbon</h5>
             </div>
           </div>
         </div>
@@ -156,7 +155,6 @@ export default function TrackingKarbon() {
 }
 
 const TrackingSection = ({ makanan }) => {
-  const dispatch = useDispatch();
 
   return (
     <div className="container">
@@ -166,17 +164,17 @@ const TrackingSection = ({ makanan }) => {
             <div className="col-12" key={`col-${index}`}>
               <div
                 className="pointer"
-                onClick={() => dispatch(showModal(el.makananID._id))}
                 key={`onclick-${index}`}
               >
                 <TrackingCard
                   image={el.makananID.image}
                   alt_image={el.makananID.makanan}
-                  makanan={el.makananID.makanan}
+                  namamakanan={el.makananID.makanan}
                   infoporsi={el.makananID.porsi}
-                  kuantitas={el.porsi}
+                  porsirekomendasi={el.porsi}
                   modals={true}
                   key={index}
+                  id={el.makananID._id}
                 ></TrackingCard>
               </div>
             </div>

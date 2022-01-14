@@ -20,21 +20,8 @@ export function getCookie(cname) {
 	return "";
 }
 
-function checkCookie() {
-	let user = getCookie("token");
-	if (user != "") {
-		alert("Welcome again " + user);
-	} else {
-		user = prompt("Please enter your name:", "");
-		if (user != "" && user != null) {
-			setCookie("token", user, 365);
-		}
-	}
-}
-
 export const addMakanan = (MID) => {
 	const items = localStorage.getItem("pilih_makanan") || [];
-
 	const data = {
 		makananID: MID,
 		porsi: 1,
@@ -63,7 +50,7 @@ export const removeMakanan = (MID) => {
 			items[index].porsi -= 1;
 			localStorage.setItem("pilih_makanan", JSON.stringify(items));
 		} else {
-			let remove = items.splice(index, 1);
+			items.splice(index, 1);
 			localStorage.setItem("pilih_makanan", JSON.stringify(items));
 		}
 	}

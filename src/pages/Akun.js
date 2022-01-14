@@ -6,7 +6,6 @@ import { getCookie } from "../helpers";
 import Layout from "../layouting/Layout";
 import { getAkun } from "../redux/actions/action.akun";
 import { Navigate } from "react-router-dom";
-import Button from "../components/Button";
 import { getCookie } from "../helpers";
 import "../style/profile.css";
 import NotFound from "./NotFound";
@@ -102,4 +101,5 @@ export default function Akun() {
       ) : null}
     </Layout>
   );
+
 }

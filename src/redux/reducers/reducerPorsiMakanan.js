@@ -23,7 +23,7 @@ const PorsiReducer = (state = initialState, action) => {
 					state[index1].porsi -= 1;
 					localStorage.setItem("pilih_makanan", JSON.stringify(state));
 				} else {
-					let remove = state.splice(index1, 1);
+					state.splice(index1, 1);
 					localStorage.setItem("pilih_makanan", JSON.stringify(state));
 				}
 			}

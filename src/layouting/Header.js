@@ -3,18 +3,11 @@ import Button from "../components/Button";
 import { getCookie } from "../helpers";
 import logo_nutziverse from "../images/logo_nutziverse.png";
 import "../style/header.css";
-import {
-	Link,
-	useMatch,
-	useResolvedPath,
-	useLocation,
-	useNavigate,
-} from "react-router-dom";
+import { Link, useMatch, useResolvedPath, useLocation } from "react-router-dom";
 
 export default function Header() {
 	let location = useLocation();
 
-	const navigate = useNavigate();
 	function WebLink({ children, to, ...props }) {
 		let resolved = useResolvedPath(to);
 		let match = useMatch({ path: resolved.pathname, end: true });

@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import TrackingCard from "../components/TrackingCard";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import "../style/historykarbon.css";
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -158,7 +159,7 @@ export default function KeranjangMakanan() {
 	const History = useSelector((state) => state.ToHistory);
 	console.log(History);
 	function Findporsi(ID) {
-		let porsi = PorsiState.filter((data) => data.makananID == ID);
+		let porsi = PorsiState.filter((data) => data.makananID === ID);
 		if (porsi.length > 0) {
 			porsi = porsi[0].porsi;
 			return porsi;
@@ -170,14 +171,12 @@ export default function KeranjangMakanan() {
 	let { keranjang } = KeranjangState;
 	let DataKeranjang = keranjang.data;
 	let Loading = KeranjangState.loading;
-	const [proteins, setProteins] = useState(0);
 	let Totalprotein,
 		Totallemak,
 		Totalkarbohidrat,
 		Totalkarbon,
 		Totalkalori = [];
 
-	let ar = [1, 2];
 	function getData() {
 		if (DataKeranjang.length !== jumlah.length) {
 			let distance = DataKeranjang.length - jumlah.length;
@@ -368,20 +367,17 @@ export default function KeranjangMakanan() {
 		return persenkalori;
 	}
 
-	let temp_kalori = 0;
 	let postkalori = Totalkalori;
 	let postkarbon = Totalkarbon;
 	let postmakanan = PorsiState;
 
 	if (!Loading) {
 		getData();
-		temp_kalori = kalori(Totalkalori, 500);
 		postkalori = Totalkalori;
 		postkarbon = Totalkarbon;
 		postmakanan = PorsiState;
 	}
-	// let status = false;
-	let [status, setstatus] = useState(false);
+	// let status = false;;
 	useEffect(() => {
 		dispatch(getKeranjang(id));
 	}, [dispatch]);

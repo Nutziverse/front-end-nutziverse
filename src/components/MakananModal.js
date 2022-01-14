@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addMakanan } from "../helpers";
 import { getMakananByID } from "../redux/actions/action.makanan";
 import { closeModal } from "../redux/actions/action.modal";
 import { TambahPorsi } from "../redux/actions/actionPorsiMakanan";
@@ -152,7 +151,10 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 							to="/pilih-makanan/detail"
 							className="btn btn-primary"
 							disabled={loading}
-							onClick={() => dispatch(TambahPorsi(makanan._id))}
+							onClick={() => {
+								dispatch(closeModal())
+								dispatch(TambahPorsi(makanan._id))
+							}}
 						>
 							Pilih
 						</Link>

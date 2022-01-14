@@ -76,6 +76,13 @@ export default function Header() {
                 </h3>
               </Link>
             </div>
+            <div className="col-3">
+              <Link to="/profile">
+                <h3 className="m-0">
+                  <i className="far fa-cloud-meatball"></i>
+                </h3>
+              </Link>
+            </div>
           </div>
         </div>
       </nav>

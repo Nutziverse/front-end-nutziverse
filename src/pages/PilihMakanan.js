@@ -66,7 +66,7 @@ export default function PilihMakanan() {
         </div>
 
         <div className="container">
-          <div className="row">
+          <div className="row gy-3">
             {!loading
               ? filterMakanan.length > 0
                 ? filterMakanan.map((el, index) => {

@@ -25,7 +25,6 @@ export default function TrackingKarbon() {
 
   const { tracking, loading, error } = trackingState;
 
-  console.log(trackingState);
   function convert(str) {
     let date = str;
 		let mnth = ("0" + (date.getMonth() + 1)).slice(-2);
@@ -122,7 +121,7 @@ export default function TrackingKarbon() {
           </div>
         </div>
 
-        {loading || error ? (
+        {loading ? (
           <div className="container">
             <h1>Loading ...</h1>
           </div>

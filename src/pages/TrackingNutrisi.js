@@ -5,7 +5,7 @@ import { getByDate, getTracking } from "../redux/actions/action.tracking";
 import TrackingCard from "../components/TrackingCard";
 import MakananModal from "../components/MakananModal";
 import "../style/card-makanan.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -34,6 +34,7 @@ ChartJS.register(
 
 export default function TrackingNutrisi() {
   const token = getCookie("token")
+  const Navigate = useNavigate()
   
   const dispatch = useDispatch();
   const trackingState = useSelector((state) => state.trackingReducer);
@@ -205,15 +206,16 @@ export default function TrackingNutrisi() {
   }, [dispatch, hidden, selectedDate, state]);
   
   if(!token) {
-    return <Navigate to="/unauthorized" />
+    Navigate("/unauthorized")
   }
+
   return (
     <Layout>
       <section className="my-5">
         <div className="container pb-2">
           <div className="row justify-content-around align-items-center text-center">
             <div className="col-1 d-lg-none">
-              <button className="btn bg-transparent text-decoration-none border-0"><i className="fas fa-chevron-left"></i></button>
+              <button className="btn bg-transparent text-decoration-none border-0" onClick={() => Navigate(-1)}><i className="fas fa-chevron-left"></i></button>
             </div>
             <div className="col-11">
               <h5 className="fw-bold">Tracking Nutrisi</h5>

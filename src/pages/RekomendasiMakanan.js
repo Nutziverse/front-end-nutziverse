@@ -6,6 +6,7 @@ import { getMakanan } from "../redux/actions/action.makanan";
 import { getRekomendasi } from "../redux/actions/action.rekomendasi";
 import Layout from "../layouting/Layout";
 import { Link } from "react-router-dom";
+import MakananModal from "../components/MakananModal";
 
 export default function RekomendasiMakanan() {
 	const dispatch = useDispatch();
@@ -192,12 +193,13 @@ export default function RekomendasiMakanan() {
 								</div>
 
 								<div className="d-flex">
-									<button
+									<Link
 										onClick={() => setlocal(sarapan[6], sarapan[5])}
 										className="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4"
+										to="/pilih-makanan/detail"
 									>
 										Pilih
-									</button>
+									</Link>
 								</div>
 							</div>
 						</div>
@@ -352,6 +354,7 @@ export default function RekomendasiMakanan() {
 							</div>
 						</div>
 					</div>
+					<MakananModal></MakananModal>
 				</div>
 			) : null}
 		</Layout>

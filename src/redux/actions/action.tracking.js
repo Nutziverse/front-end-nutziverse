@@ -1,14 +1,14 @@
 import axios from "axios";
 import { getCookie } from "../../helpers";
 const API_URL = process.env.REACT_APP_API_URL
-const accessToken = getCookie("token")
 
 export const getTracking = () => {
+  const accessToken = getCookie("token")
   return async dispatch => {
     dispatch({
       type: "GET_TRACKING_REQUEST"
     })
-
+    
     try {
       const authAxios = new axios.create({
         baseURL: API_URL,
@@ -31,13 +31,14 @@ export const getTracking = () => {
 }
 
 export const getByDate = (date) => {
+  const accessToken = getCookie("token")
   return async dispatch => {
     dispatch({
       type: "GET_TRACKING_REQUEST"
     })
-  
+    
     try {
-  
+      
       const { data } = await axios.get(`${API_URL}/tracking/${date}`, {
         headers: {
           'Authorization': `Bearer ${accessToken}`,

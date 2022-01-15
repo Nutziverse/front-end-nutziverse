@@ -19,8 +19,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getKeranjang } from "../redux/actions/action.keranjang";
 import Layout from "../layouting/Layout";
 import { Post_data_to_history } from "../redux/actions/actions.tohistory";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { GetPorsi } from "../redux/actions/actionPorsiMakanan";
 import { getTracking } from "../redux/actions/action.tracking";
+
 
 ChartJS.register(
 	CategoryScale,
@@ -149,7 +151,7 @@ export default function KeranjangMakanan() {
 			},
 		},
 	};
-	let local = localStorage.getItem("pilih_makanan");
+	let local = localStorage.getItem("pilih_makanan") || "[]";
 	local = JSON.parse(local);
 	let id = [];
 	local.map((data) => id.push(data.makananID));
@@ -157,9 +159,9 @@ export default function KeranjangMakanan() {
 	const dispatch = useDispatch();
 
 	const KeranjangState = useSelector((state) => state.keranjangReducer);
-	const PorsiState = useSelector((state) => state.PorsiReducer);
-	const History = useSelector((state) => state.ToHistory);
-	console.log(History);
+	const Porsi = useSelector((state) => state.PorsiReducer);
+	const PorsiState = Porsi.local;
+
 	function Findporsi(ID) {
 		let porsi = PorsiState.filter((data) => data.makananID === ID);
 		if (porsi.length > 0) {
@@ -213,7 +215,6 @@ export default function KeranjangMakanan() {
 		Totalprotein = Totalprotein.toFixed(2);
 		Totalkalori = Totalkalori.toFixed(2);
 		Totalkarbon = Totalkarbon.toFixed(2);
-		console.log(Totalkarbon);
 	}
 
 	const data = (karbohidrat, protein, lemak) => ({
@@ -382,6 +383,8 @@ export default function KeranjangMakanan() {
 	// let status = false;;
 	useEffect(() => {
 		dispatch(getKeranjang(id));
+		dispatch(GetPorsi());
+		console.log(PorsiState);
 	}, [dispatch]);
 
 	const handleSelesai = (postmakanan, postkalori, postkarbon) => {
@@ -417,6 +420,11 @@ export default function KeranjangMakanan() {
 									></TrackingCard>
 								</>
 							))}
+							<div className="d-flex justify-content-center mt-4">
+								<Link to="/pilih-makanan" className="btn btn-danger">
+									Tambah Makanan
+								</Link>
+							</div>
 						</div>
 						<div className="col-12 col-lg-6 d-flex flex-column py-5">
 							<div
@@ -446,17 +454,16 @@ export default function KeranjangMakanan() {
 								<Bar data={dataKalori2()} options={config2} id="items-2"></Bar>
 							</div>
 							<div className="d-flex justify-content-center mt-5">
-								<button
-									className="btn btn-danger"
-									onClick={() =>
-										// dispatch(
-										// 	Post_data_to_history(postmakanan, postkalori, postkarbon)
-										// 	)
-										handleSelesai(postmakanan, postkalori, postkarbon)
-									}
-								>
-									Selesai
-								</button>
+								{local.length > 0 ? (
+									<button
+										className="btn btn-danger"
+										onClick={() =>
+											handleSelesai(postmakanan, postkalori, postkarbon)
+										}
+									>
+										Selesai
+									</button>
+								) : null}
 							</div>
 
 							{/* <div className="custom-rows">

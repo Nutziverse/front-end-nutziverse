@@ -148,7 +148,7 @@ export default function KeranjangMakanan() {
 			},
 		},
 	};
-	let local = localStorage.getItem("pilih_makanan");
+	let local = localStorage.getItem("pilih_makanan") || "[]";
 	local = JSON.parse(local);
 	let id = [];
 	local.map((data) => id.push(data.makananID));
@@ -444,17 +444,16 @@ export default function KeranjangMakanan() {
 								<Bar data={dataKalori2()} options={config2} id="items-2"></Bar>
 							</div>
 							<div className="d-flex justify-content-center mt-5">
-								<button
-									className="btn btn-danger"
-									onClick={() =>
-										// dispatch(
-										// 	Post_data_to_history(postmakanan, postkalori, postkarbon)
-										// 	)
-										handleSelesai(postmakanan, postkalori, postkarbon)
-									}
-								>
-									Selesai
-								</button>
+								{local.length > 0 ? (
+									<button
+										className="btn btn-danger"
+										onClick={() =>
+											handleSelesai(postmakanan, postkalori, postkarbon)
+										}
+									>
+										Selesai
+									</button>
+								) : null}
 							</div>
 
 							{/* <div className="custom-rows">

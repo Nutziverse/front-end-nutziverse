@@ -25,9 +25,6 @@ export default function HomeLogin() {
 	const UserState = useSelector((state) => state.UserReducer);
 	const UserLoading = UserState.loading;
 	const { User } = UserState;
-
-	const [persenkalori, setpersen] = useState(0);
-	console.log(persenkalori);
 	const StatsProfile = ({ grid, colors, image, nutrisi, angka }) => (
 		<div
 			className={grid + " shadow d-flex flex-column"}
@@ -57,7 +54,7 @@ export default function HomeLogin() {
 		datasets: [
 			{
 				label: "# of Votes",
-				data: [kalori, maxkalori - kalori < 0 ? 0 : 100],
+				data: [kalori, maxkalori - kalori < 0 ? 0 : maxkalori - kalori],
 				backgroundColor: ["#1AA7EC", "transparent"],
 
 				borderColor: ["#1AA7EC", "transparent"],
@@ -117,19 +114,11 @@ export default function HomeLogin() {
 		dispatch(getUSER());
 		dispatch(getMakanan());
 		dispatch(getTracking());
-		if (!loading && HistoryState.tracking && HistoryState.tracking.tracking) {
-			let persen =
-				(HistoryState.tracking.tracking.totKalori /
-					User.kaloriYgDibutuhkan.toFixed(0)) *
-				100;
-			setpersen(persen.toFixed(1));
-			console.log(persenkalori);
-		} else setpersen(0);
-	}, [dispatch, persenkalori, loading]);
+	}, [dispatch, UserLoading]);
 	console.log(HistoryState);
 	return (
 		<Layout>
-			{loading ? null : (
+			{UserLoading ? null : (
 				<div className="container">
 					<div
 						className="mt-4 rounded d-flex justify-content-between main-bg"
@@ -182,7 +171,27 @@ export default function HomeLogin() {
 											/>
 											<Doughnut data={data1} options={options1} id="stacked" />
 											<div id="stacked" className="m-auto">
-												<h1>{persenkalori > 100 ? 100 : persenkalori} %</h1>
+												{UserLoading ? (
+													<h1>0 %</h1>
+												) : HistoryState.tracking &&
+												  HistoryState.tracking.tracking ? (
+													<h1>
+														{(
+															(HistoryState.tracking.tracking.totKalori /
+																User.kaloriYgDibutuhkan.toFixed(0)) *
+															100
+														).toFixed(0)}{" "}
+														%
+													</h1>
+												) : (
+													<h1>0 %</h1>
+												)}
+												{/* {HistoryState.tracking &&
+												HistoryState.tracking.tracking ? (
+													<h1>{persenkalori > 100 ? 100 : persenkalori} %</h1>
+												) : (
+													<h1>0 %</h1>
+												)} */}
 											</div>
 										</div>
 									</div>
@@ -215,7 +224,8 @@ export default function HomeLogin() {
 											loading
 												? 0
 												: HistoryState.tracking
-												? HistoryState.tracking.totKarbohidrat.toFixed(1)
+												? HistoryState.tracking.totKarbohidrat.toFixed(1) +
+												  " gr"
 												: 0 + " gr"
 										}
 										colors={"#FFECB3"}
@@ -230,7 +240,7 @@ export default function HomeLogin() {
 											loading
 												? 0
 												: HistoryState.tracking
-												? HistoryState.tracking.totProtein.toFixed(1)
+												? HistoryState.tracking.totProtein.toFixed(1) + " gr"
 												: 0 + " gr"
 										}
 										colors={"#8CD2F5"}
@@ -245,7 +255,7 @@ export default function HomeLogin() {
 											loading
 												? 0
 												: HistoryState.tracking
-												? HistoryState.tracking.totLemak.toFixed(1)
+												? HistoryState.tracking.totLemak.toFixed(1) + " gr"
 												: 0 + " gr"
 										}
 										colors={"#F89D89"}
@@ -261,7 +271,8 @@ export default function HomeLogin() {
 												? 0
 												: HistoryState.tracking &&
 												  HistoryState.tracking.tracking
-												? HistoryState.tracking.tracking.totKarbon.toFixed(1)
+												? HistoryState.tracking.tracking.totKarbon.toFixed(1) +
+												  " kg"
 												: 0 + " kg"
 										}
 										colors={"#E1E1E1"}

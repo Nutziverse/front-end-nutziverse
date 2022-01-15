@@ -32,6 +32,8 @@ const PorsiReducer = (state = initialState, action) => {
 			return [...state];
 		case "DELETE_PORSI":
 			localStorage.removeItem("pilih-makanan");
+			state = undefined;
+			initialState = undefined;
 			return [...state];
 		default:
 			return state;

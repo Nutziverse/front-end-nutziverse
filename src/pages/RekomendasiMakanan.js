@@ -15,6 +15,7 @@ export default function RekomendasiMakanan() {
 	}, []);
 	const RekomendasiState = useSelector((state) => state.rekomendasiReducer);
 	const { allRekomendasi } = RekomendasiState;
+	let RekomendasiLoading = RekomendasiState.Loading;
 	const makananState = useSelector((state) => state.allmakananReducer);
 
 	const { Loading } = makananState;
@@ -52,7 +53,7 @@ export default function RekomendasiMakanan() {
 		let porsisarapan = jenis.map((data) =>
 			data.menu.map((jumlah) => jumlah.jumlah)
 		);
-		let idsarapan = rekomendasisarapan.map((data) =>
+		let idsarapan = jenis.map((data) =>
 			data.menu.map((id) => id.idmakanan._id)
 		);
 		return [
@@ -71,20 +72,21 @@ export default function RekomendasiMakanan() {
 	let malam = getnutrisi(rekomendasimalam);
 
 	function setlocal(id, porsi) {
-		id = id[0];
-		porsi = porsi[0];
-		for (let i = 0; i < id.length; i++) {
-			let items = localStorage.getItem("pilih_makanan") || [];
+		let idmakanan = id[0];
+		let porsimakanan = porsi[0];
 
+		for (let i = 0; i < idmakanan.length; i++) {
+			let items = localStorage.getItem("pilih_makanan") || [];
 			let data = {
-				makananID: id[i],
-				porsi: porsi[i],
+				makananID: idmakanan[i],
+				porsi: porsimakanan[i],
 			};
+			console.log(data);
 			if (items.length > 0) {
 				let newData = JSON.parse(items);
-				let index = newData.findIndex((el) => el.makananID === id[i]);
+				let index = newData.findIndex((el) => el.makananID === idmakanan[i]);
 				if (index > -1) {
-					newData[index].porsi += porsi[i];
+					newData[index].porsi += porsimakanan[i];
 				} else {
 					newData.push(data);
 				}
@@ -92,7 +94,6 @@ export default function RekomendasiMakanan() {
 			} else {
 				localStorage.setItem("pilih_makanan", JSON.stringify([data]));
 			}
-			data = {};
 		}
 	}
 
@@ -124,7 +125,7 @@ export default function RekomendasiMakanan() {
 	);
 	return (
 		<Layout>
-			{!Loading ? (
+			{!Loading && !RekomendasiLoading ? (
 				<div className="container mt-4 mb-4">
 					<h3 className="fw-bold">Rekomendasi Makanan</h3>
 					<div id="sarapan">
@@ -157,7 +158,6 @@ export default function RekomendasiMakanan() {
 								<div>
 									<h4 className="text-center">Total</h4>
 									<div className="d-flex justify-content-evenly mx-auto mt-3">
-										{}
 										<Statsrekom
 											colors={"red"}
 											nama={"Kalori"}
@@ -192,18 +192,19 @@ export default function RekomendasiMakanan() {
 								</div>
 
 								<div className="d-flex">
-									<button
+									<Link
+										to="/pilih-makanan/detail"
 										onClick={() => setlocal(sarapan[6], sarapan[5])}
 										className="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4"
 									>
 										Pilih
-									</button>
+									</Link>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div id="makansiang">
-						<h4 className="mt-5">Sarapan</h4>
+						<h4 className="mt-5">Makan Siang</h4>
 						<h5 className="fw-light">
 							Rekomendasi beberapa menu sarapan untuk anda
 						</h5>
@@ -267,18 +268,19 @@ export default function RekomendasiMakanan() {
 								</div>
 
 								<div className="d-flex">
-									<button
+									<Link
+										to="/pilih-makanan/detail"
 										onClick={() => setlocal(siang[6], siang[5])}
 										className="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4"
 									>
 										Pilih
-									</button>
+									</Link>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div id="makanmalam">
-						<h4 className="mt-5">Sarapan</h4>
+						<h4 className="mt-5">Makan Malam</h4>
 						<h5 className="fw-light">
 							Rekomendasi beberapa menu sarapan untuk anda
 						</h5>
@@ -342,12 +344,13 @@ export default function RekomendasiMakanan() {
 								</div>
 
 								<div className="d-flex">
-									<button
+									<Link
+										to="/pilih-makanan/detail"
 										onClick={() => setlocal(malam[6], malam[5])}
 										className="btn mx-auto btn-danger text-white mt-3 rounded-08 py-2 px-4"
 									>
 										Pilih
-									</button>
+									</Link>
 								</div>
 							</div>
 						</div>

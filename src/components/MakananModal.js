@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getMakananByID } from "../redux/actions/action.makanan";
 import { closeModal } from "../redux/actions/action.modal";
 import { TambahPorsi } from "../redux/actions/actionPorsiMakanan";
 import "../style/card-makanan.css";
 import { getCookie } from "../helpers";
-import { Button } from "bootstrap";
 
 export default function MakananModal({ pilih = false, karbon = false }) {
 	let token = getCookie("token");

@@ -21,7 +21,9 @@ export default function HomeLogin() {
 	const HistoryState = useSelector((state) => state.trackingReducer);
 
 	const { allMakanan, loading } = allMakananState;
+
 	const UserState = useSelector((state) => state.UserReducer);
+	const UserLoading = UserState.loading;
 	const { User } = UserState;
 
 	const [persenkalori, setpersen] = useState(0);
@@ -55,7 +57,7 @@ export default function HomeLogin() {
 		datasets: [
 			{
 				label: "# of Votes",
-				data: [kalori, maxkalori - kalori],
+				data: [kalori, maxkalori - kalori < 0 ? 0 : 100],
 				backgroundColor: ["#1AA7EC", "transparent"],
 
 				borderColor: ["#1AA7EC", "transparent"],
@@ -115,13 +117,14 @@ export default function HomeLogin() {
 		dispatch(getUSER());
 		dispatch(getMakanan());
 		dispatch(getTracking());
-		if (!loading && HistoryState.tracking.tracking && HistoryState.tracking) {
+		if (!loading && HistoryState.tracking && HistoryState.tracking.tracking) {
 			let persen =
 				(HistoryState.tracking.tracking.totKalori /
 					User.kaloriYgDibutuhkan.toFixed(0)) *
 				100;
 			setpersen(persen.toFixed(1));
-		}
+			console.log(persenkalori);
+		} else setpersen(0);
 	}, [dispatch, persenkalori, loading]);
 	console.log(HistoryState);
 	return (
@@ -164,7 +167,7 @@ export default function HomeLogin() {
 										<div className="div1">
 											<Doughnut
 												data={
-													loading
+													UserLoading
 														? data(0, 100)
 														: HistoryState.tracking &&
 														  HistoryState.tracking.tracking
@@ -179,7 +182,7 @@ export default function HomeLogin() {
 											/>
 											<Doughnut data={data1} options={options1} id="stacked" />
 											<div id="stacked" className="m-auto">
-												<h1>{persenkalori} %</h1>
+												<h1>{persenkalori > 100 ? 100 : persenkalori} %</h1>
 											</div>
 										</div>
 									</div>
@@ -187,7 +190,8 @@ export default function HomeLogin() {
 										<div>
 											<h5 className="text-danger">Dibutuhkan</h5>
 											<h5>
-												{loading ? 0 : User.kaloriYgDibutuhkan.toFixed(0)} Kkal
+												{UserLoading ? 0 : User.kaloriYgDibutuhkan.toFixed(0)}{" "}
+												Kkal
 											</h5>
 											<h5 className="text-primary mt-5">Terpenuhi</h5>
 											<h5>
@@ -272,10 +276,10 @@ export default function HomeLogin() {
 					</div>
 					<div className=" mt-4">
 						<div className=" my-2 d-flex justify-content-between">
-							<h4>Resep</h4>
+							{/* <h4>Resep</h4>
 							<Link className="text-decoration-none" to="/resep">
 								Lihat Semua
-							</Link>
+							</Link> */}
 						</div>
 					</div>
 

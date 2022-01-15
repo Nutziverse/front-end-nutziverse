@@ -22,13 +22,6 @@ export default function PilihMakanan() {
     setfilterMakanan(filter);
   };
 
-	const searchMakanan = () => {
-		let filter = allMakanan.filter((item) =>
-			item.makanan.toLowerCase().includes(input)
-		);
-		setfilterMakanan(filter);
-	};
-
 	useEffect(() => {
 		dispatch(getMakanan());
 	}, [dispatch]);

@@ -18,7 +18,7 @@ export default function Profile() {
 	}, [dispatch]);
 	const Navigate = useNavigate();
 	if (!token || error) {
-		return Navigate("/unauthorized");
+		Navigate("/unauthorized");
 	}
 
 	return (

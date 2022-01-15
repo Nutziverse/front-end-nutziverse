@@ -44,7 +44,7 @@ export default function PilihMakanan() {
             </div>
             <div className="col-2 col-md-1">
               <Link to="/pilih-makanan/detail" className="btn p-0 text-primary fs-2">
-                <img src={eat} />
+                <img src={eat} alt="icon piring dan sendok" />
               </Link>
             </div>
           </div>

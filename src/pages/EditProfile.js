@@ -175,9 +175,11 @@ export default function EditProfile() {
 							</select>
 						</div>
 					</div>
-					<Button type="submit" btnclass="btn btn-primary mt-4 mb-5 float-end">
-						Simpan
-					</Button>
+					<div className="text-end">
+						<Button type="submit" btnclass="btn btn-primary mt-4 mb-5">
+							Simpan
+						</Button>
+					</div>
 				</form>
 			</div>
 		</Layout>

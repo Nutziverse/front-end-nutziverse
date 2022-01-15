@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUSER } from "../redux/actions/action.User";
 import "../style/card-makanan.css";
 import CardResep from "../components/CardResep";
+import { getResep } from "../redux/actions/action.resep";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function HomeLogin() {
@@ -29,6 +30,8 @@ export default function HomeLogin() {
 
 	const resepState = useSelector((state) => state.ResepReducer);
   const { resep } = resepState;
+	const resepLoading = resepState.loading
+	console.log(resepState)	
 
 	const [persenkalori, setpersen] = useState(0);
   
@@ -121,8 +124,9 @@ export default function HomeLogin() {
 		dispatch(getUSER());
 		dispatch(getMakanan());
 		dispatch(getTracking());
+		dispatch(getResep())
 	}, [dispatch, UserLoading]);
-	console.log(HistoryState);
+	
 	return (
 		<Layout>
 			{UserLoading ? null : (
@@ -352,7 +356,7 @@ export default function HomeLogin() {
 						</div>
 
 						<div className="row justify-content-center gy-3">
-							{resep.slice(-3).map((data) => (
+							{ !resepLoading ? resep.slice(-3).map((data) => (
 								<div className="col-12 col-md-4">
 									<Link className="pointer text-decoration-none" to={`/resep/detail/${data._id}`}>
 										<CardResep
@@ -364,7 +368,7 @@ export default function HomeLogin() {
 										></CardResep>
 									</Link>
 								</div>
-							))}
+							)): null}
 						</div>
 					</div>
 				</div>

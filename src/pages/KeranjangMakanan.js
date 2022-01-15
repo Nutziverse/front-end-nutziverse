@@ -384,7 +384,6 @@ export default function KeranjangMakanan() {
 	useEffect(() => {
 		dispatch(getKeranjang(id));
 		dispatch(GetPorsi());
-		console.log(PorsiState);
 	}, [dispatch]);
 
 	const handleSelesai = (postmakanan, postkalori, postkarbon) => {

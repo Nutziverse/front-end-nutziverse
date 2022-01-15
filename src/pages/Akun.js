@@ -25,7 +25,7 @@ export default function Akun() {
   
   return (
     <Layout>
-      {!loading ? (
+      {!loading && akun ? (
         akun.email ? (
           <AkunGoogle email={akun.email}></AkunGoogle>
         ) : (

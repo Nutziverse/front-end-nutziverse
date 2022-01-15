@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCookie } from "../helpers";
 import Layout from "../layouting/Layout";
 import { getUSER } from "../redux/actions/action.User";
@@ -16,9 +16,9 @@ export default function Profile() {
 	useEffect(() => {
 		dispatch(getUSER());
 	}, [dispatch]);
-
+	const Navigate = useNavigate();
 	if (!token || error) {
-		return <Navigate to="/unauhorized" />;
+		return Navigate("/unauthorized");
 	}
 
 	return (

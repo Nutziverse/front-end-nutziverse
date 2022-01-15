@@ -9,46 +9,66 @@ import { getMakanan } from "../redux/actions/action.makanan";
 import { showModal } from "../redux/actions/action.modal";
 import "../style/card-makanan.css";
 import eat from "../images/eat.png";
+import { getCookie } from "../helpers";
+import { useNavigate } from "react-router-dom";
 
 export default function PilihMakanan() {
-  const dispatch = useDispatch();
-  const allMakananState = useSelector((state) => state.allmakananReducer);
-  const { allMakanan, loading, error } = allMakananState;
-  const [input, setinput] = useState("");
-  const [filterMakanan, setfilterMakanan] = useState([]);
+	const Navigate = useNavigate();
+	let token = getCookie("token");
+	const dispatch = useDispatch();
+	const allMakananState = useSelector((state) => state.allmakananReducer);
+	const { allMakanan, loading, error } = allMakananState;
+	const [input, setinput] = useState("");
+	const [filterMakanan, setfilterMakanan] = useState([]);
 
-  const searchMakanan = () => {
-    let filter = allMakanan.filter((item) => item.makanan.toLowerCase().includes(input));
-    setfilterMakanan(filter);
-  };
-
+	const searchMakanan = () => {
+		let filter = allMakanan.filter((item) =>
+			item.makanan.toLowerCase().includes(input)
+		);
+		setfilterMakanan(filter);
+	};
 	useEffect(() => {
 		dispatch(getMakanan());
 	}, [dispatch]);
-  
-  return (
-    <Layout>
-      <section className="py-2">
-        <div className="container py-5">
-          <div className="row align-items-center">
-            <div className="col-12 col-md-6 text-center text-md-start mb-4">
-              <h5 className="fw-bold">Pilih Makanan</h5>
-            </div>
-            <div className="col-10 col-md-5">
-              <div class="input-group">
-                <input onChange={(e) => setinput(e.target.value.toLowerCase())} type="text" class="form-control" placeholder="Cari . . ." aria-label="Recipient's username" aria-describedby="button-addon2" />
-                <button class="btn btn-outline-primary" type="button" id="button-addon2" onClick={() => searchMakanan()}>
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
-            <div className="col-2 col-md-1">
-              <Link to="/pilih-makanan/detail" className="btn p-0 text-primary fs-2">
-                <img src={eat} alt="icon piring dan sendok" />
-              </Link>
-            </div>
-          </div>
-        </div>
+
+	return (
+		<Layout>
+			<section className="py-2">
+				<div className="container py-5">
+					<div className="row align-items-center">
+						<div className="col-12 col-md-6 text-center text-md-start mb-4">
+							<h5 className="fw-bold">Pilih Makanan</h5>
+						</div>
+						<div className="col-10 col-md-5">
+							<div class="input-group">
+								<input
+									onChange={(e) => setinput(e.target.value.toLowerCase())}
+									type="text"
+									class="form-control"
+									placeholder="Cari . . ."
+									aria-label="Recipient's username"
+									aria-describedby="button-addon2"
+								/>
+								<button
+									class="btn btn-outline-primary"
+									type="button"
+									id="button-addon2"
+									onClick={() => searchMakanan()}
+								>
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+						<div className="col-2 col-md-1">
+							<Link
+								to="/pilih-makanan/detail"
+								className="btn p-0 text-primary fs-2"
+							>
+								<img src={eat} alt="icon piring dan sendok" />
+							</Link>
+						</div>
+					</div>
+				</div>
 
         <div className="container">
           <div className="row gy-3">
@@ -74,6 +94,7 @@ export default function PilihMakanan() {
                   })
 									: null}
           </div>
+
 					<MakananModal pilih={true}></MakananModal>
         </div>
 			</section>

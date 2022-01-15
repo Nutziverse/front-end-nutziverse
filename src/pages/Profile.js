@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { getCookie } from "../helpers";
 import Layout from "../layouting/Layout";
-import { getUSER } from "../redux/actions/action.User";
+import { getUSER, logout } from "../redux/actions/action.User";
 import "../style/card-makanan.css";
 
 export default function Profile() {
@@ -192,7 +192,7 @@ export default function Profile() {
 							</div>
 						</div>
 					</Link>
-					<Link className="col-12 text-decoration-none text-dark" to="/logout">
+					<Link className="col-12 text-decoration-none text-dark" to="/" onClick={() => dispatch(logout)}>
 						<div className="row align-items-center">
 							<div className="col-10">
 								<h5 className="fw-bold">

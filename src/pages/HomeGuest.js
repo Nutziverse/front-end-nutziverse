@@ -41,7 +41,7 @@ export default function HomeGuest() {
               <div className="mt-11">
                 <h5>Daftar sekarang untuk menikmati fitur-fitur ekslusif kami </h5>
                 <Link to="/sign-up"><Button btnclass="btn btn-danger text-white mt-3 rounded-08 py-2 px-3">Daftar Sekarang</Button></Link>
-                <Link to="/sign-up"><Button btnclass="btn btn-light text-danger mt-3 rounded-08 py-2 px-3 ms-3 d-lg-none">Masuk</Button></Link>
+                <Link to="/sign-in"><Button btnclass="btn btn-light text-danger mt-3 rounded-08 py-2 px-3 ms-3 d-lg-none">Masuk</Button></Link>
               </div>
 
             </div>

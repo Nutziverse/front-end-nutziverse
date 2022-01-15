@@ -87,7 +87,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
                       <small>dan menghasilkan emisi karbon sebesar</small>
                     </p>
                     <h5 className="fw-bold">
-                      {makanan.kaloriMakanan}{" "}
+                      {makanan.karbon}{" "}
                       <small className="text-muted fs-6 fw-normal">
                         kg CO<sup>2</sup>
                       </small>
@@ -105,7 +105,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 												</small>
 											</p>
 											<h5 className="fw-bold">
-												{makanan.kaloriMakanan}{" "}
+												{makanan.karbon}{" "}
 												<small className="text-muted fs-6 fw-normal">
 													kg CO<sup>2</sup>
 												</small>

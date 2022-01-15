@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -10,7 +11,6 @@ import { getTracking } from "../redux/actions/action.tracking";
 import { getMakanan } from "../redux/actions/action.makanan";
 import { useDispatch, useSelector } from "react-redux";
 import { getUSER } from "../redux/actions/action.User";
-import CardResep from "../components/CardResep";
 import "../style/card-makanan.css";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -21,7 +21,9 @@ export default function HomeLogin() {
 	const HistoryState = useSelector((state) => state.trackingReducer);
 
 	const { allMakanan, loading } = allMakananState;
+
 	const UserState = useSelector((state) => state.UserReducer);
+	const UserLoading = UserState.loading;
 	const { User } = UserState;
 
 	const [persenkalori, setpersen] = useState(0);
@@ -49,32 +51,13 @@ export default function HomeLogin() {
 	);
 
 	// chart js
-	const plugins = [
-		{
-			afterDraw: async function (chart) {
-				let width = chart.width,
-					height = chart.height,
-					ctx = chart.ctx;
-
-				ctx.restore();
-				let fontSize = (height / 160).toFixed(2);
-				ctx.font = fontSize + "em sans-serif";
-				ctx.textBaseline = "top";
-				let text = chart.config._config.options.text,
-					textX = Math.round((width - ctx.measureText(text).width) / 2),
-					textY = height / 2;
-				ctx.fillText(text, textX, textY);
-				ctx.save();
-			},
-		},
-	];
 
 	const data = (kalori, maxkalori) => ({
 		labels: ["kalori anda"],
 		datasets: [
 			{
 				label: "# of Votes",
-				data: [kalori, maxkalori - kalori],
+				data: [kalori, maxkalori - kalori < 0 ? 0 : 100],
 				backgroundColor: ["#1AA7EC", "transparent"],
 
 				borderColor: ["#1AA7EC", "transparent"],
@@ -114,7 +97,7 @@ export default function HomeLogin() {
 		maintainAspectRatio: true,
 	};
 
-	const options = (kalori) => ({
+	const options = () => ({
 		rotation: 225,
 		plugins: {
 			legend: {
@@ -128,27 +111,22 @@ export default function HomeLogin() {
 		cutout: "85%",
 		responsive: true,
 		maintainAspectRatio: true,
-		text: kalori + "%",
 	});
-	if (HistoryState.tracking) {
-		console.log("hallo");
-	} else {
-		console.log("APa");
-	}
-	console.log(HistoryState.tracking);
+
 	useEffect(() => {
 		dispatch(getUSER());
 		dispatch(getMakanan());
 		dispatch(getTracking());
-		if (!loading && HistoryState.tracking) {
+		if (!loading && HistoryState.tracking && HistoryState.tracking.tracking) {
 			let persen =
 				(HistoryState.tracking.tracking.totKalori /
 					User.kaloriYgDibutuhkan.toFixed(0)) *
 				100;
 			setpersen(persen.toFixed(1));
-		}
-		console.log(persenkalori);
+			console.log(persenkalori);
+		} else setpersen(0);
 	}, [dispatch, persenkalori, loading]);
+	console.log(HistoryState);
 	return (
 		<Layout>
 			{loading ? null : (
@@ -189,34 +167,38 @@ export default function HomeLogin() {
 										<div className="div1">
 											<Doughnut
 												data={
-													loading
+													UserLoading
 														? data(0, 100)
-														: HistoryState.tracking
+														: HistoryState.tracking &&
+														  HistoryState.tracking.tracking
 														? data(
 																HistoryState.tracking.tracking.totKalori,
 																User.kaloriYgDibutuhkan.toFixed(0)
 														  )
 														: data(0, 100)
 												}
-												options={options(persenkalori)}
-												plugins={plugins}
 												id="stacked1"
+												options={options()}
 											/>
 											<Doughnut data={data1} options={options1} id="stacked" />
+											<div id="stacked" className="m-auto">
+												<h1>{persenkalori > 100 ? 100 : persenkalori} %</h1>
+											</div>
 										</div>
 									</div>
 									<div className="col-6 col-md-7 col-lg-4 d-flex justify-content-evenly justify-content-lg-end mmt-0 mt-md-4 ">
 										<div>
 											<h5 className="text-danger">Dibutuhkan</h5>
 											<h5>
-												{loading ? 0 : User.kaloriYgDibutuhkan.toFixed(0)} Kkal
-												{console.log(User)}
+												{UserLoading ? 0 : User.kaloriYgDibutuhkan.toFixed(0)}{" "}
+												Kkal
 											</h5>
 											<h5 className="text-primary mt-5">Terpenuhi</h5>
 											<h5>
 												{loading
 													? 0
-													: HistoryState.tracking
+													: HistoryState.tracking &&
+													  HistoryState.tracking.tracking
 													? HistoryState.tracking.tracking.totKalori
 													: 0}{" "}
 												Kkal
@@ -277,7 +259,8 @@ export default function HomeLogin() {
 										angka={
 											loading
 												? 0
-												: HistoryState.tracking
+												: HistoryState.tracking &&
+												  HistoryState.tracking.tracking
 												? HistoryState.tracking.tracking.totKarbon.toFixed(1)
 												: 0 + " kg"
 										}
@@ -293,26 +276,10 @@ export default function HomeLogin() {
 					</div>
 					<div className=" mt-4">
 						<div className=" my-2 d-flex justify-content-between">
-							<h4>Resep</h4>
+							{/* <h4>Resep</h4>
 							<Link className="text-decoration-none" to="/resep">
 								Lihat Semua
-							</Link>
-						</div>
-
-						<div className="row">
-							{allMakanan.slice(0, 4).map((data) => (
-								<div className="col-12 col-md-6 col-lg-3">
-									<div className="pointer">
-										<CardResep
-											imageUrl={data.image}
-											kalori={data.kaloriMakanan}
-											karbon={data.karbon}
-											title={data.makanan}
-											key={data._id}
-										></CardResep>
-									</div>
-								</div>
-							))}
+							</Link> */}
 						</div>
 					</div>
 

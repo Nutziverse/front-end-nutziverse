@@ -123,7 +123,7 @@ export default function Header() {
 						<div className="col-3">
 							<MobileLink to="/profile">
 								<h3 className="m-0">
-									<i className="far fa-cloud-meatball"></i>
+									<i className="far fa-user-circle"></i>
 								</h3>
 							</MobileLink>
 						</div>

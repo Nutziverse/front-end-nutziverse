@@ -114,16 +114,16 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 											</h5>
 										</div>
 
-										<p className="mt-4 mb-1">
-											<small>dan menghasilkan emisi karbon sebesar</small>
-										</p>
-										<h5 className="fw-bold">
-											{makanan.kaloriMakanan}{" "}
-											<small className="text-muted fs-6 fw-normal">
-												kg CO<sup>2</sup>
-											</small>
-										</h5>
-									</div>
+                    <p className="mt-4 mb-1">
+                      <small>dan menghasilkan emisi karbon sebesar</small>
+                    </p>
+                    <h5 className="fw-bold">
+                      {makanan.karbon}{" "}
+                      <small className="text-muted fs-6 fw-normal">
+                        kg CO<sup>2</sup>
+                      </small>
+                    </h5>
+                  </div>
 
 									<div className={`row ${karbon ? "" : "d-none"}`}>
 										<div className="col-12 text-center">
@@ -136,7 +136,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 												</small>
 											</p>
 											<h5 className="fw-bold">
-												{makanan.kaloriMakanan}{" "}
+												{makanan.karbon}{" "}
 												<small className="text-muted fs-6 fw-normal">
 													kg CO<sup>2</sup>
 												</small>

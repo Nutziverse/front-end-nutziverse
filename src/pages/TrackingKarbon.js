@@ -56,7 +56,7 @@ export default function TrackingKarbon() {
   }, [dispatch, hidden, selectedDate, state]);
 
   if(!token) {
-    return <Navigate to="/unauhorized" />
+    return <Navigate to="/unauthorized" />
   }
 
   return(
@@ -114,7 +114,7 @@ export default function TrackingKarbon() {
             <div className="card-body">
               <div className="row gy-4 pt-3">
                 <div className="col-12">
-                  <p className="fs-2 mb-0 fw-bold"><span className="fa"><i class="fas fa-cloud-meatball"></i></span> {!loading && !error && tracking.tracking  ? tracking.tracking.totKarbon : 0}</p>
+                  <p className="fs-2 mb-0 fw-bold"><span className="fa"><i class="fas fa-cloud-meatball"></i></span> {!loading && !error && tracking.tracking  ? tracking.tracking.totKarbon.toFixed(2) : 0}</p>
                   <p className="fs-6 fw-medium">kg CO<sup>2</sup></p>
                 </div>
               </div>

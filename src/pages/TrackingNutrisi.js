@@ -81,9 +81,6 @@ export default function TrackingNutrisi() {
   if(lemak > 100) {
     lemak = 100
   }
-console.log(tracking)
-
-  console.log(userState)
 
   // for chart
   const borderRadiusAllCorners = {

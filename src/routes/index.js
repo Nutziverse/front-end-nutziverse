@@ -12,6 +12,8 @@ import TrackingKarbon from "../pages/TrackingKarbon";
 import RekomendasiMakanan from "../pages/RekomendasiMakanan";
 import KeranjangMakanan from "../pages/KeranjangMakanan";
 import NotFound from "../pages/NotFound";
+import Resep from "../pages/Resep";
+import ResepDetail from "../pages/ResepDetail";
 
 export default function Routers() {
   return (
@@ -28,6 +30,8 @@ export default function Routers() {
       <Route path="/pilih-makanan/detail" element={<KeranjangMakanan />}></Route>
       <Route path="/profile" element={<Profile />}></Route>
       <Route path="/karbon" element={<TrackingKarbon />}></Route>
+      <Route path="/resep" element={<Resep />}></Route>
+      <Route path="/resep/detail/:id" element={<ResepDetail />}></Route>
       <Route path="*" element={<NotFound />}></Route>
       <Route path="/unauthorized" element={<NotFound notfound={false}/>}></Route>
     </Routes>

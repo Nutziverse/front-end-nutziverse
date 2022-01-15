@@ -20,3 +20,7 @@
 .card-content {
 	margin-top: 0.3rem;
 }
+
+.card-title h6 {
+	font-weight: 600 !important;
+}

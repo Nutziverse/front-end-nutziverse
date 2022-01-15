@@ -20,6 +20,7 @@ import { getKeranjang } from "../redux/actions/action.keranjang";
 import Layout from "../layouting/Layout";
 import { Post_data_to_history } from "../redux/actions/actions.tohistory";
 import { useNavigate } from "react-router-dom";
+import { getTracking } from "../redux/actions/action.tracking";
 
 ChartJS.register(
 	CategoryScale,
@@ -385,6 +386,7 @@ export default function KeranjangMakanan() {
 
 	const handleSelesai = (postmakanan, postkalori, postkarbon) => {
 		dispatch(Post_data_to_history(postmakanan, postkalori, postkarbon));
+		dispatch(getTracking())
 		Navigate("/tracking-nutrisi");
 	};
 	let token = getCookie("token");

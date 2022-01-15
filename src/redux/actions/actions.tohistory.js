@@ -20,6 +20,8 @@ export const Post_data_to_history = (makanan, kalori, karbon) => {
 					Authorization: `Bearer ${token}`,
 				},
 			});
+			console.log(API_URL);
+			console.log(data);
 			localStorage.removeItem("pilih_makanan");
 			dispatch({
 				type: "POST_DATA_SUCCESS",

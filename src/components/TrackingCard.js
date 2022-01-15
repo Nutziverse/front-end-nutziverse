@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "../style/TrackingCard.css";
 import { useDispatch } from "react-redux";
 import { showModal } from "../redux/actions/action.modal";
-import MakananModal from "../components/MakananModal";
 import { TambahPorsi, KurangiPorsi } from "../redux/actions/actionPorsiMakanan";
 
 export default function TrackingCard({
@@ -24,7 +23,6 @@ export default function TrackingCard({
 					style={{ borderRadius: "20px" }}
 					onClick={() => dispatch(showModal(id))}
 				>
-					<MakananModal></MakananModal>
 					<div className="row w-100">
 						<div className="col-3 col-md-3 ">
 							<img

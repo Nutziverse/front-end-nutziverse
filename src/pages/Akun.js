@@ -5,27 +5,27 @@ import { getCookie } from "../helpers";
 import Layout from "../layouting/Layout";
 import { getAkun } from "../redux/actions/action.akun";
 import "../style/profile.css";
-import NotFound from "./NotFound";
 import AkunGoogle from "./AkunGoogle";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Akun() {
   const token = getCookie("token");
   const dispatch = useDispatch();
+  const Navigate = useNavigate()
   const akunState = useSelector((state) => state.akunReducers);
-  const { akun, loading, error } = akunState;
+  const { akun, loading } = akunState;
 
   useEffect(() => {
     dispatch(getAkun());
   }, [dispatch]);
 
-  if (!token || error) {
-    return <NotFound notfound={false} />;
+  if (!token ) {
+    Navigate("/unauthorized")
   }
   
   return (
     <Layout>
-      {!loading ? (
+      {!loading && akun ? (
         akun.email ? (
           <AkunGoogle email={akun.email}></AkunGoogle>
         ) : (

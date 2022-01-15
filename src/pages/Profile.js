@@ -1,24 +1,25 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getCookie } from "../helpers";
 import Layout from "../layouting/Layout";
-import { getUSER } from "../redux/actions/action.User";
+import { getUSER, logout } from "../redux/actions/action.User";
 import "../style/card-makanan.css";
 
 export default function Profile() {
 	let token = getCookie("token");
 	const dispatch = useDispatch();
 	const profile = useSelector((state) => state.UserReducer);
-	const { User, loading, error } = profile;
+	const { User, loading } = profile;
 
 	useEffect(() => {
 		dispatch(getUSER());
 	}, [dispatch]);
 
-	if (!token || error) {
-		return <Navigate to="/unauhorized" />;
+	const Navigate = useNavigate();
+	if (!token) {
+		Navigate("/unauthorized");
 	}
 
 	return (
@@ -26,7 +27,7 @@ export default function Profile() {
 			<section className="container py-5">
 				<div className="card border-0 shadow-sm">
 					<div class="card-body">
-						{!loading && !error ? (
+						{!loading ? (
 							<div className="row">
 								<div className="col-2">
 									<h1 className="mb-0 text-primary profile-icon">
@@ -192,7 +193,7 @@ export default function Profile() {
 							</div>
 						</div>
 					</Link>
-					<Link className="col-12 text-decoration-none text-dark" to="/logout">
+					<Link className="col-12 text-decoration-none text-dark" to="/" onClick={() => dispatch(logout)}>
 						<div className="row align-items-center">
 							<div className="col-10">
 								<h5 className="fw-bold">

@@ -22,6 +22,12 @@ const UserReducer = (state = initialState, action) => {
 				loading: false,
 				error: action.error,
 			};
+		case "LOGOUT":
+			return {
+				...state,
+				loading: false,
+				User: []
+			}
 		default:
 			return state;
 	}

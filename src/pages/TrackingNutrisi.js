@@ -5,7 +5,7 @@ import { getByDate, getTracking } from "../redux/actions/action.tracking";
 import TrackingCard from "../components/TrackingCard";
 import MakananModal from "../components/MakananModal";
 import "../style/card-makanan.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 
@@ -34,6 +34,7 @@ ChartJS.register(
 
 export default function TrackingNutrisi() {
   const token = getCookie("token")
+  const Navigate = useNavigate()
   
   const dispatch = useDispatch();
   const trackingState = useSelector((state) => state.trackingReducer);
@@ -49,7 +50,7 @@ export default function TrackingNutrisi() {
     User = null
 
   let today = new Date()
-  const { tracking, loading, error } = trackingState;
+  const { tracking, loading } = trackingState;
   let karbohidrat = 0, protein = 0, lemak = 0
   let butuhkarbohidrat = 0, butuhprotein = 0, butuhlemak = 0
 
@@ -81,9 +82,6 @@ export default function TrackingNutrisi() {
   if(lemak > 100) {
     lemak = 100
   }
-console.log(tracking)
-
-  console.log(userState)
 
   // for chart
   const borderRadiusAllCorners = {
@@ -208,15 +206,16 @@ console.log(tracking)
   }, [dispatch, hidden, selectedDate, state]);
   
   if(!token) {
-    return <Navigate to="/unauthorized" />
+    Navigate("/unauthorized")
   }
+
   return (
     <Layout>
       <section className="my-5">
         <div className="container pb-2">
           <div className="row justify-content-around align-items-center text-center">
             <div className="col-1 d-lg-none">
-              <button className="btn bg-transparent text-decoration-none border-0"><i className="fas fa-chevron-left"></i></button>
+              <button className="btn bg-transparent text-decoration-none border-0" onClick={() => Navigate(-1)}><i className="fas fa-chevron-left"></i></button>
             </div>
             <div className="col-11">
               <h5 className="fw-bold">Tracking Nutrisi</h5>
@@ -265,14 +264,14 @@ console.log(tracking)
             <div className="card-body">
               <div className="row gy-4 pt-3">
                 <div className="col-12">
-                  <p className="fs-2 mb-0 fw-bold"><span className="fa"><i className="fas fa-fire"></i></span> {!loading && !error && tracking.tracking  ? tracking.tracking.totKalori : 0}</p>
+                  <p className="fs-2 mb-0 fw-bold"><span className="fa"><i className="fas fa-fire"></i></span> {!loading && tracking.tracking  ? tracking.tracking.totKalori : 0}</p>
                   <p className="fs-6 fw-medium">kkal</p>
                 </div>
 
                 <div className="col-12">
                   <div className="row gy-4">
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totKarbohidrat : 0} <sup className="fs-6 text-white-8 sup">/{butuhkarbohidrat}</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && tracking && tracking.tracking ? tracking.totKarbohidrat : 0} <sup className="fs-6 text-white-8 sup">/{butuhkarbohidrat}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(karbohidrat,100-karbohidrat)} options={config} id="stacked1" />
@@ -281,7 +280,7 @@ console.log(tracking)
                       <p className="fs-6 fw-medium">Karbohidrat</p>
                     </div>
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totProtein : 0} <sup className="fs-6 text-white-8 sup">/{butuhprotein}</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && tracking && tracking.tracking ? tracking.totProtein : 0} <sup className="fs-6 text-white-8 sup">/{butuhprotein}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(protein,100-protein)} options={config} id="stacked1" />
@@ -290,7 +289,7 @@ console.log(tracking)
                       <p className="fs-6 fw-medium">Protein</p>
                     </div>
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totLemak : 0} <sup className="fs-6 text-white-8 sup">/{butuhlemak}</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && tracking && tracking.tracking ? tracking.totLemak : 0} <sup className="fs-6 text-white-8 sup">/{butuhlemak}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(lemak,100-lemak)} options={config} id="stacked1" />
@@ -305,7 +304,7 @@ console.log(tracking)
           </div>
         </div>
 
-        {loading || error ? (
+        {loading ? (
           <div className="container">
             <h1>Loading ...</h1>
           </div>

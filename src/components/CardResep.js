@@ -7,7 +7,7 @@ export default function CardResep({ title, imageUrl, kalori, karbon }) {
 			<div className="image-container">
 				<img src={imageUrl} alt="" />
 			</div>
-			<div className="card-content">
+			<div className="card-content mt-3">
 				<div className="list-inline d-flex flex-wrap justify-content-around mb-1">
 					<div className="list-inline-item text-secondary fw-bold">
 						<small>
@@ -20,7 +20,7 @@ export default function CardResep({ title, imageUrl, kalori, karbon }) {
 						</small>
 					</div>
 				</div>
-				<div className="card-title ms-3 py-2 text-start">
+				<div className="card-title ms-3 py-2 text-center text-dark">
 					<h6>{title}</h6>
 				</div>
 			</div>

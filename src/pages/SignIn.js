@@ -47,8 +47,8 @@ export default function SignIn() {
       const result = await axios.post(`${REACT_APP_API_URL}/users/login`, body);
 
       const { token } = result.data;
-      setCookie("token", token);
       if (token) {
+        setCookie("token", token);
         Navigate("/");
       } else if(result.data === "user is not exist") {
         setAlert(true)

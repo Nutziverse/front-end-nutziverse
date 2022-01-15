@@ -70,99 +70,33 @@ export default function PilihMakanan() {
 					</div>
 				</div>
 
-				<div className="container">
-					<div className="row gy-3">
-						{!loading
-							? filterMakanan.length > 0
-								? filterMakanan.map((el, index) => {
-										return (
-											<div className="col-6 col-md-4 col-lg-3" key={index}>
-												<div
-													onClick={() => dispatch(showModal(el._id))}
-													className="pointer"
-												>
-													<CardMakanan
-														makanan={el.makanan}
-														image={el.image}
-														penyetaraanPorsi={el.porsi}
-														kalori={el.kaloriMakanan}
-														karbon={el.karbon}
-														key={el._id}
-													></CardMakanan>
-												</div>
-											</div>
-										);
-								  })
-								: allMakanan.map((el, index) => {
-										return (
-											<div className="col-6 col-md-4 col-lg-3" key={index}>
-												<div
-													onClick={() => dispatch(showModal(el._id))}
-													className="pointer"
-												>
-													<CardMakanan
-														makanan={el.makanan}
-														image={el.image}
-														penyetaraanPorsi={el.porsi}
-														kalori={el.kaloriMakanan}
-														karbon={el.karbon}
-														key={el._id}
-													></CardMakanan>
-												</div>
-											</div>
-										);
-								  })
-							: null}
-					</div>
-				</div>
-
-				<div className="container">
-					<div className="row gy-3">
-						{!loading
-							? filterMakanan.length > 0
-								? filterMakanan.map((el, index) => {
-										return (
-											<div className="col-6 col-md-4 col-lg-3" key={index}>
-												<div
-													onClick={() => dispatch(showModal(el._id))}
-													className="pointer"
-												>
-													<CardMakanan
-														makanan={el.makanan}
-														image={el.image}
-														penyetaraanPorsi={el.porsi}
-														kalori={el.kaloriMakanan}
-														karbon={el.karbon}
-														key={el._id}
-													></CardMakanan>
-												</div>
-											</div>
-										);
-								  })
-								: allMakanan.map((el, index) => {
-										return (
-											<div className="col-6 col-md-4 col-lg-3" key={index}>
-												<div
-													onClick={() => dispatch(showModal(el._id))}
-													className="pointer"
-												>
-													<CardMakanan
-														makanan={el.makanan}
-														image={el.image}
-														penyetaraanPorsi={el.porsi}
-														kalori={el.kaloriMakanan}
-														karbon={el.karbon}
-														key={el._id}
-													></CardMakanan>
-												</div>
-											</div>
-										);
-								  })
-							: null}
-					</div>
+        <div className="container">
+          <div className="row gy-3">
+            {!loading
+              ? filterMakanan.length > 0
+                ? filterMakanan.map((el, index) => {
+                    return (
+                      <div className="col-6 col-md-4 col-lg-3" key={index}>
+                        <div onClick={() => dispatch(showModal(el._id))} className="pointer">
+                          <CardMakanan makanan={el.makanan} image={el.image} penyetaraanPorsi={el.porsi} kalori={el.kaloriMakanan} karbon={el.karbon} key={el._id}></CardMakanan>
+                        </div>
+                      </div>
+                    );
+                  })
+                : allMakanan.map((el, index) => {
+                    return (
+                      <div className="col-6 col-md-4 col-lg-3" key={index}>
+                        <div onClick={() => dispatch(showModal(el._id))} className="pointer">
+                          <CardMakanan makanan={el.makanan} image={el.image} penyetaraanPorsi={el.porsi} kalori={el.kaloriMakanan} karbon={el.karbon} key={el._id}></CardMakanan>
+                        </div>
+                      </div>
+                    );
+                  })
+									: null}
+          </div>
 
 					<MakananModal pilih={true}></MakananModal>
-				</div>
+        </div>
 			</section>
 		</Layout>
 	);

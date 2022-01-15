@@ -6,6 +6,7 @@ import { getMakanan } from "../redux/actions/action.makanan";
 import { getRekomendasi } from "../redux/actions/action.rekomendasi";
 import Layout from "../layouting/Layout";
 import { Link } from "react-router-dom";
+import MakananModal from "../components/MakananModal";
 
 export default function RekomendasiMakanan() {
 	const dispatch = useDispatch();
@@ -355,6 +356,7 @@ export default function RekomendasiMakanan() {
 							</div>
 						</div>
 					</div>
+					<MakananModal></MakananModal>
 				</div>
 			) : null}
 		</Layout>

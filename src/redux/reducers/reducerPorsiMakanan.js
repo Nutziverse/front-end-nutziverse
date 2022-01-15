@@ -40,7 +40,7 @@ const PorsiReducer = (state = initialState, action) => {
 			return { ...state, loading: false, local: local1 };
 		case "GET_PORSI":
 			let local2 = JSON.parse(localStorage.getItem("pilih_makanan")) || [];
-			console.log(local2);
+			
 			return { ...state, loading: false, local: local2 };
 		case "DELETE_PORSI":
 			localStorage.removeItem("pilih-makanan");

@@ -11,13 +11,14 @@ export default function Profile() {
 	let token = getCookie("token");
 	const dispatch = useDispatch();
 	const profile = useSelector((state) => state.UserReducer);
-	const { User, loading, error } = profile;
+	const { User, loading } = profile;
 
 	useEffect(() => {
 		dispatch(getUSER());
 	}, [dispatch]);
+
 	const Navigate = useNavigate();
-	if (!token || error) {
+	if (!token) {
 		Navigate("/unauthorized");
 	}
 
@@ -26,7 +27,7 @@ export default function Profile() {
 			<section className="container py-5">
 				<div className="card border-0 shadow-sm">
 					<div class="card-body">
-						{!loading && !error ? (
+						{!loading ? (
 							<div className="row">
 								<div className="col-2">
 									<h1 className="mb-0 text-primary profile-icon">

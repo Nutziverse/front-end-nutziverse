@@ -50,7 +50,7 @@ export default function TrackingNutrisi() {
     User = null
 
   let today = new Date()
-  const { tracking, loading, error } = trackingState;
+  const { tracking, loading } = trackingState;
   let karbohidrat = 0, protein = 0, lemak = 0
   let butuhkarbohidrat = 0, butuhprotein = 0, butuhlemak = 0
 
@@ -264,14 +264,14 @@ export default function TrackingNutrisi() {
             <div className="card-body">
               <div className="row gy-4 pt-3">
                 <div className="col-12">
-                  <p className="fs-2 mb-0 fw-bold"><span className="fa"><i className="fas fa-fire"></i></span> {!loading && !error && tracking.tracking  ? tracking.tracking.totKalori : 0}</p>
+                  <p className="fs-2 mb-0 fw-bold"><span className="fa"><i className="fas fa-fire"></i></span> {!loading && tracking.tracking  ? tracking.tracking.totKalori : 0}</p>
                   <p className="fs-6 fw-medium">kkal</p>
                 </div>
 
                 <div className="col-12">
                   <div className="row gy-4">
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totKarbohidrat : 0} <sup className="fs-6 text-white-8 sup">/{butuhkarbohidrat}</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && tracking && tracking.tracking ? tracking.totKarbohidrat : 0} <sup className="fs-6 text-white-8 sup">/{butuhkarbohidrat}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(karbohidrat,100-karbohidrat)} options={config} id="stacked1" />
@@ -280,7 +280,7 @@ export default function TrackingNutrisi() {
                       <p className="fs-6 fw-medium">Karbohidrat</p>
                     </div>
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totProtein : 0} <sup className="fs-6 text-white-8 sup">/{butuhprotein}</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && tracking && tracking.tracking ? tracking.totProtein : 0} <sup className="fs-6 text-white-8 sup">/{butuhprotein}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(protein,100-protein)} options={config} id="stacked1" />
@@ -289,7 +289,7 @@ export default function TrackingNutrisi() {
                       <p className="fs-6 fw-medium">Protein</p>
                     </div>
                     <div className="col-sm-4 col-12">
-                      <p className="fs-5 fw-semi-bold">{ !loading && !error && tracking && tracking.tracking ? tracking.totLemak : 0} <sup className="fs-6 text-white-8 sup">/{butuhlemak}</sup></p>
+                      <p className="fs-5 fw-semi-bold">{ !loading && tracking && tracking.tracking ? tracking.totLemak : 0} <sup className="fs-6 text-white-8 sup">/{butuhlemak}</sup></p>
                       {/* this will be chart */}
                       <div className="custom-rows">
                         <Bar data={data(lemak,100-lemak)} options={config} id="stacked1" />
@@ -304,7 +304,7 @@ export default function TrackingNutrisi() {
           </div>
         </div>
 
-        {loading || error ? (
+        {loading ? (
           <div className="container">
             <h1>Loading ...</h1>
           </div>

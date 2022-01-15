@@ -55,7 +55,7 @@ export default function HomeLogin() {
 		datasets: [
 			{
 				label: "# of Votes",
-				data: [kalori, maxkalori - kalori],
+				data: [kalori, maxkalori - kalori < 0 ? 0 : 100],
 				backgroundColor: ["#1AA7EC", "transparent"],
 
 				borderColor: ["#1AA7EC", "transparent"],

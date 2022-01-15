@@ -2,6 +2,7 @@
 import TrackingCard from "../components/TrackingCard";
 import React, { useEffect } from "react";
 import "../style/historykarbon.css";
+import { getCookie } from "../helpers";
 import "react-datepicker/dist/react-datepicker.css";
 import {
 	Chart as ChartJS,
@@ -386,6 +387,10 @@ export default function KeranjangMakanan() {
 		dispatch(Post_data_to_history(postmakanan, postkalori, postkarbon));
 		Navigate("/tracking-nutrisi");
 	};
+	let token = getCookie("token");
+	if (!token) {
+		Navigate("/unauthorized");
+	}
 
 	return (
 		<Layout>

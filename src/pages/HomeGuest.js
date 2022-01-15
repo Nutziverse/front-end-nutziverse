@@ -1,20 +1,14 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../components/Button";
+import CardResep from "../components/CardResep";
 import Layout from "../layouting/Layout";
+import { getResep } from "../redux/actions/action.resep";
 import "../style/card-makanan.css"
 
 export default function HomeGuest() {
   const features = [
-    {
-      icon: "https://cdn-icons-png.flaticon.com/512/2884/2884645.png",
-      title: "Rekomendasi Makanan",
-      desc: "Temukan rekomendasi makanan sesuai dengan kebutuhan kalori anda"
-    },
-    {
-      icon: "https://cdn-icons-png.flaticon.com/512/6503/6503107.png",
-      title: "Dampak Karbon",
-      desc: "Informasi dampak karbon dan cara mengurangi efeknya bagi bumi"
-    },
     {
       icon: "https://cdn-icons-png.flaticon.com/512/2934/2934108.png",
       title: "Pilih Makanan",
@@ -24,8 +18,28 @@ export default function HomeGuest() {
       icon: "https://cdn-icons-png.flaticon.com/512/2738/2738658.png",
       title: "Tracking Nutrisi",
       desc: "Rekam nutrisi yang sudah anda konsumsi setiap hari"
+    },
+    {
+      icon: "https://cdn-icons-png.flaticon.com/512/2884/2884645.png",
+      title: "Rekomendasi Makanan",
+      desc: "Temukan rekomendasi makanan sesuai dengan kebutuhan kalori anda"
+    },
+    {
+      icon: "https://cdn-icons-png.flaticon.com/512/6503/6503107.png",
+      title: "Dampak Karbon",
+      desc: "Informasi dampak karbon dan cara mengurangi efeknya bagi bumi"
     }
   ]
+
+  const dispatch = useDispatch();
+
+  const resepState = useSelector((state) => state.ResepReducer);
+  const { resep } = resepState;
+
+  useEffect(() => {
+    dispatch(getResep());
+  }, [dispatch]);
+
   return(
     <Layout>
       <main className="main-section">
@@ -77,6 +91,31 @@ export default function HomeGuest() {
               )
             })
           }
+        </div>
+      </section>
+
+      <section className="container py-5">
+        <div className="text-center pb-4">
+          <h3 className="text-center mb-3">Resep Masakan</h3>
+          <Link className="text-decoration-none" to="/resep">
+            Lihat Semua
+          </Link>
+        </div>
+
+        <div className="row justify-content-center gy-3">
+          {resep.slice(-3).map((data) => (
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+              <Link className="pointer text-decoration-none" to={`/resep/detail/${data._id}`}>
+                <CardResep
+                  imageUrl={data.idMakanan.image}
+                  kalori={data.idMakanan.kaloriMakanan}
+                  karbon={data.idMakanan.karbon}
+                  title={data.idMakanan.makanan}
+                  key={data._id}
+                ></CardResep>
+              </Link>
+            </div>
+          ))}
         </div>
       </section>
     </Layout>

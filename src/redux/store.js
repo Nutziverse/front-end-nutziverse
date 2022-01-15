@@ -12,6 +12,8 @@ import PorsiReducer from "./reducers/reducerPorsiMakanan";
 import UserReducer from "./reducers/reducer.User";
 import ToHistory from "./reducers/reducer.tohistory";
 import akunReducers from './reducers/reducer.akun';
+import ResepReducer from "./reducers/reducer.resep";
+import ResepIDReducer from "./reducers/reducer.resepid";
 
 const reducers = combineReducers({
 	makananReducers: makananReducers,
@@ -23,7 +25,9 @@ const reducers = combineReducers({
 	PorsiReducer: PorsiReducer,
 	UserReducer: UserReducer,
 	ToHistory: ToHistory,
-  akunReducers: akunReducers
+  akunReducers: akunReducers,
+	ResepReducer: ResepReducer,
+	ResepIDReducer: ResepIDReducer
 });
 
 export const store = createStore(reducers, {}, applyMiddleware(thunk));

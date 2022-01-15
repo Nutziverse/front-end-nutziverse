@@ -12,6 +12,7 @@ import { getMakanan } from "../redux/actions/action.makanan";
 import { useDispatch, useSelector } from "react-redux";
 import { getUSER } from "../redux/actions/action.User";
 import "../style/card-makanan.css";
+import CardResep from "../components/CardResep";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function HomeLogin() {
@@ -25,6 +26,9 @@ export default function HomeLogin() {
 	const UserState = useSelector((state) => state.UserReducer);
 	const UserLoading = UserState.loading;
 	const { User } = UserState;
+
+	const resepState = useSelector((state) => state.ResepReducer);
+  const { resep } = resepState;
 
 	const [persenkalori, setpersen] = useState(0);
 	console.log(persenkalori);
@@ -322,6 +326,31 @@ export default function HomeLogin() {
 								/>
 								<h6 className="text-center mt-3">Makan Malam</h6>
 							</Link>
+						</div>
+					</div>
+
+					<div className=" mt-4">
+						<div className=" my-2 d-flex justify-content-between">
+							<h4>Resep</h4>
+							<Link className="text-decoration-none" to="/resep">
+								Lihat Semua
+							</Link>
+						</div>
+
+						<div className="row justify-content-center gy-3">
+							{resep.slice(-3).map((data) => (
+								<div className="col-12 col-md-4">
+									<Link className="pointer text-decoration-none" to={`/resep/detail/${data._id}`}>
+										<CardResep
+											imageUrl={data.idMakanan.image}
+											kalori={data.idMakanan.kaloriMakanan}
+											karbon={data.idMakanan.karbon}
+											title={data.idMakanan.makanan}
+											key={data._id}
+										></CardResep>
+									</Link>
+								</div>
+							))}
 						</div>
 					</div>
 				</div>

@@ -187,7 +187,7 @@ export default function RekomendasiMakanan() {
 											colors={"red"}
 											nama={"Karbon"}
 											angka={sarapan[4]}
-											satuan={"gr"}
+											satuan={"kg CO2"}
 										></Statsrekom>
 									</div>
 								</div>
@@ -263,7 +263,7 @@ export default function RekomendasiMakanan() {
 											colors={"red"}
 											nama={"Karbon"}
 											angka={siang[4]}
-											satuan={"gr"}
+											satuan={"kg CO2"}
 										></Statsrekom>
 									</div>
 								</div>
@@ -339,7 +339,7 @@ export default function RekomendasiMakanan() {
 											colors={"red"}
 											nama={"Karbon"}
 											angka={malam[4]}
-											satuan={"gr"}
+											satuan={"kg CO2"}
 										></Statsrekom>
 									</div>
 								</div>

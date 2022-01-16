@@ -31,7 +31,6 @@ export default function HomeLogin() {
 	const resepState = useSelector((state) => state.ResepReducer);
   const { resep } = resepState;
 	const resepLoading = resepState.loading
-	console.log(resepState)	
 
 	const [persenkalori, setpersen] = useState(0);
   
@@ -188,6 +187,10 @@ export default function HomeLogin() {
 												  HistoryState.tracking.tracking ? (
 													<h1>
 														{(
+															(HistoryState.tracking.tracking.totKalori /
+																User.kaloriYgDibutuhkan.toFixed(0)) *
+															100
+														).toFixed(0) > 100 ? 100 : (
 															(HistoryState.tracking.tracking.totKalori /
 																User.kaloriYgDibutuhkan.toFixed(0)) *
 															100

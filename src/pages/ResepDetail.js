@@ -122,7 +122,7 @@ export default function ResepDetail() {
                     colors={"black"}
                     nama={"Karbon"}
                     angka={resepID.idMakanan.karbon * resepID.porsi}
-                    satuan={"gr"}
+                    satuan={"kg CO2"}
                   ></Statsrekom>
                 </div>
                 <div className="mt-4 mt-lg-5 d-lg-none">

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import LoadingComponent from "../components/Loading";
 import Layout from "../layouting/Layout";
 import { getResepByID } from "../redux/actions/action.resep";
 import "../style/card-makanan.css";
@@ -64,9 +65,7 @@ export default function ResepDetail() {
         </div>
         <div className="row gx-lg-5">
           {loading ? (
-            <div className="col-12 pt-5">
-              <h5>Loading ...</h5>
-            </div>
+            <LoadingComponent />
           ) : resepID && resepID.idMakanan ? (
             <>
               <div className="col-12 d-lg-none">

@@ -8,7 +8,8 @@ const trackingReducer = (state = initialState, action) => {
   switch(action.type) {
     case "GET_TRACKING_REQUEST":
       return {
-        ...state
+        ...state,
+        loading: true
       }
     case "GET_TRACKING_SUCCESS":
       return {

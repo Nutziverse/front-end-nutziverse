@@ -179,3 +179,9 @@
   background-color: #63AED8;
   border-radius: 8px !important;
 }
+
+
+/* loading css */
+.min-vh-70 {
+  min-height: 70vh;
+}

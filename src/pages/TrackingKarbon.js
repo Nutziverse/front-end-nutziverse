@@ -10,6 +10,7 @@ import "../style/card-makanan.css";
 import TrackingCard from "../components/TrackingCard";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
+import LoadingComponent from "../components/Loading";
 
 export default function TrackingKarbon() {
   const token = getCookie("token")
@@ -122,9 +123,7 @@ export default function TrackingKarbon() {
         </div>
 
         {loading ? (
-          <div className="container">
-            <h1>Loading ...</h1>
-          </div>
+          <LoadingComponent customstyle="" />
         ) : tracking && tracking.tracking ? (
           <TrackingSection
             makanan={tracking.tracking.makanan}

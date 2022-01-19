@@ -22,6 +22,7 @@ import { Post_data_to_history } from "../redux/actions/actions.tohistory";
 import { Link, useNavigate } from "react-router-dom";
 import { GetPorsi } from "../redux/actions/actionPorsiMakanan";
 import { getTracking } from "../redux/actions/action.tracking";
+import LoadingComponent from "../components/Loading";
 
 
 ChartJS.register(
@@ -475,7 +476,7 @@ export default function KeranjangMakanan() {
 							</div> */}
 						</div>
 					</div>
-				) : null}
+				) : <LoadingComponent />}
 			</div>
 		</Layout>
 	);

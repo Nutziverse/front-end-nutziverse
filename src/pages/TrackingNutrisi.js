@@ -21,6 +21,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { getUSER } from "../redux/actions/action.User";
 import { getCookie } from "../helpers";
+import LoadingComponent from "../components/Loading";
 
 ChartJS.register(
 	CategoryScale,
@@ -54,8 +55,7 @@ export default function TrackingNutrisi() {
   let karbohidrat = 0, protein = 0, lemak = 0
   let butuhkarbohidrat = 0, butuhprotein = 0, butuhlemak = 0
 
-  
-  if(!loading && tracking && tracking.tracking && User) {
+  if(!loading && tracking && User) {
     butuhkarbohidrat = Number(User.gizi.karbohidrat.toFixed(2))
     butuhprotein = Number(User.gizi.protein.toFixed(2))
     butuhlemak = Number(User.gizi.lemak.toFixed(2))
@@ -305,9 +305,7 @@ export default function TrackingNutrisi() {
         </div>
 
         {loading ? (
-          <div className="container">
-            <h1>Loading ...</h1>
-          </div>
+          <LoadingComponent customstyle="" />
         ) : tracking && tracking.tracking ? (
           <TrackingSection
             makanan={tracking.tracking.makanan}

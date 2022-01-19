@@ -24,7 +24,7 @@ export default function TrackingCard({
 					onClick={() => dispatch(showModal(id))}
 				>
 					<div className="row w-100">
-						<div className="col-3 col-md-3 ">
+						<div className="col-6 col-md-3 ">
 							<img
 								src={image}
 								style={{
@@ -36,14 +36,14 @@ export default function TrackingCard({
 								alt={namamakanan}
 							/>
 						</div>
-						<div className="col-9 col-md-9">
+						<div className="col-6 col-md-9">
 							<div className="d-flex justify-content-between">
 								<div className="d-flex flex-column">
-									<h5 className="text-start fw-bold">{namamakanan}</h5>
+									<h6 className="text-start fw-bold">{namamakanan}</h6>
 									<h6 className="text-start fw-light">{infoporsi}</h6>
 								</div>
 								<div className="">
-									<h4 className="fw-bold">{porsirekomendasi + " x"}</h4>
+									<h6 className="fw-bold">{porsirekomendasi + "x"}</h6>
 								</div>
 							</div>
 						</div>

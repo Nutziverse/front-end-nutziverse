@@ -13,7 +13,7 @@ export default function CardMakanan({makanan, image, penyetaraanPorsi, kalori, k
         <p className="card-text mb-2"><small>{penyetaraanPorsi}</small></p>
         <ul className="list-inline d-flex flex-wrap justify-content-around mb-1">
           <li className="list-inline-item text-danger fw-bold"><small>{kalori} Kkal</small></li>
-          <li className="list-inline-item text-info fw-bold"><small>{karbon} Kg/CO<sup>2</sup></small></li>
+          <li className="list-inline-item text-info fw-bold"><small>{karbon} Kg/CO<sub>2</sub></small></li>
         </ul>
       </div>
     </div>

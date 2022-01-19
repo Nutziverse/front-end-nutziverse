@@ -19,6 +19,7 @@ export default function SignIn() {
     trigger,
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
+  const [disabled, setDisabled] = useState(false)
   
   const togglePasswordVisiblity = () => {
     setShowPassword(showPassword ? false : true);
@@ -37,52 +38,62 @@ export default function SignIn() {
   }, [alert]);
 
   const onSubmit = async (data) => {
+    setDisabled(true)
     const body = {
       no_hp: data.telepon.replace("+62", "0"),
       password: data.password,
     };
-
+    
     const { REACT_APP_API_URL } = process.env;
     try {
       const result = await axios.post(`${REACT_APP_API_URL}/users/login`, body);
-
+      
       const { token } = result.data;
       if (token) {
+        setDisabled(false)
         setCookie("token", token);
         Navigate("/");
       } else if(result.data === "user is not exist") {
+        setDisabled(false)
         setAlert(true)
         setAlertmsg("Nomor telepon belum terdaftar")
       } else if(result.data === "invalid") {
+        setDisabled(false)
         setAlert(true)
         setAlertmsg("Password salah")
       }
-    } catch (error) {}
+    } catch (error) {
+      setDisabled(false)
+    }
   };
-
-  const responseGoogle = async (authResult) => {
   
+  const responseGoogle = async (authResult) => {
+    setDisabled(true)
+    
     try {
       if (authResult) {
         const result = await axios.post(`${process.env.REACT_APP_API_URL}/users/auth/google`, authResult);
         
         const { message } = result.data
-
+        
         if (message === "welcome") {
+          setDisabled(false)
           const { token } = result.data;
           setCookie("token", token);
           Navigate("/");
         } else {
+          setDisabled(false)
           setCookie("email", result.data.result.email);
           Navigate("/sign-up");
         }
-
+        
         return result;
       } else {
+        setDisabled(false)
         throw new Error(authResult);
       }
     } catch (e) {
-    
+      setDisabled(false)
     }
   };
 
@@ -180,7 +191,7 @@ export default function SignIn() {
                           <div className="d-grid col-12 mt-md-4 mt-3">
                             <button
                               type="submit"
-                              className="btn btn-sm btn-main"
+                              className={`btn btn-sm btn-main ${disabled ? 'disabled' : ''}`}
                               style={{ backgroundColor: "#067cc6", fontSize: "16px", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)", borderRadius: "8px", padding: "15px 18px;", color: "white" }}
                             >
                               Masuk
@@ -196,7 +207,7 @@ export default function SignIn() {
                               <div className="d-grid col-12 mt-md-3 mt-2">
                                 <button
                                   onClick={props.onClick}
-                                  className="btn btn-sm btn-main"
+                                  className={`btn btn-sm btn-main ${disabled ? 'disabled' : ''}`}
                                   style={{ backgroundColor: "white", fontSize: "16px", boxShadow: "0 8px 16px 0 rgba(0,0,0,0.05), 0 6px 20px 0 rgba(0,0,0,0.19)", borderRadius: "8px", padding: "15px 18px;" }}
                                 >
                                   <img src={google} alt="google" style={{ height: "16px", marginRight: "10px" }}></img>Masuk dengan Google

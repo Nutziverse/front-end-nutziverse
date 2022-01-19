@@ -11,6 +11,7 @@ import "../style/card-makanan.css";
 import eat from "../images/eat.png";
 import { getCookie } from "../helpers";
 import { useNavigate } from "react-router-dom";
+import LoadingComponent from "../components/Loading";
 
 export default function PilihMakanan() {
 	const Navigate = useNavigate();
@@ -92,7 +93,7 @@ export default function PilihMakanan() {
                       </div>
                     );
                   })
-									: null}
+									: <LoadingComponent />}
           </div>
 
 					<MakananModal pilih={true}></MakananModal>

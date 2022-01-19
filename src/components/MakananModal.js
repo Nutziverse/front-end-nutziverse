@@ -121,7 +121,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
                     <h5 className="fw-bold">
                       {makanan.karbon}{" "}
                       <small className="text-muted fs-6 fw-normal">
-                        kg CO<sup>2</sup>
+                        kg CO<sub>2</sub>
                       </small>
                     </h5>
                   </div>
@@ -139,7 +139,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 											<h5 className="fw-bold">
 												{makanan.karbon}{" "}
 												<small className="text-muted fs-6 fw-normal">
-													kg CO<sup>2</sup>
+													kg CO<sub>2</sub>
 												</small>
 											</h5>
 											<p>

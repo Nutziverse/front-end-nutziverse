@@ -30,11 +30,11 @@ export default function HomeLogin() {
 	const { User } = UserState;
 
 	const resepState = useSelector((state) => state.ResepReducer);
-  const { resep } = resepState;
-	const resepLoading = resepState.loading
+	const { resep } = resepState;
+	const resepLoading = resepState.loading;
 
 	const [persenkalori, setpersen] = useState(0);
-  
+
 	const StatsProfile = ({ grid, colors, image, nutrisi, angka }) => (
 		<div
 			className={grid + " shadow d-flex flex-column"}
@@ -124,9 +124,9 @@ export default function HomeLogin() {
 		dispatch(getUSER());
 		dispatch(getMakanan());
 		dispatch(getTracking());
-		dispatch(getResep())
+		dispatch(getResep());
 	}, [dispatch, UserLoading]);
-	
+
 	return (
 		<Layout>
 			{UserLoading ? <LoadingComponent /> : (
@@ -183,23 +183,25 @@ export default function HomeLogin() {
 											<Doughnut data={data1} options={options1} id="stacked" />
 											<div id="stacked" className="m-auto">
 												{UserLoading ? (
-													<h1>0 %</h1>
+													<h6>0%</h6>
 												) : HistoryState.tracking &&
 												  HistoryState.tracking.tracking ? (
-													<h1>
+													<h6>
 														{(
 															(HistoryState.tracking.tracking.totKalori /
 																User.kaloriYgDibutuhkan.toFixed(0)) *
 															100
-														).toFixed(0) > 100 ? 100 : (
-															(HistoryState.tracking.tracking.totKalori /
-																User.kaloriYgDibutuhkan.toFixed(0)) *
-															100
-														).toFixed(0)}{" "}
+														).toFixed(0) > 100
+															? 100
+															: (
+																	(HistoryState.tracking.tracking.totKalori /
+																		User.kaloriYgDibutuhkan.toFixed(0)) *
+																	100
+															  ).toFixed(0)}{" "}
 														%
-													</h1>
+													</h6>
 												) : (
-													<h1>0 %</h1>
+													<h1>0%</h1>
 												)}
 												{/* {HistoryState.tracking &&
 												HistoryState.tracking.tracking ? (
@@ -360,19 +362,24 @@ export default function HomeLogin() {
 						</div>
 
 						<div className="row justify-content-center gy-3">
-							{ !resepLoading ? resep.slice(-3).map((data) => (
-								<div className="col-12 col-md-4">
-									<Link className="pointer text-decoration-none" to={`/resep/detail/${data._id}`}>
-										<CardResep
-											imageUrl={data.idMakanan.image}
-											kalori={data.idMakanan.kaloriMakanan}
-											karbon={data.idMakanan.karbon}
-											title={data.idMakanan.makanan}
-											key={data._id}
-										></CardResep>
-									</Link>
-								</div>
-							)): null}
+							{!resepLoading
+								? resep.slice(-3).map((data) => (
+										<div className="col-12 col-md-4">
+											<Link
+												className="pointer text-decoration-none"
+												to={`/resep/detail/${data._id}`}
+											>
+												<CardResep
+													imageUrl={data.idMakanan.image}
+													kalori={data.idMakanan.kaloriMakanan}
+													karbon={data.idMakanan.karbon}
+													title={data.idMakanan.makanan}
+													key={data._id}
+												></CardResep>
+											</Link>
+										</div>
+								  ))
+								: null}
 						</div>
 					</div>
 				</div>

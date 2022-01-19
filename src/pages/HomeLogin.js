@@ -14,6 +14,7 @@ import { getUSER } from "../redux/actions/action.User";
 import "../style/card-makanan.css";
 import CardResep from "../components/CardResep";
 import { getResep } from "../redux/actions/action.resep";
+import LoadingComponent from "../components/Loading";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function HomeLogin() {
@@ -128,7 +129,7 @@ export default function HomeLogin() {
 
 	return (
 		<Layout>
-			{UserLoading ? null : (
+			{UserLoading ? <LoadingComponent /> : (
 				<div className="container">
 					<div
 						className="mt-4 rounded d-flex justify-content-between main-bg"

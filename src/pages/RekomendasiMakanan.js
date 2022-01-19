@@ -7,6 +7,7 @@ import { getRekomendasi } from "../redux/actions/action.rekomendasi";
 import Layout from "../layouting/Layout";
 import { Link } from "react-router-dom";
 import MakananModal from "../components/MakananModal";
+import "../style/rekomendasi.css";
 
 export default function RekomendasiMakanan() {
 	const dispatch = useDispatch();
@@ -100,26 +101,18 @@ export default function RekomendasiMakanan() {
 
 	const Statsrekom = ({ colors, angka, satuan, nama }) => (
 		<div className="position-relative">
-			<div
-				className="border border-primary rounded shadow-sm p-2"
-				style={{ width: "80px" }}
-			>
+			<div className="border border-primary rounded shadow-sm p-2 rekomendasi">
 				<h5 className="fw-bold text-center">{angka}</h5>
 				<h6 className="fw-light text-center">{satuan}</h6>
 			</div>
 
 			<div
+				className="circle-dot"
 				style={{
-					width: "20px",
-					height: "20px",
 					backgroundColor: colors,
-					position: "absolute",
-					borderRadius: "50%",
-					top: "-8px",
-					left: "-8px",
 				}}
 			></div>
-			<div className="d-flex justify-content-center">
+			<div className="d-flex mt-2 justify-content-center">
 				<h6 className="text-center">{nama}</h6>
 			</div>
 		</div>
@@ -158,7 +151,7 @@ export default function RekomendasiMakanan() {
 								</Link>
 								<div>
 									<h4 className="text-center">Total</h4>
-									<div className="d-flex justify-content-evenly mx-auto mt-3">
+									<div className="d-flex justify-content-evenly mx-auto mt-3 flex-md-row flex-column">
 										<Statsrekom
 											colors={"red"}
 											nama={"Kalori"}
@@ -233,7 +226,7 @@ export default function RekomendasiMakanan() {
 								</Link>
 								<div>
 									<h4 className="text-center">Total</h4>
-									<div className="d-flex justify-content-evenly mx-auto mt-3">
+									<div className="d-flex justify-content-evenly mx-auto mt-3 flex-md-row flex-column">
 										{}
 										<Statsrekom
 											colors={"red"}
@@ -309,7 +302,7 @@ export default function RekomendasiMakanan() {
 								</Link>
 								<div>
 									<h4 className="text-center">Total</h4>
-									<div className="d-flex justify-content-evenly mx-auto mt-3">
+									<div className="d-flex justify-content-evenly mx-auto mt-3 flex-md-row flex-column">
 										{}
 										<Statsrekom
 											colors={"red"}

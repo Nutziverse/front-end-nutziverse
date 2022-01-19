@@ -12,16 +12,18 @@ import Button from "../components/Button";
 export default function SignUp() {
   const { REACT_APP_API_URL } = process.env;
   const google_cookie = getCookie("email");
-
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
   } = useForm();
-
+  
   let Navigate = useNavigate();
   const [alert, setAlert] = useState(false);
+  const [disabled, setDisabled] = useState(false)
+
   useEffect(() => {
     const timeId = setTimeout(() => {
       // After 3 seconds set the show value to false
@@ -32,58 +34,66 @@ export default function SignUp() {
       clearTimeout(timeId);
     };
   }, [alert]);
+
   const onSubmit = async (data) => {
+    setDisabled(true)
     let { nama_lengkap, no_hp, password, konfirmasi_password, berat, tinggi, umur, aktivitasFisik, jeniskelamin } = data;
     if (konfirmasi_password !== password) {
+      setDisabled(false)
       setError("konfirmasi_password", {
         message: "Password tidak sesuai",
       });
-    }
-
-    
-    if (google_cookie) {
-      const body = {
-        email: google_cookie,
-        jeniskelamin: jeniskelamin,
-        umur: umur,
-        tinggi: tinggi,
-        berat: berat,
-        aktivitasFisik: aktivitasFisik,
-      };
-      
-      const { data } = await axios.patch(`${REACT_APP_API_URL}/users/register/google`, body);
-      if (data.message === "success") {
-        document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        setCookie("token", data.token);
-        
-        Navigate("/");
-      }
     } else {
-      no_hp = no_hp.replace("+62", "0");
-      const body = {
-        nama: nama_lengkap,
-        no_hp: no_hp,
-        jeniskelamin: jeniskelamin,
-        password: password,
-        umur: umur,
-        tinggi: tinggi,
-        berat: berat,
-        aktivitasFisik: aktivitasFisik,
-      };
-
-      const { data } = await axios.post(`${REACT_APP_API_URL}/users/register`, body);
-
-      if (data.message === "success") {
-        setCookie("token", data.token);
-
-        Navigate("/");
+      if (google_cookie) {
+        const body = {
+          email: google_cookie,
+          jeniskelamin: jeniskelamin,
+          umur: umur,
+          tinggi: tinggi,
+          berat: berat,
+          aktivitasFisik: aktivitasFisik,
+        };
+        
+        const { data } = await axios.patch(`${REACT_APP_API_URL}/users/register/google`, body);
+        if (data.message === "success") {
+          setDisabled(false)
+          document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          setCookie("token", data.token);
+          
+          Navigate("/");
+        }
       } else {
-        setAlert(true);
+        no_hp = no_hp.replace("+62", "0");
+        const body = {
+          nama: nama_lengkap,
+          no_hp: no_hp,
+          jeniskelamin: jeniskelamin,
+          password: password,
+          umur: umur,
+          tinggi: tinggi,
+          berat: berat,
+          aktivitasFisik: aktivitasFisik,
+        };
+        
+        const { data } = await axios.post(`${REACT_APP_API_URL}/users/register`, body);
+        
+        if (data.message === "success") {
+          setDisabled(false)
+          setCookie("token", data.token);
+          
+          Navigate("/");
+        } else {
+          setDisabled(false)
+          setAlert(true);
+        }
       }
     }
+    
+    
   };
 
   const responseGoogle = async (authResult) => {
+    setDisabled(true)
     try {
       if (authResult) {
         const result = await axios.post(`${process.env.REACT_APP_API_URL}/users/auth/google`, authResult);
@@ -91,19 +101,24 @@ export default function SignUp() {
         const { message } = result.data;
 
         if (message === "welcome") {
+          setDisabled(false)
           const { token } = result.data;
           setCookie("token", token);
           Navigate("/");
         } else {
+          setDisabled(false)
           setCookie("email", result.data.result.email);
           Navigate("/sign-up");
         }
-
+        
         return result;
       } else {
+        setDisabled(false)
         throw new Error(authResult);
       }
-    } catch (e) {}
+    } catch (e) {
+      setDisabled(false)
+    }
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -335,7 +350,7 @@ export default function SignUp() {
           <div className="row justify-content-center">
             <div className="col-12 col-md-9 col-lg-5 mt-5 text-center">
               <div className="d-grid col-12">
-                <Button type="submit" btnclass={"btn btn-sm btn-main text-center btn-daftar"}>
+                <Button type="submit" btnclass={`btn btn-sm btn-main text-center btn-daftar ${disabled ? 'disabled' : ''}`}>
                   Daftar
                 </Button>
               </div>
@@ -357,8 +372,8 @@ export default function SignUp() {
                 <GoogleLogin
                   clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                   render={(props) => (
-                    <div className="d-grid col-12 mt-md-3 mt-2" onClick={props.onClick}>
-                      <Button type="submit" btnclass={"btn btn-sm btn-main btn-google"}>
+                    <div className={`d-grid col-12 mt-md-3 mt-2`} onClick={props.onClick}>
+                      <Button type="submit" btnclass={`btn btn-sm btn-main btn-google ${disabled ? 'disabled' : ''}`}>
                         <img src={google} style={{ height: "16px", marginRight: "10px" }} alt=""></img>
                         Daftar dengan Google
                       </Button>

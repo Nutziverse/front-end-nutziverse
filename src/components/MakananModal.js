@@ -6,6 +6,7 @@ import { closeModal } from "../redux/actions/action.modal";
 import { TambahPorsi } from "../redux/actions/actionPorsiMakanan";
 import "../style/card-makanan.css";
 import { getCookie } from "../helpers";
+import LoadingComponent from "./Loading";
 
 export default function MakananModal({ pilih = false, karbon = false }) {
 	let token = getCookie("token");
@@ -47,7 +48,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 							onClick={() => dispatch(closeModal())}
 						></button>
 					</div>
-					{loading ? null : (
+					{loading ? <LoadingComponent customstyle=""/> : (
 						<div className="modal-body text-center text-lg-start px-sm-4">
 							<div className="row gy-4 align-items-center">
 								<div className="col-12 col-lg-5">
@@ -120,7 +121,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
                     <h5 className="fw-bold">
                       {makanan.karbon}{" "}
                       <small className="text-muted fs-6 fw-normal">
-                        kg CO<sup>2</sup>
+                        kg CO<sub>2</sub>
                       </small>
                     </h5>
                   </div>
@@ -138,7 +139,7 @@ export default function MakananModal({ pilih = false, karbon = false }) {
 											<h5 className="fw-bold">
 												{makanan.karbon}{" "}
 												<small className="text-muted fs-6 fw-normal">
-													kg CO<sup>2</sup>
+													kg CO<sub>2</sub>
 												</small>
 											</h5>
 											<p>

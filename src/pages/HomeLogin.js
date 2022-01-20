@@ -129,7 +129,9 @@ export default function HomeLogin() {
 
 	return (
 		<Layout>
-			{UserLoading ? <LoadingComponent /> : (
+			{UserLoading ? (
+				<LoadingComponent />
+			) : (
 				<div className="container">
 					<div
 						className="mt-4 rounded d-flex justify-content-between main-bg"
@@ -183,10 +185,10 @@ export default function HomeLogin() {
 											<Doughnut data={data1} options={options1} id="stacked" />
 											<div id="stacked" className="m-auto">
 												{UserLoading ? (
-													<h6>0%</h6>
+													<h1>0%</h1>
 												) : HistoryState.tracking &&
 												  HistoryState.tracking.tracking ? (
-													<h6>
+													<h1>
 														{(
 															(HistoryState.tracking.tracking.totKalori /
 																User.kaloriYgDibutuhkan.toFixed(0)) *
@@ -199,7 +201,7 @@ export default function HomeLogin() {
 																	100
 															  ).toFixed(0)}{" "}
 														%
-													</h6>
+													</h1>
 												) : (
 													<h1>0%</h1>
 												)}

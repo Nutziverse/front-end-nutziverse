@@ -185,25 +185,47 @@ export default function HomeLogin() {
 											<Doughnut data={data1} options={options1} id="stacked" />
 											<div id="stacked" className="m-auto">
 												{UserLoading ? (
-													<h1>0%</h1>
+													<div>
+														<h1 className="d-none d-md-block">0%</h1>
+														<h5 className="d-block d-md-none">0%</h5>
+													</div>
 												) : HistoryState.tracking &&
 												  HistoryState.tracking.tracking ? (
-													<h1>
-														{(
-															(HistoryState.tracking.tracking.totKalori /
-																User.kaloriYgDibutuhkan.toFixed(0)) *
-															100
-														).toFixed(0) > 100
-															? 100
-															: (
-																	(HistoryState.tracking.tracking.totKalori /
-																		User.kaloriYgDibutuhkan.toFixed(0)) *
-																	100
-															  ).toFixed(0)}{" "}
-														%
-													</h1>
+													<div>
+														<h1 className="d-none d-md-block">
+															{(
+																(HistoryState.tracking.tracking.totKalori /
+																	User.kaloriYgDibutuhkan.toFixed(0)) *
+																100
+															).toFixed(0) > 100
+																? 100
+																: (
+																		(HistoryState.tracking.tracking.totKalori /
+																			User.kaloriYgDibutuhkan.toFixed(0)) *
+																		100
+																  ).toFixed(0)}{" "}
+															%
+														</h1>
+														<h5 className="d-block d-md-none">
+															{(
+																(HistoryState.tracking.tracking.totKalori /
+																	User.kaloriYgDibutuhkan.toFixed(0)) *
+																100
+															).toFixed(0) > 100
+																? 100
+																: (
+																		(HistoryState.tracking.tracking.totKalori /
+																			User.kaloriYgDibutuhkan.toFixed(0)) *
+																		100
+																  ).toFixed(0)}{" "}
+															%
+														</h5>
+													</div>
 												) : (
-													<h1>0%</h1>
+													<div>
+														<h1 className="d-none d-md-block">0%</h1>
+														<h5 className="d-block d-md-none">0%</h5>
+													</div>
 												)}
 												{/* {HistoryState.tracking &&
 												HistoryState.tracking.tracking ? (

@@ -153,31 +153,31 @@ export default function RekomendasiMakanan() {
 									<h4 className="text-center">Total</h4>
 									<div className="d-flex justify-content-evenly mx-auto mt-3 flex-md-row flex-column">
 										<Statsrekom
-											colors={"red"}
+											colors={"#FF0000"}
 											nama={"Kalori"}
 											angka={sarapan[3].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"yellow"}
+											colors={"#13D43D"}
 											nama={"Karbohidrat"}
 											angka={sarapan[0].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#FFE500"}
 											nama={"Protein"}
 											angka={sarapan[2].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#FF7A00"}
 											nama={"Lemak"}
 											angka={sarapan[1].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#000000"}
 											nama={"Karbon"}
 											angka={sarapan[4].toFixed(1)}
 											satuan={"kg CO2"}
@@ -230,31 +230,31 @@ export default function RekomendasiMakanan() {
 									<div className="d-flex justify-content-evenly mx-auto mt-3 flex-md-row flex-column">
 										{}
 										<Statsrekom
-											colors={"red"}
+											colors={"#FF0000"}
 											nama={"Kalori"}
 											angka={siang[3].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"yellow"}
+											colors={"#13D43D"}
 											nama={"Karbohidrat"}
 											angka={siang[0].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#FFE500"}
 											nama={"Protein"}
 											angka={siang[2].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#FF7A00"}
 											nama={"Lemak"}
 											angka={siang[1].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#000000"}
 											nama={"Karbon"}
 											angka={siang[4].toFixed(1)}
 											satuan={"kg CO2"}
@@ -307,38 +307,37 @@ export default function RekomendasiMakanan() {
 									<div className="d-flex justify-content-evenly mx-auto mt-3 flex-md-row flex-column">
 										{}
 										<Statsrekom
-											colors={"red"}
+											colors={"#FF0000"}
 											nama={"Kalori"}
 											angka={malam[3].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"yellow"}
+											colors={"#13D43D"}
 											nama={"Karbohidrat"}
 											angka={malam[0].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#FFE500"}
 											nama={"Protein"}
 											angka={malam[2].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#FF7A00"}
 											nama={"Lemak"}
 											angka={malam[1].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
-											colors={"red"}
+											colors={"#000000"}
 											nama={"Karbon"}
 											angka={malam[4].toFixed(1)}
 											satuan={"kg CO2"}
 										></Statsrekom>
 									</div>
 								</div>
-
 								<div className="d-flex">
 									<Link
 										to="/pilih-makanan/detail"

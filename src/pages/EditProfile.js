@@ -55,17 +55,18 @@ export default function EditProfile() {
 	return (
 		<Layout>
 			<div className="container d-block">
-				<nav className="navbar sticky-top navbar-light bg-light">
-					<div className="container-fluid">
-						<Link className="navbar-brand" to="/profile">
-							<div className="">
-								<i className="fas fa-chevron-left me-5 px-2 py-2">
-									<span> Edit Profil</span>
-								</i>
-							</div>
-						</Link>
-					</div>
-				</nav>
+				<div className="container">
+					<Link
+						className="text-decoration-none text-black py-3 d-flex"
+						to="/profile"
+					>
+						<i class="fas fa-chevron-left text-decoration-none my-auto me-2"></i>
+						<h5 className="text-decoration-none my-auto fw-bold">
+							{" "}
+							Edit Profile
+						</h5>
+					</Link>
+				</div>
 				{/* Alert */}
 				<div
 					className={`alert alert-danger align-items-center mt-4 ${

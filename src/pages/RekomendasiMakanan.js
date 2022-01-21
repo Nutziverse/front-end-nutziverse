@@ -155,31 +155,31 @@ export default function RekomendasiMakanan() {
 										<Statsrekom
 											colors={"red"}
 											nama={"Kalori"}
-											angka={sarapan[3]}
+											angka={sarapan[3].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"yellow"}
 											nama={"Karbohidrat"}
-											angka={sarapan[0]}
+											angka={sarapan[0].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Protein"}
-											angka={sarapan[2]}
+											angka={sarapan[2].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Lemak"}
-											angka={sarapan[1]}
+											angka={sarapan[1].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Karbon"}
-											angka={sarapan[4]}
+											angka={sarapan[4].toFixed(1)}
 											satuan={"kg CO2"}
 										></Statsrekom>
 									</div>
@@ -232,31 +232,31 @@ export default function RekomendasiMakanan() {
 										<Statsrekom
 											colors={"red"}
 											nama={"Kalori"}
-											angka={siang[3]}
+											angka={siang[3].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"yellow"}
 											nama={"Karbohidrat"}
-											angka={siang[0]}
+											angka={siang[0].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Protein"}
-											angka={siang[2]}
+											angka={siang[2].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Lemak"}
-											angka={siang[1]}
+											angka={siang[1].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Karbon"}
-											angka={siang[4]}
+											angka={siang[4].toFixed(1)}
 											satuan={"kg CO2"}
 										></Statsrekom>
 									</div>
@@ -309,31 +309,31 @@ export default function RekomendasiMakanan() {
 										<Statsrekom
 											colors={"red"}
 											nama={"Kalori"}
-											angka={malam[3]}
+											angka={malam[3].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"yellow"}
 											nama={"Karbohidrat"}
-											angka={malam[0]}
+											angka={malam[0].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Protein"}
-											angka={malam[2]}
+											angka={malam[2].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Lemak"}
-											angka={malam[1]}
+											angka={malam[1].toFixed(1)}
 											satuan={"gr"}
 										></Statsrekom>
 										<Statsrekom
 											colors={"red"}
 											nama={"Karbon"}
-											angka={malam[4]}
+											angka={malam[4].toFixed(1)}
 											satuan={"kg CO2"}
 										></Statsrekom>
 									</div>

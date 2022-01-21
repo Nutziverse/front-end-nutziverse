@@ -78,7 +78,7 @@ export default function PilihMakanan() {
                 ? filterMakanan.map((el, index) => {
                     return (
                       <div className="col-6 col-md-4 col-lg-3" key={index}>
-                        <div onClick={() => dispatch(showModal(el._id))} className="pointer">
+                        <div onClick={() => dispatch(showModal(el._id))} className="pointer h-100">
                           <CardMakanan makanan={el.makanan} image={el.image} penyetaraanPorsi={el.porsi} kalori={el.kaloriMakanan} karbon={el.karbon} key={el._id}></CardMakanan>
                         </div>
                       </div>
@@ -87,7 +87,7 @@ export default function PilihMakanan() {
                 : allMakanan.map((el, index) => {
                     return (
                       <div className="col-6 col-md-4 col-lg-3" key={index}>
-                        <div onClick={() => dispatch(showModal(el._id))} className="pointer">
+                        <div onClick={() => dispatch(showModal(el._id))} className="pointer h-100">
                           <CardMakanan makanan={el.makanan} image={el.image} penyetaraanPorsi={el.porsi} kalori={el.kaloriMakanan} karbon={el.karbon} key={el._id}></CardMakanan>
                         </div>
                       </div>

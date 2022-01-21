@@ -28,20 +28,12 @@ export default function Footer() {
 						</div>
 					</div>
 					<div class="col-12 col-md-4 mt-2 text-md-center">
-						<p>Partner Kami</p>
+						<p>Challenge Partner Kami</p>
 						<div className="d-flex flex-column align-items-md-center">
 							<img
-								src="https://logos-world.net/wp-content/uploads/2020/03/Danone-logo.png"
-								height="80px"
-								width="160px"
+								src="https://user-images.githubusercontent.com/61933958/150524480-9cb1d9e4-faf7-45de-a5bd-135d97344267.png"
 								alt="Logo"
-							></img>
-
-							<img
-								src="https://blud.co.id/wp/wp-content/uploads/2018/02/logo-kemenkes.png"
-								height="80px"
-								width="160px"
-								alt="Logo"
+								className="img-fluid w-50"
 							></img>
 						</div>
 					</div>
@@ -49,7 +41,7 @@ export default function Footer() {
 				<div class="copyright mb-5 mb-lg-0">
 					<div class="row mb-4 mt-5 text-center">
 						<div class="col-12 mb-5 mb-lg-0">
-							Copyright © Danone 2021 | All Right Reserved
+							Copyright © Group2 - Danone #Tech4Impact 2021 | All Right Reserved
 						</div>
 					</div>
 				</div>

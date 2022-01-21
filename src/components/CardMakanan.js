@@ -2,7 +2,7 @@ import "../style/card-makanan.css";
 
 export default function CardMakanan({makanan, image, penyetaraanPorsi, kalori, karbon}) {
   return (
-    <div className="card rounded-08">
+    <div className="card rounded-08 h-100 position-relative">
       <img
         className="card-makanan-img"
         src={image}

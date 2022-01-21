@@ -83,7 +83,6 @@ export default function RekomendasiMakanan() {
 				makananID: idmakanan[i],
 				porsi: porsimakanan[i],
 			};
-			console.log(data);
 			if (items.length > 0) {
 				let newData = JSON.parse(items);
 				let index = newData.findIndex((el) => el.makananID === idmakanan[i]);
@@ -138,6 +137,7 @@ export default function RekomendasiMakanan() {
 													namamakanan={id.idmakanan.makanan}
 													image={id.idmakanan.image}
 													porsirekomendasi={id.jumlah}
+													infoporsi={id.idmakanan.porsi}
 												></TrackingCard>
 											</div>
 										);
@@ -200,7 +200,7 @@ export default function RekomendasiMakanan() {
 					<div id="makansiang">
 						<h4 className="mt-5">Makan Siang</h4>
 						<h5 className="fw-light">
-							Rekomendasi beberapa menu sarapan untuk anda
+							Rekomendasi beberapa menu siang untuk anda
 						</h5>
 						<div className="rounded border border-danger p-4">
 							<div className="row ">
@@ -210,6 +210,7 @@ export default function RekomendasiMakanan() {
 											<div className="col-12 col-lg-6">
 												<TrackingCard
 													id={id.idmakanan._id}
+													infoporsi={id.idmakanan.porsi}
 													namamakanan={id.idmakanan.makanan}
 													image={id.idmakanan.image}
 													porsirekomendasi={id.jumlah}
@@ -276,7 +277,7 @@ export default function RekomendasiMakanan() {
 					<div id="makanmalam">
 						<h4 className="mt-5">Makan Malam</h4>
 						<h5 className="fw-light">
-							Rekomendasi beberapa menu sarapan untuk anda
+							Rekomendasi beberapa menu malam untuk anda
 						</h5>
 						<div className="rounded border border-danger p-4">
 							<div className="row ">
@@ -287,6 +288,7 @@ export default function RekomendasiMakanan() {
 												<TrackingCard
 													id={id.idmakanan._id}
 													namamakanan={id.idmakanan.makanan}
+													infoporsi={id.idmakanan.porsi}
 													image={id.idmakanan.image}
 													porsirekomendasi={id.jumlah}
 												></TrackingCard>
